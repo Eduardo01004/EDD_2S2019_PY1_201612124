@@ -1,0 +1,102 @@
+# depslib dependency file v1.0
+1566333502 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+	<iostream>
+	"ArbolABB.h"
+	"raiz.h"
+	"ListaCircularDobleFiltros.h"
+
+1566065854 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodoabb.cpp
+	"NodoABB.h"
+	<stdlib.h>
+
+1566065624 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodoabb.h
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+
+1566082143 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\arbolabb.cpp
+	"ArbolABB.h"
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+
+1566081768 c:\users\eduardo\desktop\edd2019\proyecto1\include\arbolabb.h
+	<iostream>
+	<string.h>
+	"NodoABB.h"
+
+1566316592 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\cabecera.cpp
+	"cabecera.h"
+	<stdlib.h>
+
+1566316571 c:\users\eduardo\desktop\edd2019\proyecto1\include\cabecera.h
+	"Nodomatriz.h"
+
+1566316491 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodomatriz.h
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+
+1566316596 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodomatriz.cpp
+	"Nodomatriz.h"
+	<stdlib.h>
+
+1566324908 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
+	"raiz.h"
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+
+1566316889 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
+	"cabecera.h"
+	<string.h>
+
+1566332173 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodolistacirculardobleimagenes.cpp
+	"NodoListaCircularDobleImagenes.h"
+	<stdlib.h>
+
+1566332056 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodolistacirculardobleimagenes.h
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+
+1566333340 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\listacirculardoblefiltros.cpp
+	"ListaCircularDobleFiltros.h"
+	<stdlib.h>
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+	<sstream>
+	<string>
+
+1566333360 c:\users\eduardo\desktop\edd2019\proyecto1\include\listacirculardoblefiltros.h
+	"NodoListaCircularDobleImagenes.h"
+

@@ -1,0 +1,18 @@
+digraph G {rankdir=LR;
+
+ 
+ subgraph cluster3{label="Filtros";
+12563168[shape=box,label=" negativo "];
+12563168 -> 12564240 ;
+12564240->12563168 ;
+12564240[shape=box,label=" mosaico "];
+12564240 -> 12564280 ;
+12564280->12564240 ;
+12564280[shape=box,label=" espejo "];
+12564280 -> 12564320 ;
+12564320->12564280 ;
+12564320[shape=box,label=" grayscale "];
+12564320 -> 12563168 ;
+12563168->12564320 ;
+}
+}

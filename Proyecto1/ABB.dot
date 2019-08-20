@@ -1,0 +1,14 @@
+digraph BINARIO {
+node [fontname="Arial", color=gray30, style=	rounded];
+11565656[label="Nombre: Mario1 Dimension: 1 Tamano: 12"];
+11565656 -> 11539312;
+11539312[label="Nombre: Boo Dimension: 15 Tamano: 6"];
+11539312 -> 11539360;
+11539360[label="Nombre: Geoff Dimension: 16 Tamano: 61"];
+11565656 -> 11539264;
+11539264[label="Nombre: Pikachu Dimension: 12 Tamano: 125"];
+11539264 -> 11539408;
+11539408[label="Nombre: Mario2 Dimension: 99 Tamano: 5"];
+11539408 -> 11539712;
+11539712[label="Nombre: Mushroom Dimension: 646 Tamano: 4949"];
+}

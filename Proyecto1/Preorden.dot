@@ -1,0 +1,7 @@
+digraph preorden {
+Mario1 -> Boo; 
+Mario1 -> Pikachu; 
+Boo -> Geoff; 
+Pikachu -> Mario2; 
+Mario2 -> Mushroom; 
+}
