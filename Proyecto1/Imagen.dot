@@ -1,0 +1,37 @@
+digraph  imagen {
+ node [shape=plaintext]; 
+struct1 [label=< <TABLE >
+<TR>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+</TR>
+<TR>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+</TR>
+<TR>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" ds "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+</TR>
+<TR>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" #ffffff "></TD>
+<TD WIDTH="30" HEIGHT="30" BORDER="0" BGCOLOR=" asx "></TD>
+</TR>
+</TABLE>>];
+}

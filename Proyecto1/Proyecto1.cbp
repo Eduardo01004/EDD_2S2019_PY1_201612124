@@ -35,10 +35,24 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/ArbolABB.h" />
+		<Unit filename="include/ListaCircularDobleFiltros.h" />
 		<Unit filename="include/NodoABB.h" />
+		<Unit filename="include/NodoDobleProfundidad.h" />
+		<Unit filename="include/NodoListaCircularDobleImagenes.h" />
+		<Unit filename="include/Nodomatriz.h" />
+		<Unit filename="include/Profundidad_Matriz.h" />
+		<Unit filename="include/cabecera.h" />
+		<Unit filename="include/raiz.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ArbolABB.cpp" />
+		<Unit filename="src/ListaCircularDobleFiltros.cpp" />
 		<Unit filename="src/NodoABB.cpp" />
+		<Unit filename="src/NodoDobleProfundidad.cpp" />
+		<Unit filename="src/NodoListaCircularDobleImagenes.cpp" />
+		<Unit filename="src/Nodomatriz.cpp" />
+		<Unit filename="src/Profundidad_Matriz.cpp" />
+		<Unit filename="src/cabecera.cpp" />
+		<Unit filename="src/raiz.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

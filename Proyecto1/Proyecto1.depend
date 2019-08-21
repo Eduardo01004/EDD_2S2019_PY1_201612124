@@ -1,15 +1,16 @@
 # depslib dependency file v1.0
-1566333502 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+1566412985 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
 	<iostream>
 	"ArbolABB.h"
 	"raiz.h"
 	"ListaCircularDobleFiltros.h"
+	"Profundidad_Matriz.h"
 
 1566065854 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodoabb.cpp
 	"NodoABB.h"
 	<stdlib.h>
 
-1566065624 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodoabb.h
+1566424767 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodoabb.h
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
@@ -18,6 +19,7 @@
 	<ctype.h>
 	<fstream>
 	<iomanip>
+	"Profundidad_Matriz.h"
 
 1566082143 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\arbolabb.cpp
 	"ArbolABB.h"
@@ -56,7 +58,7 @@
 	"Nodomatriz.h"
 	<stdlib.h>
 
-1566324908 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
+1566412814 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
 	"raiz.h"
 	<iostream>
 	<stdlib.h>
@@ -67,7 +69,7 @@
 	<fstream>
 	<iomanip>
 
-1566316889 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
+1566412877 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
 	"cabecera.h"
 	<string.h>
 
@@ -83,7 +85,7 @@
 	<fstream>
 	<iomanip>
 
-1566333340 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\listacirculardoblefiltros.cpp
+1566333722 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\listacirculardoblefiltros.cpp
 	"ListaCircularDobleFiltros.h"
 	<stdlib.h>
 	<iostream>
@@ -99,4 +101,26 @@
 
 1566333360 c:\users\eduardo\desktop\edd2019\proyecto1\include\listacirculardoblefiltros.h
 	"NodoListaCircularDobleImagenes.h"
+
+1566353248 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nododobleprofundidad.cpp
+	"NodoDobleProfundidad.h"
+	<stdlib.h>
+
+1566404121 c:\users\eduardo\desktop\edd2019\proyecto1\include\nododobleprofundidad.h
+	"raiz.h"
+
+1566411926 c:\users\eduardo\desktop\edd2019\proyecto1\include\profundidad_matriz.h
+	"NodoDobleProfundidad.h"
+	"raiz.h"
+
+1566411881 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\profundidad_matriz.cpp
+	"Profundidad_Matriz.h"
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
 

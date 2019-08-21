@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <fstream>
 #include <iomanip>
+#include "Profundidad_Matriz.h"
 using namespace std;
 class NodoABB
 {
@@ -17,8 +18,8 @@ class NodoABB
         string nombre;
         int dimension;
         int tamano;
+        Profundidad_Matriz *matriz;
         NodoABB(string,int,int);
-        //aqui va el nodo del cubo disperso si lo tuviera ;v
         NodoABB *izquierdo;
         NodoABB *derecho;
 

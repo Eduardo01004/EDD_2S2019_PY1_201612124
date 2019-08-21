@@ -18,6 +18,12 @@ raiz::raiz()
     ultimofila=NULL;
 
 }
+void raiz::InsertarTodoMatriz(int x,int y,string color){
+    existeX(x);
+    existey(y);
+    InsertarMatriz(x,y,color);
+
+}
 
 
 
@@ -448,122 +454,44 @@ void raiz::GraficarDispersa()
     system("Matriz.png");
 
 }
+void raiz::graficarCapa(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    FILE* salida;
+    salida = fopen("Imagen.dot","w");
+    fprintf(salida, "digraph  imagen {\n node [shape=plaintext]; \n");
+    if( x != -1 && y != -1){
+        fprintf(salida,"struct1 [label=< ");
+        fprintf(salida,"<TABLE >\n");
+        while(j <= y){
+            i = 1;
+            fprintf(salida,"<TR>\n");
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
 
-void raiz::graficarMatriz(){
-    std::ofstream afile("Matriz.dot",std::ios::out);
-    cabecera *auxiliar=primerocolumna;
-    cabecera *auxiliar2=primerofila;
-    afile << "digraph G{\n";
-    afile << "subgraph cluster_area{\n";
-    afile << "{rank=same raiz ";
-
-    while(auxiliar!=NULL){
-        long int point = reinterpret_cast<long int>(auxiliar);
-        afile << point;
-        afile << " ";
-        auxiliar=auxiliar->siguiente;
-    }
-    afile << "}\n";
-    afile << "}\n";
-    auxiliar=primerocolumna;
-    if(auxiliar!=NULL){
-        afile << "subgraph cluster_lista_columna{\n";
-        afile <<  "raiz[shape=box,label=\"*\"];\n";
-        long int point = reinterpret_cast<long int>(auxiliar);
-        afile << "raiz->"<<point<<";\n";
-        while(auxiliar!=NULL){
-            long int point = reinterpret_cast<long int>(auxiliar);
-            if(auxiliar->siguiente!=NULL){
-                        long int point2 = reinterpret_cast<long int>(auxiliar->siguiente);
-                        afile << point << "[shape=box,label=\"" <<auxiliar->numero<<"\"];\n";
-                        afile << point2 << "[shape=box,label=\"" <<auxiliar->siguiente->numero<<"\"];\n";
-                        afile <<point<<"->"<<point2<<";\n";
-            }else if(auxiliar==primerocolumna){
-                        afile<<point<<"[shape=box,label=\""<<auxiliar->numero<<"\"];\n";
-            }
-            auxiliar=auxiliar->siguiente;
-
-        }
-         afile<<"}\n";
-        auxiliar=primerocolumna;
-         afile << "subgraph cluster_lista_Nodos{\n";
-        while(auxiliar!=NULL){
-            Nodomatriz *temp=auxiliar->primeromatriz;
-            if(temp!=NULL){
-                point=reinterpret_cast<long int>(auxiliar);
-                long int point2=reinterpret_cast<long int>(temp);
-                afile <<point<<"->"<<point2<<";\n";
-                while(temp!=NULL){
-                    if(temp!=auxiliar->ultimomatriz){
-                         long int point = reinterpret_cast<long int>(temp);
-                         long int point2 = reinterpret_cast<long int>(temp->siguiente);
-                         afile<<point<<"->"<<point2<<";\n";
-                         afile <<point <<"[label=\""<<temp->color<<"\"]\n";
-                         afile<<point2<<"->"<<point<<";\n";
-                         }else if(temp==auxiliar->primeromatriz || temp==auxiliar->ultimomatriz){
-                            long int point = reinterpret_cast<long int>(temp);
-                            afile<<point<<"[label=\""<<temp->color<<"\"]\n";
-                         }
-                    temp=temp->siguiente;
+                if(aux != NULL){
+                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" %s \">",aux->color.c_str());
+                    fprintf(salida,"</TD>\n");
                 }
+                else {
+                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" #ffffff \">");
+                    fprintf(salida,"</TD>\n");
+                }
+                i++;
             }
-            auxiliar=auxiliar->siguiente;
+            fprintf(salida,"</TR>\n");
+            j++;
         }
-         afile<<"}\n";
-        point=reinterpret_cast<long int>(auxiliar2);
-        if(auxiliar2!=NULL){
-            afile<<"raiz->"<<point<<";\n";
-            int contador=0;
-            while(auxiliar2!=NULL){
-               long int point = reinterpret_cast<long int>(auxiliar2);
-               if(auxiliar2->siguiente!=NULL){
-                            long int point2 = reinterpret_cast<long int>(auxiliar2->siguiente);
-                            afile<<point<<"[shape=box,label=\""<<auxiliar2->numero<<"\"];\n";
-                            afile<<point2<<"[shape=box,label=\""<<auxiliar2->siguiente->numero<<"\"];\n";
-                            afile<<point<<"->"<<point2<<";\n";
-               }else if(auxiliar2==primerofila){
-                    afile<<point<<"[shape=box,label=\""<<auxiliar2->numero<<"\"];\n";
-               }
-               Nodomatriz *temp=auxiliar2->primeromatriz;
-                 point = reinterpret_cast<long int>(auxiliar2);
-                 afile<<"{rank=same "<<point<<" ";
-               while(temp!=NULL){
-                   long int point = reinterpret_cast<long int>(temp);
-                   afile<<point;
-                   afile<<" ";
-                   temp=temp->arriba;
-               }
-                    afile<<"}\n";
-               temp=auxiliar2->primeromatriz;
-               if(temp!=NULL){
-                   point=reinterpret_cast<long int>(auxiliar2);
-                   long int point2=reinterpret_cast<long int>(temp);
-                   afile<<point<<"->"<<point2<<";\n";
-                   while(temp!=NULL){
-                       if(temp!=auxiliar2->ultimomatriz){
-                            long int point = reinterpret_cast<long int>(temp);
-                            long int point2 = reinterpret_cast<long int>(temp->arriba);
-                            afile<<point<<"->"<<point2<<";\n";
-                            afile<<point2<<"->"<<point<<";\n";
-                            }else if(temp==auxiliar2->primeromatriz || temp==auxiliar2->ultimomatriz){
-                               long int point = reinterpret_cast<long int>(temp);
-                            }
-                       temp=temp->arriba;
-                   }
-               }
-
-                auxiliar2=auxiliar2->siguiente;
-                contador+=1;
-            }
-
-        }
-
+        fprintf(salida,"</TABLE>>];\n");
     }
-    afile<<"}\n";
-    afile.close();
-    system("dot -Tpng Matriz.dot -o Matriz.png");
-    system(" Matriz.png");
+    fprintf(salida,"}\n");
+    fclose(salida);
+    system("dot -Tpng Imagen.dot -o Imagen.png");
+    system(" Imagen.png");
 }
+
 
 
 

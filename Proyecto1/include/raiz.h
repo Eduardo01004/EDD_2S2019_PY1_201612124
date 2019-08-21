@@ -20,6 +20,8 @@ class raiz
     void graficarMatriz();
     void GraficarDispersa();
     Nodomatriz* buscar(int,int);
+    void InsertarTodoMatriz(int x,int y,string color);
+    void graficarCapa();
     ~raiz();
 
 };

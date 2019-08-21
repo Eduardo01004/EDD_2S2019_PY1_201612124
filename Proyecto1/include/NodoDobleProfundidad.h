@@ -1,5 +1,6 @@
 #ifndef NODODOBLEPROFUNDIDAD_H
 #define NODODOBLEPROFUNDIDAD_H
+#include "raiz.h"
 
 
 class NodoDobleProfundidad
@@ -7,7 +8,7 @@ class NodoDobleProfundidad
     public:
         NodoDobleProfundidad();
         int profundidad;
-        //aqui va el atributo raiz de la matriz
+        raiz *matriz;
         NodoDobleProfundidad *siguiente;
         NodoDobleProfundidad *atras;
 
