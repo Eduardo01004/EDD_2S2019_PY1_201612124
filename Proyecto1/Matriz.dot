@@ -1,13 +1,13 @@
 digraph G{
 node [shape = box] 
 raiz[label="*"  group=1];
-13113000 [label="6" group = 1]; 
-13112968 [label="1" group = 3]; 
-raiz -> 13113000;
-raiz -> 13112968;
-{ rank  = same; raiz 13112968; }
-13113032 [style=filled,fillcolor=seashell2,label= "zxbv" group = 3 ]; 
-13113000->13113032;
-{ rank = same; 13113000; 13113032; }
-13112968->13113032;
+8460240 [label="3" group = 1]; 
+8460208 [label="2" group = 4]; 
+raiz -> 8460240;
+raiz -> 8460208;
+{ rank  = same; raiz 8460208; }
+8498176 [style=filled,fillcolor=seashell2,label= "#000000" group = 4 ]; 
+8460240->8498176;
+{ rank = same; 8460240; 8498176; }
+8460208->8498176;
 }

@@ -12,6 +12,7 @@ class ArbolABB
         NodoABB *raiz;
 //------------------------METODOS DEL ARBOL ABB------------------------------------
         NodoABB* Insertar(NodoABB *,NodoABB *);
+        NodoABB* buscar(NodoABB *raiz,string nombre);
         void graficaBinario();
         void Crear(string,int,int);
         void GraficarABB(NodoABB *tree,FILE* stream);
@@ -21,6 +22,7 @@ class ArbolABB
         void HacerInorden(NodoABB * raiz,FILE* stream);
         void Inorden(FILE *stream, NodoABB *raiz);
         void GraficarPreOrden();
+
 
 };
 

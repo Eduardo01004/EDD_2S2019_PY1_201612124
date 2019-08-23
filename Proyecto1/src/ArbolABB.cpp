@@ -28,6 +28,16 @@ NodoABB* ArbolABB::Insertar(NodoABB *p,NodoABB *q){
 	return p;
 }
 
+NodoABB* ArbolABB::buscar(NodoABB *raiz,string nombre){
+
+    if(raiz != NULL){
+        if(raiz->nombre == nombre) return raiz;
+        if(raiz->derecho && nombre.compare(raiz->nombre) > 0) return buscar(raiz->derecho,nombre);
+        if(raiz->izquierdo && nombre.compare(raiz->nombre) < 0) return buscar(raiz->izquierdo,nombre);
+    }
+    return NULL;
+}
+
 void ArbolABB::Crear(string nombre,int dimension, int tamano){
     NodoABB* nuevo = new NodoABB(nombre,dimension,tamano);
 	raiz=Insertar(raiz,nuevo);

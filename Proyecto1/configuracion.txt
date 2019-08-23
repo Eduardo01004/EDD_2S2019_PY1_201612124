@@ -1,0 +1,10 @@
+Config Config
+Value Value
+image_width datos
+16 ancho
+image_heigth datos
+16 ancho
+pixel_width datos
+30 ancho
+pixel_heigth datos
+30 ancho
