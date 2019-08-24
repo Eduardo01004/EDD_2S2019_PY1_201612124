@@ -3,12 +3,8 @@ File file
 0 inicial
 config.csv config
 1 capa
-body.csv archivo
+capa1.csv archivo
 2 capa
-hair.csv archivo
+capa0.csv archivo
 3 capa
-shirt.csv archivo
-4 capa
-dungarees.csv archivo
-5 capa
-boots.csv archivo
+capa2.csv archivo

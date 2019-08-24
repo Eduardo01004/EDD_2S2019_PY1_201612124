@@ -20,6 +20,50 @@ int altoimage=0;
 int anchoimage=0;
 int altopixel=0;
 int anchopixel=0;
+
+//-----------variables globales de los archivos de las capas ------------------------------------------------
+int fila=0;
+int columna=0;
+string color="";
+//---------------------------------------------fin caroables globales ----------------------------------------------------
+
+void AnalizarArchivoCapas(string path, string archivo){
+    char caracter;
+    int coorx=1;//fila
+    int coory=0;//columna
+    std::ifstream in (path.c_str());
+    if(in.is_open()){
+        FILE *fp;
+        fp = fopen(archivo.c_str(),"w");
+        string palabra = "";
+        while(in.get(caracter)){
+            if(caracter == 'x'){
+                fprintf(fp,"%s %s\n",palabra.c_str(),"X");
+                palabra = "";
+            }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32){
+
+                //---------------------------- Espacios en blanco --------------------------
+            }else if(caracter == 10){
+                coorx++;
+                coory=0;
+            }
+            else if(caracter == ';'){
+                if(palabra != "") fprintf(fp,"%s %s\n",palabra.c_str(),"color");
+                coory++;
+                fprintf(fp,"%d %s\n",coory,"COORX");
+                fprintf(fp,"%d %s\n",coorx,"COORY");
+                palabra = "";
+            }else{
+                palabra += caracter;
+            }
+        }
+        fclose(fp);
+    }
+    else{
+        cout<<"No existe el archivo "<< path << endl;
+    }
+}
+
 void AnalizarConfig(string path,string archivo){
     std::ifstream in (path.c_str());
     if(in.is_open()){
@@ -138,6 +182,7 @@ void automataArchivoinicial(string lexema , string token){
         if (token == "archivo"){
             leerarchivo=lexema;
             cout<<"este es el archivo de las capas que se van insertanto en el cubo disperso"<<endl;
+            AnalizarArchivoCapas(leerarchivo,"capas.txt");
             cout<<leerarchivo<<endl;
             faseinicial=6;
         }else {
@@ -301,8 +346,9 @@ int main()
             break;
         case 4:
             system("cls");
-
-
+            cout<< "Ingrese la ruta del archivo Inicial"<<endl;
+            cin >> direccion;
+            AnalizarArchivoCapas(direccion,"capas.txt");
             break;
         case 5:
             system("cls");
