@@ -117,7 +117,7 @@ void ArbolABB::HacerInorden(NodoABB * raiz,FILE* stream){
 
     if(raiz != NULL){
         HacerInorden(raiz->izquierdo,stream);
-        fprintf(stream,"%s[shape=record, style=filled, fillcolor=seashell2,label=\"Nombre: %s\"];\n",raiz->nombre.c_str(),raiz->nombre.c_str());
+        fprintf(stream,"%s[shape=record, style=filled, fillcolor=seashell2,label=\"Nombre: %s Dimension: %d Tamano: %d\"];\n",raiz->nombre.c_str(),raiz->nombre.c_str(),raiz->dimension,raiz->tamano);
         if (raiz->derecho != NULL){
 
             fprintf(stream, "%s -> %s;\n ",raiz->nombre.c_str(),raiz->derecho->nombre.c_str());

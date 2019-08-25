@@ -1,13 +1,3 @@
 digraph inorden {
-Boo[shape=record, style=filled, fillcolor=seashell2,label="Nombre: Boo"];
-Boo -> Geoff;
- Geoff[shape=record, style=filled, fillcolor=seashell2,label="Nombre: Geoff"];
-Mario1[shape=record, style=filled, fillcolor=seashell2,label="Nombre: Mario1"];
-Mario1 -> Pikachu;
- Mario1 -> Boo;
- Mario2[shape=record, style=filled, fillcolor=seashell2,label="Nombre: Mario2"];
-Mario2 -> Mushroom;
- Mushroom[shape=record, style=filled, fillcolor=seashell2,label="Nombre: Mushroom"];
-Pikachu[shape=record, style=filled, fillcolor=seashell2,label="Nombre: Pikachu"];
-Pikachu -> Mario2;
- }
+inicial[shape=record, style=filled, fillcolor=seashell2,label="Nombre: inicial Dimension: 16 Tamano: 16"];
+}

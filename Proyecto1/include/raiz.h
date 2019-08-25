@@ -22,6 +22,8 @@ class raiz
     Nodomatriz* buscar(int,int);
     void InsertarTodoMatriz(int x,int y,string color);
     void graficarCapa();
+    void graficarHTML();
+    void GenerarSCSS();
     ~raiz();
 
 };

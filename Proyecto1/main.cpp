@@ -3,67 +3,136 @@
 #include "raiz.h"
 #include "ListaCircularDobleFiltros.h"
 #include "Profundidad_Matriz.h"
+#include <sstream>
 using namespace std;
 ArbolABB *arbol=new ArbolABB();
 raiz *matriztemporal =new raiz();
 ListaCircularDobleFiltros *filtro=new ListaCircularDobleFiltros();
 Profundidad_Matriz *matrix=new Profundidad_Matriz();
-
+NodoABB *aux;
+NodoDobleProfundidad *aux2;
 //---------------------------variables globales del archivo inicial-------------------------
 string id="";
 int faseinicial=0;
 int capa=0;
 string leerarchivo="";
 string archivoconfig="";
+string nombreimagen="";
 //------------------------variables globales del archivo configuracion------------------------------------
 int altoimage=0;
 int anchoimage=0;
 int altopixel=0;
 int anchopixel=0;
-
+int Faseconfig=0;
 //-----------variables globales de los archivos de las capas ------------------------------------------------
-int fila=0;
-int columna=0;
+int coorx=0;
+int coory=0;
 string color="";
+int FaseCapas=0;
+string R="";
+string G="";
+string B="";
+string salida="";
 //---------------------------------------------fin caroables globales ----------------------------------------------------
-
-void AnalizarArchivoCapas(string path, string archivo){
-    char caracter;
-    int coorx=1;//fila
-    int coory=0;//columna
-    std::ifstream in (path.c_str());
-    if(in.is_open()){
-        FILE *fp;
-        fp = fopen(archivo.c_str(),"w");
-        string palabra = "";
-        while(in.get(caracter)){
-            if(caracter == 'x'){
-                fprintf(fp,"%s %s\n",palabra.c_str(),"X");
-                palabra = "";
-            }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32){
-
-                //---------------------------- Espacios en blanco --------------------------
-            }else if(caracter == 10){
-                coorx++;
-                coory=0;
-            }
-            else if(caracter == ';'){
-                if(palabra != "") fprintf(fp,"%s %s\n",palabra.c_str(),"color");
-                coory++;
-                fprintf(fp,"%d %s\n",coory,"COORX");
-                fprintf(fp,"%d %s\n",coorx,"COORY");
-                palabra = "";
-            }else{
-                palabra += caracter;
-            }
-        }
-        fclose(fp);
-    }
-    else{
-        cout<<"No existe el archivo "<< path << endl;
-    }
+string RGBToHex(int rNum, int gNum, int bNum){
+    string result;
+    char r[255];
+    sprintf(r, "%.2X", rNum);
+    result.append(r );
+    char g[255];
+    sprintf(g, "%.2X", gNum);
+    result.append(g );
+    char b[255];
+    sprintf(b, "%.2X", bNum);
+    result.append(b );
+    return "#"+result;
 }
+void automataConfig(string lexema, string token){
+    switch(Faseconfig){
+     case 0:
+         if(token == "datos"){
+            Faseconfig=1;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 1:
+         if(token == "ancho"){
+            anchoimage= atoi(lexema.c_str());
+            Faseconfig=2;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 2:
+         if(token == "datos"){
+            Faseconfig=3;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 3:
+        if(token == "ancho"){
+            altoimage= atoi(lexema.c_str());
+            Faseconfig=4;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 4:
+        if(token == "datos"){
+            Faseconfig=5;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 5:
+        if(token == "ancho"){
+            anchopixel= atoi(lexema.c_str());
+            Faseconfig=6;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 6:
+        if(token == "datos"){
+            Faseconfig=7;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 7:
+        if(token == "ancho"){
+            altopixel= atoi(lexema.c_str());
+            arbol->Crear(nombreimagen,altoimage,anchoimage);
+            Faseconfig=8;
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+     case 8:
+         if(token == "datos"){
+            Faseconfig=0;
+            automataConfig(lexema,token);
+         }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
 
+
+    }
+
+
+}
 void AnalizarConfig(string path,string archivo){
     std::ifstream in (path.c_str());
     if(in.is_open()){
@@ -78,21 +147,132 @@ void AnalizarConfig(string path,string archivo){
         string heigth;
         getline(in,columna,',');
         getline(in,fila,'\n');
-        fprintf(fp,"%s %s\n",columna.c_str(),"Config");
-        fprintf(fp,"%s %s\n",fila.c_str(),"Value");
         while(in.good()){
             getline(in,palabra,',');
             getline(in,alto,'\n');
             fprintf(fp,"%s %s\n",palabra.c_str(),"datos");
             fprintf(fp,"%s %s\n",alto.c_str(),"ancho");
         }
-        cout<<"archivo leido" << endl;
         fclose(fp);
     }else {
         cout<<"No existe el archivo "<< path << endl;
      }
 
 }
+void analisisSintacticoConfig(){
+    std::ifstream in ("configuracion.txt");
+    if(in.is_open()){
+        string lexema,token;
+        while(in>>lexema>>token){
+            if(token == "datos") faseinicial = 0;
+            automataConfig(lexema, token);
+        }
+    }
+}
+
+void AutomataArchivoCapas(string lexema, string token){
+    switch(FaseCapas){
+     case 0:
+        if (token == "color"){
+            color=lexema;
+            R= color.substr(0, color.find('-'));
+            G= color.substr(4, color.find('-'));
+            B= color.substr(8, color.find('-'));
+            salida=RGBToHex(atoi(R.c_str()),atoi(G.c_str()),atoi(B.c_str())).c_str();
+            FaseCapas=1;
+        }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un color se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+    case 1:
+        if (token == "COORX"){
+            coorx = atoi(lexema.c_str());
+            FaseCapas=2;
+        }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba una coordenada x se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+    case 2:
+        if (token == "COORY"){
+            coory = atoi(lexema.c_str());
+            aux2=aux->matriz->Buscar(capa);
+                if (aux2 ){
+                    aux2->matriz->InsertarTodoMatriz(coorx,coory,salida);
+                }else cout<<"no encontrado"<<endl;
+            FaseCapas=3;
+        }else{
+            FaseCapas=1000;
+            cout<<"Se esperaba una coordenada y se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+
+
+    case 3:
+        if (token == "color"){
+            FaseCapas=0;
+            AutomataArchivoCapas(lexema,token);
+        }
+        else{
+            FaseCapas=1000;
+            cout<<"Se esperaba un id se encontro: "<<lexema<< " "<<token<<endl;
+        }
+        break;
+    }
+}
+
+
+void analisisSintacticoArchivoCapas(){
+    std::ifstream in ("capas.txt");
+    if(in.is_open()){
+        string lexema,token;
+        while(in>>lexema>>token){
+            if(token == "color") faseinicial = 0;
+            AutomataArchivoCapas(lexema, token);
+        }
+    }
+}
+
+void AnalizarArchivoCapas(string path, string archivo){
+    char caracter;
+    int coorx=1;//fila
+    int coory=0;//columna
+    std::ifstream in (path.c_str());
+    if(in.is_open()){
+        FILE *fp;
+        fp = fopen(archivo.c_str(),"w");
+        string palabra = "";
+        while(in.get(caracter)){
+            if(caracter == 'x'){
+            }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32){
+
+                //---------------------------- Espacios en blanco --------------------------
+            }else if(caracter == 10){
+                coorx++;
+                coory=1;
+            }
+            else if(caracter == ';'){
+                if(palabra != "") {
+                fprintf(fp,"%s %s\n",palabra.c_str(),"color");
+                fprintf(fp,"%d %s\n",coory,"COORX");
+                fprintf(fp,"%d %s\n",coorx,"COORY");
+                }
+                coory++;
+                palabra = "";
+            }else{
+                palabra += caracter;
+            }
+        }
+        fclose(fp);
+    }
+    else{
+        cout<<"No existe el archivo "<< path << endl;
+    }
+}
+
+
+
 void AnalizarArchivoinicial(string path,string archivo){
     std::ifstream in (path.c_str());
     if(in.is_open()){
@@ -130,7 +310,6 @@ void automataArchivoinicial(string lexema , string token){
     switch(faseinicial){
     case 0:
         if (token == "layer"){
-            cout<<"esta es el encabezado layer no sse hace nada"<<endl;
             faseinicial=1;
         }else {
             faseinicial=111;
@@ -139,7 +318,6 @@ void automataArchivoinicial(string lexema , string token){
         break;
     case 1:
         if (token == "file"){
-            cout<<"esta es el encabezado file no sse hace nada"<<endl;
             faseinicial=2;
         }else {
             faseinicial=111;
@@ -148,7 +326,6 @@ void automataArchivoinicial(string lexema , string token){
         break;
     case 2:
         if (token == "inicial"){
-            cout<<"esta es la capa  0 no se hace nada"<<endl;
             faseinicial=3;
         }else {
             faseinicial=111;
@@ -158,9 +335,8 @@ void automataArchivoinicial(string lexema , string token){
     case 3:
         if (token == "config"){
             archivoconfig=lexema;
-            cout<<"este es el archivo de configuracion aqui se deberia insertar  el nombre la dimension y el tamano al arbol abb"<<endl;
-            cout<<archivoconfig<<endl;
             AnalizarConfig(archivoconfig,"configuracion.txt");
+            analisisSintacticoConfig();
             faseinicial=4;
         }else {
             faseinicial=111;
@@ -170,8 +346,12 @@ void automataArchivoinicial(string lexema , string token){
     case 4:
         if (token == "capa"){
             capa=atoi(lexema.c_str());
-            cout<<"esta son las capas del cubo disperso"<<endl;
-            cout<<capa<<endl;
+             aux = arbol->buscar(arbol->raiz,nombreimagen);
+            if (aux != NULL){
+                aux->matriz->Insertar_eje_Z(capa);
+                //cout<<capa<<endl;
+            }
+            else cout<<"no existe"<<endl;
             faseinicial=5;
         }else {
             faseinicial=111;
@@ -181,9 +361,8 @@ void automataArchivoinicial(string lexema , string token){
     case 5:
         if (token == "archivo"){
             leerarchivo=lexema;
-            cout<<"este es el archivo de las capas que se van insertanto en el cubo disperso"<<endl;
             AnalizarArchivoCapas(leerarchivo,"capas.txt");
-            cout<<leerarchivo<<endl;
+            analisisSintacticoArchivoCapas();
             faseinicial=6;
         }else {
             faseinicial=111;
@@ -207,7 +386,6 @@ void automataArchivoinicial(string lexema , string token){
     }
 
 }
-
 void analisisSintacticoArchivoInicial(){
     std::ifstream in ("archivo.txt");
     if(in.is_open()){
@@ -235,6 +413,8 @@ void unircapaprueba(){
             aux3 = aux3->siguiente;
         }
         matriztemporal->graficarCapa();
+        matriztemporal->graficarHTML();
+        matriztemporal->GenerarSCSS();
     }else cout<<"No se encontro la imagen a buscar"<<endl;
 
 }
@@ -302,15 +482,29 @@ void joo(){
         }
     }else cout<<"dato no encontrado"<<endl;
 }
+
+void porCapa(){
+    int opcion;
+    system("cls");
+    cout<<"Ingrese el id de profundidad"<<endl;
+    cin >> opcion;
+    NodoDobleProfundidad * aux3 = aux->matriz->Buscar(opcion);
+    if(aux != NULL){
+        aux3->matriz->GraficarDispersa();
+    }else cout<<"No se encontro el id a buscar"<<endl;
+}
+
+
 int main()
 {
-    arbol->Crear("pito",100,8989);
-    arbol->Crear("jojo",51,46);
-    arbol->Crear("poto",79,32);
-    arbol->Crear("nana",795,98);
-
     string direccion;
+    string token;
+    string punto=".";
     int opcion;
+
+
+
+
     while (1)
     {
 
@@ -330,10 +524,11 @@ int main()
             system("cls");
             cout<< "Ingrese la ruta del archivo Inicial"<<endl;
             cin >> direccion;
+            token= direccion.substr(0, direccion.find(punto));
+            nombreimagen=token;
             AnalizarArchivoinicial(direccion,"archivo.txt");
             system("cls");
             analisisSintacticoArchivoInicial();
-
             break;
         case 2:
             system("cls");
@@ -352,6 +547,7 @@ int main()
             break;
         case 5:
             system("cls");
+            porCapa();
             break;
         case 6:
             system("cls");

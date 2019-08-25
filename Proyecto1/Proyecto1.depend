@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1566583940 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+1566688961 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
 	<iostream>
 	"ArbolABB.h"
 	"raiz.h"
 	"ListaCircularDobleFiltros.h"
 	"Profundidad_Matriz.h"
+	<sstream>
 
 1566424816 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodoabb.cpp
 	"NodoABB.h"
@@ -21,7 +22,7 @@
 	<iomanip>
 	"Profundidad_Matriz.h"
 
-1566493339 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\arbolabb.cpp
+1566668351 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\arbolabb.cpp
 	"ArbolABB.h"
 	<iostream>
 	<stdlib.h>
@@ -32,7 +33,7 @@
 	<fstream>
 	<iomanip>
 
-1566492053 c:\users\eduardo\desktop\edd2019\proyecto1\include\arbolabb.h
+1566688645 c:\users\eduardo\desktop\edd2019\proyecto1\include\arbolabb.h
 	<iostream>
 	<string.h>
 	"NodoABB.h"
@@ -58,7 +59,7 @@
 	"Nodomatriz.h"
 	<stdlib.h>
 
-1566412814 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
+1566694706 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
 	"raiz.h"
 	<iostream>
 	<stdlib.h>
@@ -69,7 +70,7 @@
 	<fstream>
 	<iomanip>
 
-1566412877 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
+1566688651 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
 	"cabecera.h"
 	<string.h>
 

@@ -1,13 +1,46 @@
 digraph G{
 node [shape = box] 
 raiz[label="*"  group=1];
-8460240 [label="3" group = 1]; 
-8460208 [label="2" group = 4]; 
-raiz -> 8460240;
-raiz -> 8460208;
-{ rank  = same; raiz 8460208; }
-8498176 [style=filled,fillcolor=seashell2,label= "#000000" group = 4 ]; 
-8460240->8498176;
-{ rank = same; 8460240; 8498176; }
-8460208->8498176;
+177488 [label="8" group = 1]; 
+177104 [label="10" group = 1]; 
+176912 [label="11" group = 1]; 
+177200 [label="12" group = 1]; 
+177488->177104;
+177104->177488;
+177104->176912;
+176912->177104;
+176912->177200;
+177200->176912;
+176976 [label="3" group = 5]; 
+177552 [label="4" group = 6]; 
+176848 [label="5" group = 7]; 
+176976->177552;
+177552->176976;
+177552->176848;
+176848->177552;
+raiz -> 177488;
+raiz -> 176976;
+{ rank  = same; raiz 176976; 177552; 176848; }
+178456 [style=filled,fillcolor=seashell2,label= "66FF66" group = 5 ]; 
+178848 [style=filled,fillcolor=seashell2,label= "66FF66" group = 5 ]; 
+178400 [style=filled,fillcolor=seashell2,label= "66FF66" group = 6 ]; 
+178624 [style=filled,fillcolor=seashell2,label= "66FF66" group = 6 ]; 
+178904 [style=filled,fillcolor=seashell2,label= "66FF66" group = 7 ]; 
+177488->178456;
+178456->178400;
+178400->178456;
+{ rank = same; 177488; 178456; 178400; }
+177104->178848;
+{ rank = same; 177104; 178848; }
+176912->178624;
+{ rank = same; 176912; 178624; }
+177200->178904;
+{ rank = same; 177200; 178904; }
+176976->178456;
+178456->178848;
+178848->178456;
+177552->178400;
+178400->178624;
+178624->178400;
+176848->178904;
 }

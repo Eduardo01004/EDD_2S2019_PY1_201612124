@@ -1,5 +1,3 @@
-Config Config
-Value Value
 image_width datos
 16 ancho
 image_heigth datos

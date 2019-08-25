@@ -5,6 +5,4 @@ config.csv config
 1 capa
 capa1.csv archivo
 2 capa
-capa0.csv archivo
-3 capa
 capa2.csv archivo

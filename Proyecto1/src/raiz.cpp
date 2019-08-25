@@ -464,7 +464,7 @@ void raiz::graficarCapa(){
     fprintf(salida, "digraph  imagen {\n node [shape=plaintext]; \n");
     if( x != -1 && y != -1){
         fprintf(salida,"struct1 [label=< ");
-        fprintf(salida,"<TABLE >\n");
+        fprintf(salida,"<TABLE border=\"1\">\n");
         while(j <= y){
             i = 1;
             fprintf(salida,"<TR>\n");
@@ -472,11 +472,11 @@ void raiz::graficarCapa(){
                 Nodomatriz* aux = buscar(i,j);
 
                 if(aux != NULL){
-                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" %s \">",aux->color.c_str());
+                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"1\" BGCOLOR=\" %s \">",aux->color.c_str());
                     fprintf(salida,"</TD>\n");
                 }
                 else {
-                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" #ffffff \">");
+                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"1\" BGCOLOR=\" #ffffff \">");
                     fprintf(salida,"</TD>\n");
                 }
                 i++;
@@ -492,9 +492,79 @@ void raiz::graficarCapa(){
     system(" Imagen.png");
 }
 
+void raiz::graficarHTML(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int contador=0;
+    FILE* salida;
+    salida = fopen("prueba.html","w");
+    fprintf(salida,"<!DOCTYPE html>\n");
+    fprintf(salida,"<html>\n");
+    fprintf(salida,"<head>\n");
+    fprintf(salida,"<link rel=\"stylesheet\" href=\"prueba.css\">\n");
+    fprintf(salida,"</head>\n");
+    fprintf(salida,"<body>\n");
+    fprintf(salida,"<div class=\"canvas\">\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                        fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                else{
+                                        fprintf(salida,"<div class=\"pixel\"></div>\n");
 
 
+                }
+                contador++;
+                i++;
+            }
 
+            j++;
+        }
+    }
+     fprintf(salida,"</div>\n\n\n");
+      fprintf(salida,"</body>\n\n\n");
+       fprintf(salida,"</html>");
+    fclose(salida);
+}
 
+void raiz::GenerarSCSS(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int contador=0;
+    FILE* salida;
+    salida = fopen("prueba.css","w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
 
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 200px;\n height: 360px; \n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 35px;\n height: 35px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", aux->color.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+}
 raiz::~raiz(){}
