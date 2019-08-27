@@ -19,10 +19,10 @@ ListaCircularDobleFiltros::ListaCircularDobleFiltros()
     ultimo=NULL;
 }
 
-
 void ListaCircularDobleFiltros::InsertarFiltro(string filtro){
     NodoListaCircularDobleImagenes*nuevo=new NodoListaCircularDobleImagenes();
     nuevo->filtro=filtro;
+    nuevo->copiacubo=new Profundidad_Matriz();
     if(primero == NULL){
         primero=nuevo;
         ultimo=nuevo;

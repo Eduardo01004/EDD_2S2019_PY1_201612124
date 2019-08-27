@@ -92,12 +92,14 @@ void ArbolABB::graficaBinario(){
 
 
 void ArbolABB::mostrarInOrden(NodoABB * raiz)
-{
-    if(raiz != NULL){
-        mostrarInOrden(raiz->izquierdo);
-        cout<<"Capa: "<<raiz->nombre.c_str()<<endl;
-        mostrarInOrden(raiz->derecho);
+{   int contador=1;
 
+    if(raiz != NULL){
+
+        mostrarInOrden(raiz->izquierdo);
+        cout<<contador<<raiz->nombre.c_str()<<endl;
+        contador++;
+        mostrarInOrden(raiz->derecho);
     }
 }
 void ArbolABB::GraficarInOrden()
@@ -106,7 +108,6 @@ void ArbolABB::GraficarInOrden()
     archivo=fopen("Inorden.dot","w");
     fprintf(archivo, "digraph inorden {\n");
     HacerInorden(raiz,archivo);
-    //Inorden(archivo,raiz);
     fprintf(archivo, "}\n");
     fclose(archivo);
     system("dot -Tjpg Inorden.dot -o Inorden.jpg");

@@ -33,6 +33,7 @@ string R="";
 string G="";
 string B="";
 string salida="";
+istringstream iss;
 //---------------------------------------------fin caroables globales ----------------------------------------------------
 string RGBToHex(int rNum, int gNum, int bNum){
     string result;
@@ -47,6 +48,7 @@ string RGBToHex(int rNum, int gNum, int bNum){
     result.append(b );
     return "#"+result;
 }
+/*---------------------------ANALIZA EL ARCHIVO CONFIGURACION DE LA CAPA 0-------------------*/
 void automataConfig(string lexema, string token){
     switch(Faseconfig){
      case 0:
@@ -170,15 +172,17 @@ void analisisSintacticoConfig(){
     }
 }
 
+/*------------------------ANALIZA LOS ARCHIVOS DE LAS CAPAS QUE FORMAN LA IMAGEN------------*/
 void AutomataArchivoCapas(string lexema, string token){
     switch(FaseCapas){
      case 0:
         if (token == "color"){
             color=lexema;
-            R= color.substr(0, color.find('-'));
-            G= color.substr(4, color.find('-'));
-            B= color.substr(8, color.find('-'));
-            salida=RGBToHex(atoi(R.c_str()),atoi(G.c_str()),atoi(B.c_str())).c_str();
+            /*std::istringstream iss(color);
+            getline(iss,R,'-');
+            getline(iss,G,'-');
+            getline(iss,B,'-');
+            salida=RGBToHex(atoi(R.c_str()),atoi(G.c_str()),atoi(B.c_str())).c_str();*/
             FaseCapas=1;
         }else{
             FaseCapas=1000;
@@ -199,7 +203,7 @@ void AutomataArchivoCapas(string lexema, string token){
             coory = atoi(lexema.c_str());
             aux2=aux->matriz->Buscar(capa);
                 if (aux2 ){
-                    aux2->matriz->InsertarTodoMatriz(coorx,coory,salida);
+                    aux2->matriz->InsertarTodoMatriz(coorx,coory,color);
                 }else cout<<"no encontrado"<<endl;
             FaseCapas=3;
         }else{
@@ -221,7 +225,6 @@ void AutomataArchivoCapas(string lexema, string token){
         break;
     }
 }
-
 
 void analisisSintacticoArchivoCapas(){
     std::ifstream in ("capas.txt");
@@ -250,7 +253,7 @@ void AnalizarArchivoCapas(string path, string archivo){
                 //---------------------------- Espacios en blanco --------------------------
             }else if(caracter == 10){
                 coorx++;
-                coory=1;
+                coory=0;
             }
             else if(caracter == ';'){
                 if(palabra != "") {
@@ -272,7 +275,7 @@ void AnalizarArchivoCapas(string path, string archivo){
 }
 
 
-
+/*----------------------ANALIZA EL ARCHIVO INICIAL -----------------*/
 void AnalizarArchivoinicial(string path,string archivo){
     std::ifstream in (path.c_str());
     if(in.is_open()){
@@ -289,9 +292,6 @@ void AnalizarArchivoinicial(string path,string archivo){
         getline(in,fila,'\n');
         getline(in,inicial,';');
         getline(in,archivoinicial,'\n');
-        fprintf(fp,"%s %s\n",columna.c_str(),"layer");
-        fprintf(fp,"%s %s\n",fila.c_str(),"file");
-        fprintf(fp,"%s %s\n",inicial.c_str(),"inicial");
         fprintf(fp,"%s %s\n",archivoinicial.c_str(),"config");
         while(in.good()){
         getline(in,profundidad,';');
@@ -349,7 +349,6 @@ void automataArchivoinicial(string lexema , string token){
              aux = arbol->buscar(arbol->raiz,nombreimagen);
             if (aux != NULL){
                 aux->matriz->Insertar_eje_Z(capa);
-                //cout<<capa<<endl;
             }
             else cout<<"no existe"<<endl;
             faseinicial=5;
@@ -370,12 +369,12 @@ void automataArchivoinicial(string lexema , string token){
         }
         break;
     case 6:
-        if (token == "capa"){
-            faseinicial=4;
+        if (token == "config"){
+            faseinicial=3;
             automataArchivoinicial(lexema,token);
         }
-        else if(token == "archivo"){
-            faseinicial=5;
+        else if(token == "capa"){
+            faseinicial=4;
             automataArchivoinicial(lexema,token);
         }
         else {
@@ -397,6 +396,24 @@ void analisisSintacticoArchivoInicial(){
     }
 }
 
+/*---------------------------------APLICACION DE FILTROS------------------*/
+void AplicarFiltrosMenu(){
+     string opcion;
+    cout << "[1]Negative(Negativo)" << endl;
+    cout << "[2]GrayScale(Escala de Grises)" << endl;
+    cout << "[3]Mirror(Espejo)" << endl;
+    cout << "[4]Collage(Collage)" << endl;
+    cout << "[5]Mosaic(Mosaico)" << endl;
+    cout << "\nIngresa tu opcion: ";
+
+    cin >> opcion;
+    if (opcion == "Negativo"){
+
+    }
+}
+void FiltroNegativo(){
+
+}
 
 void unircapaprueba(){
     string opcion;
@@ -495,16 +512,34 @@ void porCapa(){
 }
 
 
+
+
+/*--------------------------------------REPORTES--------------------------*/
+void Reportes(){
+    int opcion;
+    cout << "[1]Imported Images report(Arbol ABB)" << endl;
+    cout << "[2]Image layer report(Cada capa del cubo)" << endl;
+    cout << "[3]Linear Matrix Report(Reporte de linealizar cada capa)" << endl;
+    cout << "[4]Transversal Report(Recorridos Arbol ABB)" << endl;
+    cout << "[5]Filters Report(Lista Circular Doble)" << endl;
+    cout << "\nIngresa tu opcion: ";
+
+    cin >> opcion;
+    if (opcion == 1){
+        arbol->GraficarInOrden();
+    }
+
+}
+
+
+/*----------------------------------MAIN-------------------------------*/
 int main()
 {
     string direccion;
     string token;
     string punto=".";
     int opcion;
-
-
-
-
+    int opcioninorden;
     while (1)
     {
 
@@ -527,23 +562,22 @@ int main()
             token= direccion.substr(0, direccion.find(punto));
             nombreimagen=token;
             AnalizarArchivoinicial(direccion,"archivo.txt");
-            system("cls");
             analisisSintacticoArchivoInicial();
             break;
         case 2:
             system("cls");
-             joo();
-
+            arbol->mostrarInOrden(arbol->raiz);
+            cout<<"seleccione una imagen"<<endl;
+            cin>>opcioninorden;
             break;
         case 3:
             system("cls");
-             unircapaprueba();
+            AplicarFiltrosMenu();
+
             break;
         case 4:
             system("cls");
-            cout<< "Ingrese la ruta del archivo Inicial"<<endl;
-            cin >> direccion;
-            AnalizarArchivoCapas(direccion,"capas.txt");
+             unircapaprueba();
             break;
         case 5:
             system("cls");
@@ -551,6 +585,7 @@ int main()
             break;
         case 6:
             system("cls");
+            Reportes();
             break;
         case 7:
             return 0;
@@ -559,9 +594,6 @@ int main()
             cout << "Por favor ingresa una opcion correcta.\n";
             break;
         }
-
-
-
     }
     return 0;
 

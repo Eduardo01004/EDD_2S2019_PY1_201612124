@@ -7,9 +7,17 @@
 #include <ctype.h>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 
-using namespace std;
-
+string RNeg="";
+string GNeg="";
+string BNeg="";
+string text="";
+string out="";
+int a=0;
+int b=0;
+int c=0;
+string negativo="#CCCCCC";
 raiz::raiz()
 {
     primerocolumna=NULL;
@@ -348,7 +356,7 @@ void raiz::GraficarDispersa()
             if(aux->siguiente != NULL){
                 long int point2 = reinterpret_cast<long int>(aux->siguiente);
                 afile << point << "->" << point2 << ";\n";
-                afile << point2 << "->" << point << ";\n";//si se chinga puede eque sea esto
+                //afile << point2 << "->" << point << ";\n";//si se chinga puede eque sea esto
             }
              aux = aux->siguiente;
         }
@@ -454,13 +462,26 @@ void raiz::GraficarDispersa()
     system("Matriz.png");
 
 }
+string raiz::RGBToHex(int rNum, int gNum, int bNum){
+    string result;
+    char r[255];
+    sprintf(r, "%.2X", rNum);
+    result.append(r );
+    char g[255];
+    sprintf(g, "%.2X", gNum);
+    result.append(g );
+    char b[255];
+    sprintf(b, "%.2X", bNum);
+    result.append(b );
+    return "#"+result;
+}
 void raiz::graficarCapa(){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
     FILE* salida;
-    salida = fopen("Imagen.dot","w");
+    salida = fopen("mario.dot","w");
     fprintf(salida, "digraph  imagen {\n node [shape=plaintext]; \n");
     if( x != -1 && y != -1){
         fprintf(salida,"struct1 [label=< ");
@@ -488,8 +509,8 @@ void raiz::graficarCapa(){
     }
     fprintf(salida,"}\n");
     fclose(salida);
-    system("dot -Tpng Imagen.dot -o Imagen.png");
-    system(" Imagen.png");
+    system("dot -Tpng mario.dot -o mario.png");
+    system(" mario.png");
 }
 
 void raiz::graficarHTML(){
@@ -499,11 +520,11 @@ void raiz::graficarHTML(){
     int j = 1;
     int contador=0;
     FILE* salida;
-    salida = fopen("prueba.html","w");
+    salida = fopen("mario.html","w");
     fprintf(salida,"<!DOCTYPE html>\n");
     fprintf(salida,"<html>\n");
     fprintf(salida,"<head>\n");
-    fprintf(salida,"<link rel=\"stylesheet\" href=\"prueba.css\">\n");
+    fprintf(salida,"<link rel=\"stylesheet\" href=\"mario.css\">\n");
     fprintf(salida,"</head>\n");
     fprintf(salida,"<body>\n");
     fprintf(salida,"<div class=\"canvas\">\n");
@@ -516,13 +537,13 @@ void raiz::graficarHTML(){
                         fprintf(salida,"<div class=\"pixel\"></div>\n");
                 }
                 else{
-                                        fprintf(salida,"<div class=\"pixel\"></div>\n");
-
-
+                    fprintf(salida,"<div class=\"pixel\"></div>\n");
                 }
+
                 contador++;
                 i++;
             }
+
 
             j++;
         }
@@ -538,25 +559,32 @@ void raiz::GenerarSCSS(){
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
-    int contador=0;
+    int contador=1;
     FILE* salida;
-    salida = fopen("prueba.css","w");
+    salida = fopen("mario.css","w");
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
 
     fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 200px;\n height: 360px; \n }\n");
+    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
 
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 35px;\n height: 35px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
             while( i <= x){
                 Nodomatriz* aux = buscar(i,j);
                 if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
                     fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", aux->color.c_str());
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+
                 }
                 contador++;
                 i++;
@@ -566,5 +594,56 @@ void raiz::GenerarSCSS(){
         }
     }
     fclose(salida);
+}
+
+void raiz::FiltroNegativo(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int contador=1;
+    FILE* salida;
+    salida = fopen("mario.css","w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    a=ConvertirNegativo(atoi(RNeg.c_str()));
+                    b=ConvertirNegativo(atoi(GNeg.c_str()));
+                    c=ConvertirNegativo(atoi(BNeg.c_str()));
+                    out=RGBToHex(a,b,c).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                else {
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", negativo.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+}
+int raiz::ConvertirNegativo(int number){
+    return 255-number;
 }
 raiz::~raiz(){}

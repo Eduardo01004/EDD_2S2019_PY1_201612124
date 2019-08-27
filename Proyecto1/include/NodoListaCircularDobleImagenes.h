@@ -6,6 +6,8 @@
 #include <ctype.h>
 #include <fstream>
 #include <iomanip>
+#include "Profundidad_Matriz.h"
+
 using namespace std;
 
 class NodoListaCircularDobleImagenes
@@ -15,6 +17,7 @@ class NodoListaCircularDobleImagenes
         string filtro;
         NodoListaCircularDobleImagenes *siguiente;
         NodoListaCircularDobleImagenes *anterior;
+        Profundidad_Matriz *copiacubo;
 
 };
 

@@ -1,3 +1,5 @@
 digraph inorden {
 inicial[shape=record, style=filled, fillcolor=seashell2,label="Nombre: inicial Dimension: 16 Tamano: 16"];
+inicial -> mario;
+ mario[shape=record, style=filled, fillcolor=seashell2,label="Nombre: mario Dimension: 16 Tamano: 16"];
 }

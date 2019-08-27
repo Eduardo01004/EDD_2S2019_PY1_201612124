@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1566688961 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+1566858983 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
 	<iostream>
 	"ArbolABB.h"
 	"raiz.h"
@@ -22,7 +22,7 @@
 	<iomanip>
 	"Profundidad_Matriz.h"
 
-1566668351 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\arbolabb.cpp
+1566849749 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\arbolabb.cpp
 	"ArbolABB.h"
 	<iostream>
 	<stdlib.h>
@@ -59,7 +59,7 @@
 	"Nodomatriz.h"
 	<stdlib.h>
 
-1566694706 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
+1566857974 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
 	"raiz.h"
 	<iostream>
 	<stdlib.h>
@@ -69,8 +69,9 @@
 	<ctype.h>
 	<fstream>
 	<iomanip>
+	<sstream>
 
-1566688651 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
+1566857860 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
 	"cabecera.h"
 	<string.h>
 
@@ -78,15 +79,16 @@
 	"NodoListaCircularDobleImagenes.h"
 	<stdlib.h>
 
-1566332056 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodolistacirculardobleimagenes.h
+1566852459 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodolistacirculardobleimagenes.h
 	<stdio.h>
 	<stdbool.h>
 	<string.h>
 	<ctype.h>
 	<fstream>
 	<iomanip>
+	"Profundidad_Matriz.h"
 
-1566333722 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\listacirculardoblefiltros.cpp
+1566852540 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\listacirculardoblefiltros.cpp
 	"ListaCircularDobleFiltros.h"
 	<stdlib.h>
 	<iostream>
@@ -100,7 +102,7 @@
 	<sstream>
 	<string>
 
-1566333360 c:\users\eduardo\desktop\edd2019\proyecto1\include\listacirculardoblefiltros.h
+1566852429 c:\users\eduardo\desktop\edd2019\proyecto1\include\listacirculardoblefiltros.h
 	"NodoListaCircularDobleImagenes.h"
 
 1566353248 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nododobleprofundidad.cpp

@@ -1,0 +1,849 @@
+body { 
+ background: #333333; 
+ height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: center; 
+ }
+.canvas{
+ width: 400px;
+ height: 400px; 
+ }
+.pixel{
+ width: 30px;
+ height: 30px;
+ float: left; 
+ box-shadow: 0px 0px 1px #fff;
+}
+.pixel:nth-child(1)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(2)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(3)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(4)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(5)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(6)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(7)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(8)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(9)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(10)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(11)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(12)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(13)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(14)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(15)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(16)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(17)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(18)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(19)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(20)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(21)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(22)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(23)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(24)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(25)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(26)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(27)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(28)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(29)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(30)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(31)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(32)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(33)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(34)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(35)
+{
+ background: #000000; 
+}
+.pixel:nth-child(36)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(37)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(38)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(39)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(40)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(41)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(42)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(43)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(44)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(45)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(46)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(47)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(48)
+{
+ background: #000000; 
+}
+.pixel:nth-child(49)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(50)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(51)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(52)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(53)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(54)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(55)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(56)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(57)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(58)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(59)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(60)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(61)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(62)
+{
+ background: #000000; 
+}
+.pixel:nth-child(63)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(64)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(65)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(66)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(67)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(68)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(69)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(70)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(71)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(72)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(73)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(74)
+{
+ background: #000000; 
+}
+.pixel:nth-child(75)
+{
+ background: #000000; 
+}
+.pixel:nth-child(76)
+{
+ background: #000000; 
+}
+.pixel:nth-child(77)
+{
+ background: #000000; 
+}
+.pixel:nth-child(78)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(79)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(80)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(81)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(82)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(83)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(84)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(85)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(86)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(87)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(88)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(89)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(90)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(91)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(92)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(93)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(94)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(95)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(96)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(97)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(98)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(99)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(100)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(101)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(102)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(103)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(104)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(105)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(106)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(107)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(108)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(109)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(110)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(111)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(112)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(113)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(114)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(115)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(116)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(117)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(118)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(119)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(120)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(121)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(122)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(123)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(124)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(125)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(126)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(127)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(128)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(129)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(130)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(131)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(132)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(133)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(134)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(135)
+{
+ background: #FFFF00; 
+}
+.pixel:nth-child(136)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(137)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(138)
+{
+ background: #FFFF00; 
+}
+.pixel:nth-child(139)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(140)
+{
+ background: #E41D1D; 
+}
+.pixel:nth-child(141)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(142)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(143)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(144)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(145)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(146)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(147)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(148)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(149)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(150)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(151)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(152)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(153)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(154)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(155)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(156)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(157)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(158)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(159)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(160)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(161)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(162)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(163)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(164)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(165)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(166)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(167)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(168)
+{
+ background: #FFE4B5; 
+}
+.pixel:nth-child(169)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(170)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(171)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(172)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(173)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(174)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(175)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(176)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(177)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(178)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(179)
+{
+ background: #0000FF; 
+}
+.pixel:nth-child(180)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(181)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(182)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(183)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(184)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(185)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(186)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(187)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(188)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(189)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(190)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(191)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(192)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(193)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(194)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(195)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(196)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(197)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(198)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(199)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(200)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(201)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(202)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(203)
+{
+ background: #CCCCCC; 
+}
+.pixel:nth-child(204)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(205)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(206)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(207)
+{
+ background: #8B4513; 
+}
+.pixel:nth-child(208)
+{
+ background: #CCCCCC; 
+}

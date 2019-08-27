@@ -6,7 +6,7 @@ body {
  align-items: center; 
  }
 .canvas{
- width: 200px;
+ width: 150px;
  height: 360px; 
  }
 .pixel{
@@ -15,11 +15,15 @@ body {
  float: left; 
  box-shadow: 0px 0px 1px #fff;
 }
-.pixel:nth-child(11)
+.pixel:nth-child(9)
 {
  background: #99CCFF; 
 }
-.pixel:nth-child(12)
+.pixel:nth-child(10)
+{
+ background: #99CCFF; 
+}
+.pixel:nth-child(11)
 {
  background: #99CCFF; 
 }
@@ -31,7 +35,11 @@ body {
 {
  background: #99CCFF; 
 }
-.pixel:nth-child(19)
+.pixel:nth-child(17)
+{
+ background: #99CCFF; 
+}
+.pixel:nth-child(20)
 {
  background: #99CCFF; 
 }
@@ -43,7 +51,11 @@ body {
 {
  background: #99CCFF; 
 }
-.pixel:nth-child(26)
+.pixel:nth-child(25)
+{
+ background: #99CCFF; 
+}
+.pixel:nth-child(28)
 {
  background: #99CCFF; 
 }
@@ -51,21 +63,21 @@ body {
 {
  background: #99CCFF; 
 }
+.pixel:nth-child(30)
+{
+ background: #66FF66; 
+}
 .pixel:nth-child(31)
 {
- background: #99CCFF; 
+ background: #66FF66; 
 }
-.pixel:nth-child(34)
-{
- background: #99CCFF; 
-}
-.pixel:nth-child(36)
+.pixel:nth-child(33)
 {
  background: #99CCFF; 
 }
 .pixel:nth-child(37)
 {
- background: #66FF66; 
+ background: #99CCFF; 
 }
 .pixel:nth-child(38)
 {
@@ -75,27 +87,15 @@ body {
 {
  background: #99CCFF; 
 }
-.pixel:nth-child(46)
-{
- background: #99CCFF; 
-}
-.pixel:nth-child(47)
+.pixel:nth-child(43)
 {
  background: #66FF66; 
 }
-.pixel:nth-child(51)
+.pixel:nth-child(45)
 {
  background: #99CCFF; 
 }
-.pixel:nth-child(53)
-{
- background: #66FF66; 
-}
-.pixel:nth-child(56)
-{
- background: #99CCFF; 
-}
-.pixel:nth-child(59)
+.pixel:nth-child(48)
 {
  background: #66FF66; 
 }
