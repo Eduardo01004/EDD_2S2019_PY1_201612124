@@ -25,8 +25,16 @@ class raiz
     void graficarHTML();
     void GenerarSCSS();
     void FiltroNegativo();
+    void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);
     int ConvertirNegativo(int);
+    int ConvertirSacleGray(int,int,int);
+    void Negative();
+    void GrayScale();
+    void EspejoX(raiz*);
+    void MirrorX();
+    void MirrorY();
+    void DoubleMirror();
     ~raiz();
 
 };

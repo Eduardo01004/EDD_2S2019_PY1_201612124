@@ -462,19 +462,7 @@ void raiz::GraficarDispersa()
     system("Matriz.png");
 
 }
-string raiz::RGBToHex(int rNum, int gNum, int bNum){
-    string result;
-    char r[255];
-    sprintf(r, "%.2X", rNum);
-    result.append(r );
-    char g[255];
-    sprintf(g, "%.2X", gNum);
-    result.append(g );
-    char b[255];
-    sprintf(b, "%.2X", bNum);
-    result.append(b );
-    return "#"+result;
-}
+
 void raiz::graficarCapa(){
     int x = cantidadColumnas();
     int y = cantidadFilas();
@@ -553,7 +541,7 @@ void raiz::graficarHTML(){
        fprintf(salida,"</html>");
     fclose(salida);
 }
-
+/*------------------------------------GENERA IMAGEN ORIGINAL-------------------------------*/
 void raiz::GenerarSCSS(){
     int x = cantidadColumnas();
     int y = cantidadFilas();
@@ -564,6 +552,101 @@ void raiz::GenerarSCSS(){
     salida = fopen("mario.css","w");
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+}
+
+/*---------------------------------------GENERA ESCALA DE GRISES----------*/
+void raiz::GenerarScalaDeGrises(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int r=0;
+    int g=0;
+    int b=0;
+    int contador=1;
+    FILE* salida;
+    salida = fopen("mario.css","w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    r=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
+                    g=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
+                    b=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
+
+                    out=RGBToHex(r,g,b).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+}
+
+/*-----------------------------GENERA X MIRROR-----------------------*/
+void raiz::MirrorX(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int r=0;
+    int g=0;
+    int b=0;
+    int contador=1;
+    FILE* salida;
+    salida = fopen("mario.css","w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \ntransform: scaleX(-1);\n }\n");
 
     fprintf(salida,".canvas{\n");
     fprintf(salida," width: 400px;\n height: 400px; \n }\n");
@@ -596,6 +679,97 @@ void raiz::GenerarSCSS(){
     fclose(salida);
 }
 
+/*-----------------------------------------------GENERA MIRROR Y------------------------*/
+void raiz::MirrorY(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int r=0;
+    int g=0;
+    int b=0;
+    int contador=1;
+    FILE* salida;
+    salida = fopen("mario.css","w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \ntransform: scaleY(-1);\n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                   text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+}
+/*---------------------------------------------GENERA FILTRO DOBLE MIRROR------------*/
+void raiz::DoubleMirror(){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int r=0;
+    int g=0;
+    int b=0;
+    int contador=1;
+    FILE* salida;
+    salida = fopen("mario.css","w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \ntransform: scaleY(-1);\n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 400px;\n height: 400px; \ntransform: scaleX(-1);\n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+}
+/*-----------------------------------GENERA FILTRO NEGATIVO---------------------------------*/
 void raiz::FiltroNegativo(){
     int x = cantidadColumnas();
     int y = cantidadFilas();
@@ -643,7 +817,95 @@ void raiz::FiltroNegativo(){
     }
     fclose(salida);
 }
+string raiz::RGBToHex(int rNum, int gNum, int bNum){
+    string result;
+    char r[255];
+    sprintf(r, "%.2X", rNum);
+    result.append(r );
+    char g[255];
+    sprintf(g, "%.2X", gNum);
+    result.append(g );
+    char b[255];
+    sprintf(b, "%.2X", bNum);
+    result.append(b );
+    return "#"+result;
+}
 int raiz::ConvertirNegativo(int number){
     return 255-number;
+}
+void raiz::Negative(){
+    cabecera *aux=primerocolumna;
+    while (aux != NULL){
+        Nodomatriz *aux2=aux->primeromatriz;
+        while(aux2 != NULL){
+            text=aux2->color;
+            std::istringstream iso(text);
+            getline(iso,RNeg,'-');
+            getline(iso,GNeg,'-');
+            getline(iso,BNeg,'-');
+            a=ConvertirNegativo(atoi(RNeg.c_str()));
+            b=ConvertirNegativo(atoi(GNeg.c_str()));
+            c=ConvertirNegativo(atoi(BNeg.c_str()));
+            out=RGBToHex(a,b,c).c_str();
+            aux2->color=out;
+            aux2=aux2->siguiente;
+        }
+        aux=aux->siguiente;
+    }
+
+}
+void raiz::GrayScale(){
+    int r=0;
+    int g=0;
+    int b=0;
+    cabecera *aux=primerocolumna;
+    while (aux != NULL){
+        Nodomatriz *aux2=aux->primeromatriz;
+        while(aux2 != NULL){
+            text=aux2->color;
+            std::istringstream iso(text);
+            getline(iso,RNeg,'-');
+            getline(iso,GNeg,'-');
+            getline(iso,BNeg,'-');
+            r=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
+            g=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
+            b=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
+            out=RGBToHex(r,g,b).c_str();
+            aux2->color=out;
+            aux2=aux2->siguiente;
+        }
+        aux=aux->siguiente;
+    }
+}
+void raiz::EspejoX(raiz *m ){
+    int x= cantidadColumnas();
+    int y= cantidadFilas();
+    int i=0;
+    int j=1;
+    cabecera *aux=primerofila;
+    cabecera *aux2=primerocolumna;
+    if (x != -1 && y != -1){
+            i = 1;
+    while (aux != NULL){
+        Nodomatriz *mat=aux->primeromatriz;
+        while(mat != NULL){
+            i=(y-(mat->y-1));
+            mat->y=i;
+            m->InsertarTodoMatriz(mat->x,mat->y,mat->color);
+            mat=mat->siguiente;
+            i++;
+        }
+        aux=aux->siguiente;
+
+    }
+
+
+    }
+
+}
+int raiz::ConvertirSacleGray(int col,int g,int b){
+        int x=0;
+        x=(col*0.21)+(g*0.72)+(b*0.07);
+        return x;
 }
 raiz::~raiz(){}

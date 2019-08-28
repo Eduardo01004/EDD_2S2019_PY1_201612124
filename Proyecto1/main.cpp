@@ -416,6 +416,7 @@ void FiltroNegativo(){
 }
 
 void unircapaprueba(){
+    int r=0;
     string opcion;
     system("cls");
     cout<<"ingrese nombre imagen"<<endl;
@@ -429,7 +430,10 @@ void unircapaprueba(){
             if(aux3-> matriz != NULL) aux2->UnirCapas(aux3->matriz,matriztemporal);
             aux3 = aux3->siguiente;
         }
-        matriztemporal->graficarCapa();
+        //matriztemporal->graficarCapa();
+        //matriztemporal->Negative();
+       // matriztemporal->GrayScale();
+        matriztemporal->EspejoX(matriztemporal);
         matriztemporal->graficarHTML();
         matriztemporal->GenerarSCSS();
     }else cout<<"No se encontro la imagen a buscar"<<endl;
@@ -507,7 +511,9 @@ void porCapa(){
     cin >> opcion;
     NodoDobleProfundidad * aux3 = aux->matriz->Buscar(opcion);
     if(aux != NULL){
+        //aux3->matriz->Negative();
         aux3->matriz->GraficarDispersa();
+
     }else cout<<"No se encontro el id a buscar"<<endl;
 }
 
@@ -540,6 +546,8 @@ int main()
     string punto=".";
     int opcion;
     int opcioninorden;
+    //cout<<RGBToHex(230,230,230)<<endl;
+   //cout<<setprecision(1)<< matriztemporal->ConvertirSacleGray(255,228,181)<<endl;
     while (1)
     {
 
