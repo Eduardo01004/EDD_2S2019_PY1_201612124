@@ -877,29 +877,61 @@ void raiz::GrayScale(){
         aux=aux->siguiente;
     }
 }
-void raiz::EspejoX(raiz *m ){
-    int x= cantidadColumnas();
-    int y= cantidadFilas();
+void raiz::EspejoX(raiz*p,raiz *m ,int a){
     int i=0;
-    int j=1;
-    cabecera *aux=primerofila;
-    cabecera *aux2=primerocolumna;
-    if (x != -1 && y != -1){
-            i = 1;
+    int j=0;
+    int x=cantidadColumnas();
+    int f=contar();
+    int q=a;
+    cabecera *aux=p->primerocolumna;
     while (aux != NULL){
         Nodomatriz *mat=aux->primeromatriz;
         while(mat != NULL){
-            i=(y-(mat->y-1));
-            mat->y=i;
-            m->InsertarTodoMatriz(mat->x,mat->y,mat->color);
+            m->InsertarTodoMatriz(a-(mat->x-1),mat->y,mat->color);
             mat=mat->siguiente;
-            i++;
         }
+
         aux=aux->siguiente;
 
     }
+}
+void raiz::EspejoY(raiz*p,raiz *m ,int a){
+    int i=0;
+    int j=0;
+    int x=cantidadColumnas();
+    int y=cantidadFilas();
+    int f=contar();
+    int q=a;
+    cabecera *aux=p->primerocolumna;
+    while (aux != NULL){
+        Nodomatriz *mat=aux->primeromatriz;
+        while(mat != NULL){
+            m->InsertarTodoMatriz(mat->x,(q-(mat->y)),mat->color);
+            mat=mat->siguiente;
+        }
 
+        aux=aux->siguiente;
 
+    }
+}
+int raiz::contar(){
+    int j=1;
+    int i=1;
+    int x=cantidadColumnas();
+    int y=cantidadFilas();
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    return x;
+                }
+                i++;
+            }
+
+            j++;
+        }
     }
 
 }

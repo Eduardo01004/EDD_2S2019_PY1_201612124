@@ -64,5 +64,29 @@ void Profundidad_Matriz::UnirCapas(raiz *capa, raiz *unido){
         aux = aux->siguiente;
     }
 }
+int Profundidad_Matriz::cantidadColumnas(raiz *p){
+    if(p->ultimocolumna != NULL) return p->ultimocolumna->numero;
+    return -1;
+}
+
+void Profundidad_Matriz::EspejoX(raiz*p,raiz *m){
+    int i=0;
+    int j=cantidadColumnas(p);
+
+    cabecera *aux=p->primerocolumna;
+    if (j != -1){
+    while (aux != NULL && i<=j){
+        Nodomatriz *mat=aux->primeromatriz;
+        while(mat != NULL){
+            m->InsertarTodoMatriz(j-(mat->x),mat->y,mat->color);
+        cout<<j<<endl;
+            mat=mat->siguiente;
+        }
+        aux=aux->siguiente;
+        i++;
+    }
+    }
+
+}
 
 

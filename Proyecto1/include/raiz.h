@@ -31,10 +31,12 @@ class raiz
     int ConvertirSacleGray(int,int,int);
     void Negative();
     void GrayScale();
-    void EspejoX(raiz*);
+    void EspejoX(raiz*,raiz*,int);
+    void EspejoY(raiz*,raiz*,int);
     void MirrorX();
     void MirrorY();
     void DoubleMirror();
+    int contar();
     ~raiz();
 
 };

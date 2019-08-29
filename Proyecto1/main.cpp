@@ -426,14 +426,36 @@ void unircapaprueba(){
         matriztemporal = new raiz();
         Profundidad_Matriz *aux2=aux->matriz;
         NodoDobleProfundidad *aux3=aux2->primero;
+        int p=0;
+        int q=0;
+        cabecera *a=aux3->matriz->ultimocolumna;
+        cabecera *f=aux3->matriz->ultimofila;
+           while(f != NULL){
+                q=f->numero;
+                f=f->siguiente;
+                cout<<q<<endl;
+        }
+        int jo=matriztemporal->cantidadFilas();
         while(aux3 != NULL){
-            if(aux3-> matriz != NULL) aux2->UnirCapas(aux3->matriz,matriztemporal);
+                 while(a != NULL){
+                p=a->numero;
+                a=a->siguiente;
+        }
+
+            if(aux3-> matriz != NULL)
+                {
+                    //aux2->UnirCapas(aux3->matriz,matriztemporal);//saca la imagen normal
+                    //matriztemporal->EspejoX(aux3->matriz,matriztemporal,p);//saca el mirrorx
+                    matriztemporal->EspejoY(aux3->matriz,matriztemporal,q);
+                    cout<<jo<<endl;
+                }
+
             aux3 = aux3->siguiente;
         }
         //matriztemporal->graficarCapa();
         //matriztemporal->Negative();
        // matriztemporal->GrayScale();
-        matriztemporal->EspejoX(matriztemporal);
+
         matriztemporal->graficarHTML();
         matriztemporal->GenerarSCSS();
     }else cout<<"No se encontro la imagen a buscar"<<endl;
