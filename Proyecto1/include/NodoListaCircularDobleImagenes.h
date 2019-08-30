@@ -7,7 +7,7 @@
 #include <fstream>
 #include <iomanip>
 #include "Profundidad_Matriz.h"
-
+#include "NodoABB.h"
 using namespace std;
 
 class NodoListaCircularDobleImagenes
@@ -18,6 +18,7 @@ class NodoListaCircularDobleImagenes
         NodoListaCircularDobleImagenes *siguiente;
         NodoListaCircularDobleImagenes *anterior;
         Profundidad_Matriz *copiacubo;
+        NodoABB *imagen;
 
 };
 

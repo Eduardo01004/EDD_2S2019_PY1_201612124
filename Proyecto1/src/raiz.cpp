@@ -572,6 +572,7 @@ void raiz::GenerarSCSS(){
                     out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
                     fprintf(salida,".pixel:nth-child(%d)\n",contador);
                     fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                    //cout<<y<<endl;
                 }
                 contador++;
                 i++;
@@ -902,17 +903,50 @@ void raiz::EspejoY(raiz*p,raiz *m ,int a){
     int y=cantidadFilas();
     int f=contar();
     int q=a;
-    cabecera *aux=p->primerocolumna;
+    cabecera *aux=p->primerofila;
     while (aux != NULL){
         Nodomatriz *mat=aux->primeromatriz;
         while(mat != NULL){
-            m->InsertarTodoMatriz(mat->x,(q-(mat->y)),mat->color);
-            mat=mat->siguiente;
+            m->InsertarTodoMatriz(mat->y,(q+3)-(mat->x-1),mat->color);
+            mat=mat->arriba;
         }
-
         aux=aux->siguiente;
-
     }
+}
+void raiz::DobleEspejo(raiz*p,raiz *m ,int fila,int columna){
+    int i=0;
+    int j=0;
+    int x=cantidadColumnas();
+    int y=cantidadFilas();
+    int f=contar();
+    int q=a;
+    cabecera *aux=p->primerofila;
+    while (aux != NULL){
+        Nodomatriz *mat=aux->primeromatriz;
+        while(mat != NULL){
+            m->InsertarTodoMatriz(fila-(mat->x-1),(columna+3)-(mat->y-1),mat->color);
+            mat=mat->arriba;
+        }
+        aux=aux->siguiente;
+    }
+}
+
+void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,int cantidadcol){
+    cabecera *aux=rai->primerocolumna;
+    for (int i=0; i<fila;i++){
+        for(int j=0; j<columna;j++){
+            cabecera *aux=rai->primerofila;
+            while (aux != NULL){
+                Nodomatriz *mat=aux->primeromatriz;
+                while(mat != NULL){
+                    matriz->InsertarTodoMatriz((cantidadcol*j)+mat->x,((cantidadf+3)*i)+mat->y,mat->color);
+                    mat=mat->arriba;
+                }
+                aux=aux->siguiente;
+            }
+        }
+    }
+
 }
 int raiz::contar(){
     int j=1;
@@ -925,7 +959,8 @@ int raiz::contar(){
             while( i <= x){
                 Nodomatriz* aux = buscar(i,j);
                 if(aux != NULL){
-                    return x;
+                        cout<<y<<endl;
+                    return y;
                 }
                 i++;
             }

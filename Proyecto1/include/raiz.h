@@ -33,6 +33,8 @@ class raiz
     void GrayScale();
     void EspejoX(raiz*,raiz*,int);
     void EspejoY(raiz*,raiz*,int);
+    void DobleEspejo(raiz*,raiz*,int,int);
+    void Collage(raiz *,raiz *,int, int,int,int);
     void MirrorX();
     void MirrorY();
     void DoubleMirror();

@@ -22,7 +22,7 @@ ListaCircularDobleFiltros::ListaCircularDobleFiltros()
 void ListaCircularDobleFiltros::InsertarFiltro(string filtro){
     NodoListaCircularDobleImagenes*nuevo=new NodoListaCircularDobleImagenes();
     nuevo->filtro=filtro;
-    nuevo->copiacubo=new Profundidad_Matriz();
+
     if(primero == NULL){
         primero=nuevo;
         ultimo=nuevo;
@@ -60,6 +60,13 @@ void ListaCircularDobleFiltros::GraficarFiltro(){
     system("dot -Tpng ListaCircular.dot -o ListaCircular.png");
     system("ListaCircular.png");
 
+}
 
-
+NodoListaCircularDobleImagenes *ListaCircularDobleFiltros::Buscar(string filtro){
+    NodoListaCircularDobleImagenes *aux=primero;
+    do{
+        if(aux->filtro == filtro)return aux;
+        aux=aux->siguiente;
+    }while(aux != primero);
+    return NULL;
 }

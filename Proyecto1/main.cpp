@@ -11,6 +11,7 @@ ListaCircularDobleFiltros *filtro=new ListaCircularDobleFiltros();
 Profundidad_Matriz *matrix=new Profundidad_Matriz();
 NodoABB *aux;
 NodoDobleProfundidad *aux2;
+NodoListaCircularDobleImagenes* copiacubo;
 //---------------------------variables globales del archivo inicial-------------------------
 string id="";
 int faseinicial=0;
@@ -202,9 +203,9 @@ void AutomataArchivoCapas(string lexema, string token){
         if (token == "COORY"){
             coory = atoi(lexema.c_str());
             aux2=aux->matriz->Buscar(capa);
-                if (aux2 ){
-                    aux2->matriz->InsertarTodoMatriz(coorx,coory,color);
-                }else cout<<"no encontrado"<<endl;
+            if (aux2){
+                aux2->matriz->InsertarTodoMatriz(coorx,coory,color);
+            }else cout<<"no encontrado"<<endl;
             FaseCapas=3;
         }else{
             FaseCapas=1000;
@@ -239,8 +240,8 @@ void analisisSintacticoArchivoCapas(){
 
 void AnalizarArchivoCapas(string path, string archivo){
     char caracter;
-    int coorx=1;//fila
-    int coory=0;//columna
+    int coorx=0;//fila
+    int coory=1;//columna
     std::ifstream in (path.c_str());
     if(in.is_open()){
         FILE *fp;
@@ -249,19 +250,17 @@ void AnalizarArchivoCapas(string path, string archivo){
         while(in.get(caracter)){
             if(caracter == 'x'){
             }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32){
-
-                //---------------------------- Espacios en blanco --------------------------
             }else if(caracter == 10){
-                coorx++;
-                coory=0;
+                coory++;
+                coorx=0;
             }
             else if(caracter == ';'){
                 if(palabra != "") {
                 fprintf(fp,"%s %s\n",palabra.c_str(),"color");
-                fprintf(fp,"%d %s\n",coory,"COORX");
-                fprintf(fp,"%d %s\n",coorx,"COORY");
+                fprintf(fp,"%d %s\n",coorx,"COORX");
+                fprintf(fp,"%d %s\n",coory,"COORY");
                 }
-                coory++;
+                coorx++;
                 palabra = "";
             }else{
                 palabra += caracter;
@@ -397,8 +396,36 @@ void analisisSintacticoArchivoInicial(){
 }
 
 /*---------------------------------APLICACION DE FILTROS------------------*/
+void FiltroNegativo(){
+   int contador=1;
+    NodoDobleProfundidad *au=aux->matriz->primero;
+    matrix= new Profundidad_Matriz();
+    filtro->InsertarFiltro("Negative");
+    matriztemporal=new raiz();
+    while(au != NULL){
+        matriztemporal=new raiz();
+        cabecera *fila=au->matriz->primerofila;
+        while(fila !=NULL){
+            Nodomatriz *mat=fila->primeromatriz;
+            while(mat != NULL){
+                matriztemporal->InsertarTodoMatriz(mat->x,mat->y,mat->color);
+                mat=mat->siguiente;
+            }
+            fila=fila->siguiente;
+        }
+        matrix->Insertar_eje_Z(au->profundidad);
+        au=au->siguiente;
+    }
+    NodoDobleProfundidad *pr=matrix->primero;
+    while(pr != NULL){
+        pr->matriz->Negative();
+        pr=pr->siguiente;
+    }
+
+
+}
 void AplicarFiltrosMenu(){
-     string opcion;
+     int opcion;
     cout << "[1]Negative(Negativo)" << endl;
     cout << "[2]GrayScale(Escala de Grises)" << endl;
     cout << "[3]Mirror(Espejo)" << endl;
@@ -407,13 +434,11 @@ void AplicarFiltrosMenu(){
     cout << "\nIngresa tu opcion: ";
 
     cin >> opcion;
-    if (opcion == "Negativo"){
-
+    if (opcion == 1){
+        FiltroNegativo();
     }
 }
-void FiltroNegativo(){
 
-}
 
 void unircapaprueba(){
     int r=0;
@@ -429,25 +454,39 @@ void unircapaprueba(){
         int p=0;
         int q=0;
         cabecera *a=aux3->matriz->ultimocolumna;
-        cabecera *f=aux3->matriz->ultimofila;
-           while(f != NULL){
-                q=f->numero;
-                f=f->siguiente;
-                cout<<q<<endl;
-        }
-        int jo=matriztemporal->cantidadFilas();
+        cabecera *f=aux3->matriz->primerofila;
+         int jo=aux3->matriz->cantidadFilas();
+          int x;
+                    int y;
+                    cout<<"ingrese x"<<endl;
+                    cin>>x;
+                    cout<<"ingrese y"<<endl;
+                    cin>>y;
+        //para filas
+
+
+        //para columnas
         while(aux3 != NULL){
                  while(a != NULL){
                 p=a->numero;
                 a=a->siguiente;
         }
+                  while(f != NULL){
+                q=f->numero;
+                f=f->siguiente;
+
+        }
 
             if(aux3-> matriz != NULL)
                 {
-                    //aux2->UnirCapas(aux3->matriz,matriztemporal);//saca la imagen normal
-                    //matriztemporal->EspejoX(aux3->matriz,matriztemporal,p);//saca el mirrorx
-                    matriztemporal->EspejoY(aux3->matriz,matriztemporal,q);
-                    cout<<jo<<endl;
+
+
+                   // aux2->UnirCapas(aux3->matriz,matriztemporal);//saca la imagen normal
+                   // matriztemporal->EspejoX(aux3->matriz,matriztemporal,p);//saca el mirrorx
+                    //matriztemporal->DobleEspejo(aux3->matriz,matriztemporal,p,q);
+                    //matriztemporal->EspejoY(aux3->matriz,matriztemporal,q);//saca el mirrorx
+                   matriztemporal->Collage(aux3->matriz,matriztemporal,y,x,q,p);
+
                 }
 
             aux3 = aux3->siguiente;
@@ -462,87 +501,76 @@ void unircapaprueba(){
 
 }
 
-void po(){
-    int dato;
-    int x;
-    int y;
-    string color;
-    cout << "\nIngrese dato ";
-    cin >> dato;
-     NodoDobleProfundidad *aux=matrix->Buscar(dato);
-    if (aux){
-        cout << "\nIngrese x ";
-        cin >> x;
-        cout << "\nIngrese y ";
-        cin >> y;
-        cout << "\nIngrese color ";
-        cin >> color;
-        aux->matriz->InsertarTodoMatriz(x,y,color);
-        aux->matriz->GraficarDispersa();
-    }else cout<<"No se encontro "<<endl;
-}
-
-void joo(){
+void MenuExports(){
     int opcion;
-    int opcion2;
     string nombre;
-    int dato;
-    int x;
-    int y;
-    string color;
-    cout << "\nIngrese nombre ";
-    cin >> nombre;
-    NodoABB* aux = arbol->buscar(arbol->raiz,nombre);
-    if (aux != NULL){
-        cout << "\nIngrese 1 para agreagar a la doble ";
-        cin >> opcion;
-        if (opcion == 1){
-        int cantidad;
-        cout << "\nIngrese dato ";
-        cin >> cantidad;
-        aux->matriz->Insertar_eje_Z(cantidad);
-        cout<<"dato ingresado"<<endl;
-        }
-        else{
-        cout << "\nIngrese dato ";
-        cin >> dato;
-        NodoDobleProfundidad *aux2=aux->matriz->Buscar(dato);
+    string name;
+    cout<<"1. Exportar Imagen original "<<endl;
+    cout<<"2. Exportar Filtro\n\n"<<endl;
+    cout<<"ingrese su opcion: "<<endl;
+    cin>>opcion;
+    if (opcion == 1){
+        cout<<"ingrese nombre de la imagen"<<endl;
+        cin>>nombre;
+        NodoABB *image=arbol->buscar(arbol->raiz,nombre);
+        if (image != NULL){
+            matriztemporal = new raiz();
+            Profundidad_Matriz *aux2=image->matriz;
+            NodoDobleProfundidad *aux3=aux2->primero;
+            while(aux3 != NULL){
+                if (aux3->matriz != NULL){
+                    aux2->UnirCapas(aux3->matriz,matriztemporal);//saca la imagen normal
+                }
+                aux3 = aux3->siguiente;
+            }
+        matriztemporal->graficarHTML();
+        matriztemporal->GenerarSCSS();
+        }else cout<<"No se encontro la imagen a buscar"<<endl;
 
-        if (aux2 != NULL){
-        cout << "\nIngrese 1 para agreagar a la matriz ";
-        cin >> opcion2;
-        if (opcion2 == 1){
-        cout << "\nIngrese x ";
-        cin >> x;
-        cout << "\nIngrese y ";
-        cin >> y;
-        cout << "\nIngrese color ";
-        cin >> color;
-        aux2->matriz->InsertarTodoMatriz(x,y,color);
-        aux2->matriz->GraficarDispersa();
-        }else cout<<"salir"<<endl;
-        }else cout<<"dato no encontrado"<<endl;
-        }
-    }else cout<<"dato no encontrado"<<endl;
+    }
+    else{
+        cout<<"ingrese el nombre del filtro"<<endl;
+        cin>>name;
+        NodoListaCircularDobleImagenes *oi=filtro->Buscar(name);
+        if (oi != NULL){
+            matriztemporal = new raiz();
+            Profundidad_Matriz *aux2=oi->copiacubo;
+            NodoDobleProfundidad *aux3=aux2->primero;
+            while(aux3 != NULL){
+                if (aux3->matriz != NULL){
+                    aux2->UnirCapas(aux3->matriz,matriztemporal);//saca la imagen normal
+                }
+                aux3 = aux3->siguiente;
+            }
+
+        matriztemporal->graficarHTML();
+        matriztemporal->GenerarSCSS();
+        }else cout<<"No se encontro la imagen a buscar"<<endl;
+
+
+    }
+
 }
-
-void porCapa(){
-    int opcion;
-    system("cls");
-    cout<<"Ingrese el id de profundidad"<<endl;
-    cin >> opcion;
-    NodoDobleProfundidad * aux3 = aux->matriz->Buscar(opcion);
-    if(aux != NULL){
-        //aux3->matriz->Negative();
-        aux3->matriz->GraficarDispersa();
-
-    }else cout<<"No se encontro el id a buscar"<<endl;
-}
-
-
-
-
 /*--------------------------------------REPORTES--------------------------*/
+void ReportePorCapaCubo(){
+    int opcion;
+    string nombre;
+    system("cls");
+    cout<<"ingrese nombre de la imagen"<<endl;
+    cin>>nombre;
+    NodoABB * imagen=arbol->buscar(arbol->raiz,nombre);
+    if (imagen != NULL){
+        cout<<"Ingrese el id de profundidad"<<endl;
+        cin >> opcion;
+        NodoDobleProfundidad * aux3 = imagen->matriz->Buscar(opcion);
+        if(aux != NULL){
+            aux3->matriz->GraficarDispersa();
+
+        }else cout<<"No se encontro el id a buscar"<<endl;
+    }
+
+}
+
 void Reportes(){
     int opcion;
     cout << "[1]Imported Images report(Arbol ABB)" << endl;
@@ -551,13 +579,17 @@ void Reportes(){
     cout << "[4]Transversal Report(Recorridos Arbol ABB)" << endl;
     cout << "[5]Filters Report(Lista Circular Doble)" << endl;
     cout << "\nIngresa tu opcion: ";
-
     cin >> opcion;
     if (opcion == 1){
         arbol->GraficarInOrden();
     }
+    else if(opcion == 2){
+        ReportePorCapaCubo();
+    }
+    else cout<<"Opcion Incorrecta"<<endl;
 
 }
+
 
 
 /*----------------------------------MAIN-------------------------------*/
@@ -611,7 +643,7 @@ int main()
             break;
         case 5:
             system("cls");
-            porCapa();
+            MenuExports();
             break;
         case 6:
             system("cls");
