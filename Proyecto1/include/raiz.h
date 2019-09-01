@@ -24,6 +24,8 @@ class raiz
     void graficarCapa();
     void graficarHTML();
     void GenerarSCSS();
+    void graficarHTML2();
+    void GenerarSCSS2();
     void FiltroNegativo();
     void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);

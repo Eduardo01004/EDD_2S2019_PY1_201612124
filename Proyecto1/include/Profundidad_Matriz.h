@@ -11,6 +11,7 @@ class Profundidad_Matriz
         NodoDobleProfundidad *primero;
         NodoDobleProfundidad *ultimo;
         void Insertar_eje_Z(int profundidad);
+        void Insertarcopiacubo(int profundidad,raiz*);
         NodoDobleProfundidad* Buscar(int nivel);
         void EspejoX(raiz*,raiz*);
         void mostrar();

@@ -30,6 +30,23 @@ void Profundidad_Matriz::Insertar_eje_Z(int profundidad){
         ultimo=nuevo;
     }
 }
+void Profundidad_Matriz::Insertarcopiacubo(int profundidad,raiz *cubo){
+    NodoDobleProfundidad *nuevo = new NodoDobleProfundidad();
+    nuevo->profundidad=profundidad;
+    nuevo->matriz = new raiz();
+    if (primero == NULL){
+        primero=nuevo;
+        primero->siguiente=NULL;
+        primero->atras=NULL;
+        ultimo=primero;
+    }
+    else{
+        ultimo->siguiente=nuevo;
+        nuevo->siguiente=NULL;
+        nuevo->atras=ultimo;
+        ultimo=nuevo;
+    }
+}
 
 void Profundidad_Matriz::mostrar(){
     NodoDobleProfundidad* aux=primero;
