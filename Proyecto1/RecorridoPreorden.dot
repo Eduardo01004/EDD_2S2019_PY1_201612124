@@ -1,0 +1,14 @@
+digraph Pre {
+rankdir = LR;
+15969680[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Mario1"];
+15969680->15969720;
+15969720[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Boo"];
+15969720->15969560;
+15969560[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Geoff"];
+15969560->15969960;
+15969960[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Pikachu"];
+15969960->15970160;
+15970160[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Mario2"];
+15970160->15969600;
+15969600[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Mushroom"];
+}

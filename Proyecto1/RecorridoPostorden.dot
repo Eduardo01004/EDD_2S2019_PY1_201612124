@@ -1,0 +1,14 @@
+digraph Post {
+rankdir = LR;
+15969360[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Geoff"];
+15969360->15969640;
+15969640[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Boo"];
+15969640->15969760;
+15969760[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Mushroom"];
+15969760->15969800;
+15969800[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Mario2"];
+15969800->15969840;
+15969840[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Pikachu"];
+15969840->15969400;
+15969400[shape=record, style=filled, fillcolor=seashell2,label="Imagen: Mario1"];
+}

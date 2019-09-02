@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1567273523 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+1567372486 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
 	<iostream>
 	"ArbolABB.h"
 	"raiz.h"
 	"ListaCircularDobleFiltros.h"
 	"Profundidad_Matriz.h"
+	"Recorridos.h"
 	<sstream>
 
 1566424816 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodoabb.cpp
@@ -127,4 +128,26 @@
 	<ctype.h>
 	<fstream>
 	<iomanip>
+
+1567371775 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\recorridos.cpp
+	"Recorridos.h"
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<ctype.h>
+	<fstream>
+	<iomanip>
+	<sstream>
+
+1567371795 c:\users\eduardo\desktop\edd2019\proyecto1\include\recorridos.h
+	"NodoRecorricodos.h"
+
+1567367951 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\nodorecorricodos.cpp
+	"NodoRecorricodos.h"
+	<stdlib.h>
+
+1567367914 c:\users\eduardo\desktop\edd2019\proyecto1\include\nodorecorricodos.h
+	"NodoABB.h"
 

@@ -3,12 +3,16 @@
 #include "raiz.h"
 #include "ListaCircularDobleFiltros.h"
 #include "Profundidad_Matriz.h"
+#include "Recorridos.h"
 #include <sstream>
 using namespace std;
 ArbolABB *arbol=new ArbolABB();
 raiz *matriztemporal =new raiz();
 ListaCircularDobleFiltros *filtro=new ListaCircularDobleFiltros();
 //Profundidad_Matriz *matrix=new Profundidad_Matriz();
+Recorridos *recorrido=new Recorridos();
+Recorridos *recorridoPre=new Recorridos();
+Recorridos *recorridoPost=new Recorridos();
 NodoABB *aux;
 NodoDobleProfundidad *aux2;
 NodoListaCircularDobleImagenes* copnodo;
@@ -583,7 +587,7 @@ void MenuExports(){
     }
 
 }
-/*--------------------------------------REPORTES--------------------------*/
+/*--------------------------------------REPORTE DE CADA CAPA DEL CUBO--------------------------*/
 void ReportePorCapaCubo(){
     int opcion;
     string nombre;
@@ -603,6 +607,29 @@ void ReportePorCapaCubo(){
 
 }
 
+/*-----------------------------------------REPORTES DE LOS RECORRIDOS ---------------------*/
+void ReporteTransversalRecorrido(NodoABB *raiz){
+        if(raiz != NULL){
+            ReporteTransversalRecorrido(raiz->izquierdo);
+            recorrido->Recorrido(raiz->nombre.c_str());
+            ReporteTransversalRecorrido(raiz->derecho);
+        }
+}
+
+void ReportePostOrder(NodoABB *raiz){
+    if(raiz != NULL){
+        ReportePostOrder(raiz->izquierdo);
+        ReportePostOrder(raiz->derecho);
+        recorridoPost->RecorridoPosOrden(raiz->nombre.c_str());
+    }
+}
+void ReportePreOrder(NodoABB *raiz){
+    if(raiz != NULL){
+        recorridoPre->RecorridoPreOrden(raiz->nombre.c_str());
+        ReportePreOrder(raiz->izquierdo);
+        ReportePreOrder(raiz->derecho);
+    }
+}
 void Reportes(){
     int opcion;
     cout << "[1]Imported Images report(Arbol ABB)" << endl;
@@ -618,6 +645,26 @@ void Reportes(){
     else if(opcion == 2){
         ReportePorCapaCubo();
     }
+    else if(opcion == 4){
+        system("cls");
+        string opcion1;
+        cout <<"1. Recorrido INORDER"<<endl;
+        cout <<"2. Recorrido POSTORDER"<<endl;
+        cout <<"3. Recorrido PREORDER"<<endl;
+        cin>>opcion1;
+        if (opcion1 == "1"){
+                ReporteTransversalRecorrido(arbol->raiz);
+                recorrido->GraficarRecorridoInorden();
+        }
+        else if(opcion1 == "2"){
+            ReportePostOrder(arbol->raiz);
+                recorridoPost->GraficarRecorridoPostOrden();
+        }
+        else if(opcion1 == "3"){
+            ReportePreOrder(arbol->raiz);
+            recorridoPre->GraficarRecorridoPreorden();
+        }
+    }
     else if(opcion == 5){
         filtro->GraficarFiltro();
     }
@@ -627,7 +674,7 @@ void Reportes(){
 
 /*----------------------------------MAIN-------------------------------*/
 int main()
-{
+{   system("cls");
     string direccion;
     string token;
     string punto=".";
@@ -635,6 +682,12 @@ int main()
     int opcioninorden;
     //cout<<RGBToHex(230,230,230)<<endl;
    //cout<<setprecision(1)<< matriztemporal->ConvertirSacleGray(255,228,181)<<endl;
+   arbol->Crear("Mario1",1,100);
+   arbol->Crear("Pikachu",1,100);
+   arbol->Crear("Boo",1,100);
+   arbol->Crear("Geoff",1,100);
+   arbol->Crear("Mario2",1,100);
+   arbol->Crear("Mushroom",1,100);
     while (1)
     {
 
