@@ -341,13 +341,13 @@ void raiz::GraficarDispersa()
     cabecera *aux=primerofila;
     afile << "digraph G{\n";
     afile << "node [shape = box] \n";
-    afile << "raiz[label=\"*\"  group=1];\n";
+    afile << "raiz[label=\"Matriz\"  group=1];\n";
 
     if(aux != NULL){
 
         while(aux != NULL){
             long int point = reinterpret_cast<long int>(aux);
-            afile << point << " [label=\"" << aux->numero << "\" group = 1]; \n";
+            afile << point << " [label=\"F" << aux->numero << "\" group = 1]; \n";
             aux = aux->siguiente;
         }
         aux=primerofila;
@@ -355,7 +355,7 @@ void raiz::GraficarDispersa()
             long int point = reinterpret_cast<long int>(aux);
             if(aux->siguiente != NULL){
                 long int point2 = reinterpret_cast<long int>(aux->siguiente);
-                afile << point << "->" << point2 << ";\n";
+                afile << point << "->" << point2 << "[dir=both];\n";
                 //afile << point2 << "->" << point << ";\n";//si se chinga puede eque sea esto
             }
              aux = aux->siguiente;
@@ -364,7 +364,7 @@ void raiz::GraficarDispersa()
         while(aux2 != NULL){
             long int point = reinterpret_cast<long int>(aux2);
             int level = aux2->numero + 2;
-            afile << point << " [label=\"" << aux2->numero << "\" group = " << level << "]; \n";
+            afile << point << " [label=\"C" << aux2->numero << "\" group = " << level << "]; \n";
             aux2 = aux2->siguiente;
         }
         ////////////////////////////////////////funciona////////////////////////////////////
@@ -373,8 +373,8 @@ void raiz::GraficarDispersa()
             long int point = reinterpret_cast<long int>(aux2);
             if(aux2->siguiente != NULL){
                 long int point2 = reinterpret_cast<long int>(aux2->siguiente);
-                afile << point << "->" << point2 << ";\n";
-                afile << point2 << "->" << point << ";\n";
+                afile << point << "->" << point2 << "[dir=both];\n";
+                //afile << point2 << "->" << point << ";\n";
             }
              aux2 = aux2->siguiente;
         }
@@ -419,8 +419,8 @@ void raiz::GraficarDispersa()
                 while(temp->arriba != NULL){
                     nod= reinterpret_cast<long int>(temp);
                     long int nextNode = reinterpret_cast<long int>(temp->arriba);
-                    afile << nod << "->" << nextNode << ";\n";
-                    afile << nextNode << "->" << nod << ";\n";
+                    afile << nod << "->" << nextNode << "[dir=both];\n";
+                    //afile << nextNode << "->" << nod << ";\n";
                     temp = temp->arriba;
                 }
                 afile << "{ rank = same; " << fi << "; ";
@@ -442,12 +442,12 @@ void raiz::GraficarDispersa()
             Nodomatriz *temp=aux2->primeromatriz;
             if(temp != NULL){
                 long int nod = reinterpret_cast<long int>(temp);
-                afile << col << "->" << nod << ";\n";
+                afile << col << "->" << nod << "[dir=both];\n";
                 while(temp->siguiente != NULL){
                     nod= reinterpret_cast<long int>(temp);
                     long int nextNode = reinterpret_cast<long int>(temp->siguiente);
-                    afile << nod << "->" << nextNode << ";\n";
-                    afile << nextNode << "->" << nod << ";\n";
+                    afile << nod << "->" << nextNode << "[dir=both];\n";
+                   // afile << nextNode << "->" << nod << ";\n";
                     temp=temp->siguiente;
                 }
             }
@@ -603,14 +603,14 @@ void raiz::GenerarSCSS2(){
             while( i <= x){
                 Nodomatriz* aux = buscar(i,j);
                 if(aux != NULL){
-                    text=aux->color;
+                    /*text=aux->color;
                     std::istringstream iso(text);
                     getline(iso,RNeg,'-');
                     getline(iso,GNeg,'-');
                     getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();*/
                     fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                    fprintf(salida,"{\n background: %s; \n}\n", aux->color.c_str());
                     //cout<<y<<endl;
                 }
                 contador++;
@@ -666,239 +666,13 @@ void raiz::GenerarSCSS(){
 }
 
 /*---------------------------------------GENERA ESCALA DE GRISES----------*/
-void raiz::GenerarScalaDeGrises(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int r=0;
-    int g=0;
-    int b=0;
-    int contador=1;
-    FILE* salida;
-    salida = fopen("mario.css","w");
-    fprintf(salida,"body { \n background: #333333; \n");
-    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
-
-    fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
-
-    fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                    text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    r=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
-                    g=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
-                    b=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
-
-                    out=RGBToHex(r,g,b).c_str();
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
-
-                }
-                contador++;
-                i++;
-            }
-
-            j++;
-        }
-    }
-    fclose(salida);
-}
 
 /*-----------------------------GENERA X MIRROR-----------------------*/
-void raiz::MirrorX(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int r=0;
-    int g=0;
-    int b=0;
-    int contador=1;
-    FILE* salida;
-    salida = fopen("mario.css","w");
-    fprintf(salida,"body { \n background: #333333; \n");
-    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \ntransform: scaleX(-1);\n }\n");
-
-    fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
-
-    fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                    text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
-
-                }
-                contador++;
-                i++;
-            }
-
-            j++;
-        }
-    }
-    fclose(salida);
-}
 
 /*-----------------------------------------------GENERA MIRROR Y------------------------*/
-void raiz::MirrorY(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int r=0;
-    int g=0;
-    int b=0;
-    int contador=1;
-    FILE* salida;
-    salida = fopen("mario.css","w");
-    fprintf(salida,"body { \n background: #333333; \n");
-    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \ntransform: scaleY(-1);\n }\n");
-
-    fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
-
-    fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                   text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
-
-                }
-                contador++;
-                i++;
-            }
-
-            j++;
-        }
-    }
-    fclose(salida);
-}
 /*---------------------------------------------GENERA FILTRO DOBLE MIRROR------------*/
-void raiz::DoubleMirror(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int r=0;
-    int g=0;
-    int b=0;
-    int contador=1;
-    FILE* salida;
-    salida = fopen("mario.css","w");
-    fprintf(salida,"body { \n background: #333333; \n");
-    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \ntransform: scaleY(-1);\n }\n");
 
-    fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \ntransform: scaleX(-1);\n }\n");
-
-    fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                    text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
-
-                }
-                contador++;
-                i++;
-            }
-
-            j++;
-        }
-    }
-    fclose(salida);
-}
 /*-----------------------------------GENERA FILTRO NEGATIVO---------------------------------*/
-void raiz::FiltroNegativo(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int contador=1;
-    FILE* salida;
-    salida = fopen("mario.css","w");
-    fprintf(salida,"body { \n background: #333333; \n");
-    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
-
-    fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
-
-    fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                    text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    a=ConvertirNegativo(atoi(RNeg.c_str()));
-                    b=ConvertirNegativo(atoi(GNeg.c_str()));
-                    c=ConvertirNegativo(atoi(BNeg.c_str()));
-                    out=RGBToHex(a,b,c).c_str();
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
-                }
-                else {
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", negativo.c_str());
-                }
-                contador++;
-                i++;
-            }
-
-            j++;
-        }
-    }
-    fclose(salida);
-}
 string raiz::RGBToHex(int rNum, int gNum, int bNum){
     string result;
     char r[255];
@@ -963,7 +737,6 @@ void raiz::EspejoX(raiz*p,raiz *m ,int a){
     int i=0;
     int j=0;
     int x=cantidadColumnas();
-    int f=contar();
     int q=a;
     cabecera *aux=p->primerocolumna;
     while (aux != NULL){
@@ -982,7 +755,6 @@ void raiz::EspejoY(raiz*p,raiz *m ,int a){
     int j=0;
     int x=cantidadColumnas();
     int y=cantidadFilas();
-    int f=contar();
     int q=a;
     cabecera *aux=p->primerofila;
     while (aux != NULL){
@@ -999,7 +771,6 @@ void raiz::DobleEspejo(raiz*p,raiz *m ,int fila,int columna){
     int j=0;
     int x=cantidadColumnas();
     int y=cantidadFilas();
-    int f=contar();
     int q=a;
     cabecera *aux=p->primerofila;
     while (aux != NULL){
@@ -1025,28 +796,6 @@ void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,in
                 }
                 aux=aux->siguiente;
             }
-        }
-    }
-
-}
-int raiz::contar(){
-    int j=1;
-    int i=1;
-    int x=cantidadColumnas();
-    int y=cantidadFilas();
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                        cout<<y<<endl;
-                    return y;
-                }
-                i++;
-            }
-
-            j++;
         }
     }
 

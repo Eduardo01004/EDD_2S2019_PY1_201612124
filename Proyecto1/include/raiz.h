@@ -26,7 +26,6 @@ class raiz
     void GenerarSCSS();
     void graficarHTML2();
     void GenerarSCSS2();
-    void FiltroNegativo();
     void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);
     int ConvertirNegativo(int);
@@ -37,10 +36,6 @@ class raiz
     void EspejoY(raiz*,raiz*,int);
     void DobleEspejo(raiz*,raiz*,int,int);
     void Collage(raiz *,raiz *,int, int,int,int);
-    void MirrorX();
-    void MirrorY();
-    void DoubleMirror();
-    int contar();
     ~raiz();
 
 };

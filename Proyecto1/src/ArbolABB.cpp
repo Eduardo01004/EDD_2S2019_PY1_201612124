@@ -16,14 +16,10 @@ ArbolABB::ArbolABB()
 NodoABB* ArbolABB::Insertar(NodoABB *p,NodoABB *q){
 	if(p==NULL) p=q;
 	else{
-		char nq[20];
-		char np[20];
-		strcpy(nq,q->nombre.c_str());
-		strcpy(np,p->nombre.c_str());
-		if(strcmp(nq,np)<=0)
-		p->izquierdo=Insertar(p->izquierdo,q);
+		if(q->nombre.compare(p->nombre) < 0)
+            p->izquierdo=Insertar(p->izquierdo,q);
 		else
-		p->derecho=Insertar(p->derecho,q);
+            p->derecho=Insertar(p->derecho,q);
 	}
 	return p;
 }

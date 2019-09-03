@@ -23,6 +23,7 @@ int capa=0;
 string leerarchivo="";
 string archivoconfig="";
 string nombreimagen="";
+int copiacapa;
 //------------------------variables globales del archivo configuracion------------------------------------
 int altoimage=0;
 int anchoimage=0;
@@ -39,6 +40,13 @@ string G="";
 string B="";
 string salida="";
 istringstream iss;
+
+/*-----------------------*/
+int numa;
+int numb;
+int numc;
+string texto="";
+string sali="";
 //---------------------------------------------fin caroables globales ----------------------------------------------------
 string RGBToHex(int rNum, int gNum, int bNum){
     string result;
@@ -258,12 +266,12 @@ void AnalizarArchivoCapas(string path, string archivo){
         while(in.get(caracter)){
             if(caracter == 'x'){
             }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32){
-            }else if(caracter == 10){
+            }else if(caracter == 10){//salto de linea
                 coory++;
                 coorx=0;
             }
             else if(caracter == ';'){
-                if(palabra != "") {
+                if(palabra != "") {//forma el color
                 fprintf(fp,"%s %s\n",palabra.c_str(),"color");
                 fprintf(fp,"%d %s\n",coorx,"COORX");
                 fprintf(fp,"%d %s\n",coory,"COORY");
@@ -409,40 +417,51 @@ void analisisSintacticoArchivoInicial(){
 }
 
 /*---------------------------------APLICACION DE FILTROS------------------*/
+int ConvertirNegativo(int number){
+    return 255-number;
+}
 void FiltroNegativo(){
-     filtro->InsertarFiltro("Negative");
+    filtro->InsertarFiltro("Negative");
+    Profundidad_Matriz *matrix= new Profundidad_Matriz();
     NodoABB *popo=arbol->buscar(arbol->raiz,"mario");
     if (popo != NULL){
-   NodoListaCircularDobleImagenes *pi=filtro->Buscar("Negative");
-   if (pi != NULL){
-       NodoDobleProfundidad *au=popo->matriz->primero;
-    while(au != NULL ){
-        cabecera *fila=au->matriz->primerofila;
-        while(fila !=NULL){
-            Nodomatriz *mat=fila->primeromatriz;
-            while(mat != NULL){
+        NodoListaCircularDobleImagenes *pi=filtro->Buscar("Negative");
+        if (pi != NULL){
+            NodoDobleProfundidad *au=popo->matriz->primero;
+            while(au != NULL ){
+                cabecera *fila=au->matriz->primerocolumna;
+                pi->copiacubo->Insertar_eje_Z(au->profundidad);
                 NodoDobleProfundidad *pr=pi->copiacubo->primero;
-                while(pr != NULL){
-                    pr->matriz->InsertarTodoMatriz(mat->x,mat->y,mat->color);
-                    pr=pr->siguiente;
-
-                }
-                mat=mat->arriba;
-
-                }
+                while(fila !=NULL){
+                    Nodomatriz *mat=fila->primeromatriz;
+                    while(mat != NULL){
+                      if (pr != NULL){
+                        /*texto=mat->color;
+                        std::istringstream iso(texto);
+                        getline(iso,R,'-');
+                        getline(iso,G,'-');
+                        getline(iso,B,'-');
+                        numa=ConvertirNegativo(atoi(R.c_str()));
+                        numb=ConvertirNegativo(atoi(G.c_str()));
+                        numc=ConvertirNegativo(atoi(B.c_str()));
+                        sali=RGBToHex(numa,numb,numc).c_str();
+                        mat->color=sali;*/
+                        pr->matriz->InsertarTodoMatriz(mat->x,mat->y,mat->color);
+                        }
+                        mat=mat->siguiente;
+                    }
                 fila=fila->siguiente;
+                }
 
-            }
-             pi->copiacubo->Insertar_eje_Z(au->profundidad);
-        au=au->siguiente;
+
+            au=au->siguiente;
         }
-
-    }
+        }
    }else cout<<"No encontrado"<<endl;
 
     NodoListaCircularDobleImagenes *pip=filtro->Buscar("Negative");
     if (pip != NULL){
-            Profundidad_Matriz *aux2=pip->copiacubo;
+        Profundidad_Matriz *aux2=pip->copiacubo;
         matriztemporal=new raiz();
         NodoDobleProfundidad *aux3=aux2->primero;
         while(aux3 != NULL){
@@ -451,8 +470,9 @@ void FiltroNegativo(){
             }
             aux3 = aux3->siguiente;
         }
+        matriztemporal->Negative();
         matriztemporal->GraficarDispersa();
-        //matriztemporal->Negative();
+
         matriztemporal->graficarHTML2();
         matriztemporal->GenerarSCSS2();
     }else cout<<"No encontrado"<<endl;
