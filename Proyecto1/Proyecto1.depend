@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1567479298 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+1567568029 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
 	<iostream>
 	"ArbolABB.h"
 	"raiz.h"
@@ -60,7 +60,7 @@
 	"Nodomatriz.h"
 	<stdlib.h>
 
-1567479332 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
+1567565354 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
 	"raiz.h"
 	<iostream>
 	<stdlib.h>
@@ -72,7 +72,7 @@
 	<iomanip>
 	<sstream>
 
-1567479604 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
+1567556282 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
 	"cabecera.h"
 	<string.h>
 

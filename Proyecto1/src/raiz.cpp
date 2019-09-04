@@ -541,88 +541,7 @@ void raiz::graficarHTML(){
        fprintf(salida,"</html>");
     fclose(salida);
 }
-void raiz::graficarHTML2(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int contador=0;
-    FILE* salida;
-    salida = fopen("mario2.html","w");
-    fprintf(salida,"<!DOCTYPE html>\n");
-    fprintf(salida,"<html>\n");
-    fprintf(salida,"<head>\n");
-    fprintf(salida,"<link rel=\"stylesheet\" href=\"mario2.css\">\n");
-    fprintf(salida,"</head>\n");
-    fprintf(salida,"<body>\n");
-    fprintf(salida,"<div class=\"canvas\">\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                        fprintf(salida,"<div class=\"pixel\"></div>\n");
-                }
-                else{
-                    fprintf(salida,"<div class=\"pixel\"></div>\n");
-                }
 
-                contador++;
-                i++;
-            }
-
-
-            j++;
-        }
-    }
-     fprintf(salida,"</div>\n\n\n");
-      fprintf(salida,"</body>\n\n\n");
-       fprintf(salida,"</html>");
-    fclose(salida);
-}
-void raiz::GenerarSCSS2(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    int contador=1;
-    FILE* salida;
-    salida = fopen("mario2.css","w");
-    fprintf(salida,"body { \n background: #333333; \n");
-    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
-
-    fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
-
-    fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
-    if( x != -1 && y != -1){
-        while(j <= y){
-            i = 1;
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-                if(aux != NULL){
-                    /*text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();*/
-                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", aux->color.c_str());
-                    //cout<<y<<endl;
-                }
-                contador++;
-                i++;
-            }
-
-            j++;
-        }
-    }
-    fclose(salida);
-}
-/*------------------------------------GENERA IMAGEN ORIGINAL-------------------------------*/
 void raiz::GenerarSCSS(){
     int x = cantidadColumnas();
     int y = cantidadFilas();
@@ -630,6 +549,7 @@ void raiz::GenerarSCSS(){
     int j = 1;
     int contador=1;
     FILE* salida;
+    string p="asdf";
     salida = fopen("mario.css","w");
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
@@ -664,6 +584,92 @@ void raiz::GenerarSCSS(){
     }
     fclose(salida);
 }
+void raiz::graficarHTML2(string nombre){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int contador=0;
+    string dot=nombre+".html";
+    string css=nombre+".css";
+    FILE* salida;
+    salida = fopen(dot.c_str(),"w");
+    fprintf(salida,"<!DOCTYPE html>\n");
+    fprintf(salida,"<html>\n");
+    fprintf(salida,"<head>\n");
+    fprintf(salida,"<link rel=\"stylesheet\" href=\"%s\">\n",css.c_str());
+    fprintf(salida,"</head>\n");
+    fprintf(salida,"<body>\n");
+    fprintf(salida,"<div class=\"canvas\">\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                        fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                else{
+                    fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                contador++;
+                i++;
+            }
+            j++;
+        }
+    }
+    fprintf(salida,"</div>\n\n\n");
+    fprintf(salida,"</body>\n\n\n");
+    fprintf(salida,"</html>");
+    fclose(salida);
+
+}
+void raiz::GenerarSCSS2(string nombre){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot=nombre+".html";
+    string css=nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: 420px;\n height: 400px; \n }\n");
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    /*text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();*/
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", aux->color.c_str());
+                    //cout<<y<<endl;
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+/*------------------------------------GENERA IMAGEN ORIGINAL-------------------------------*/
+
 
 /*---------------------------------------GENERA ESCALA DE GRISES----------*/
 
