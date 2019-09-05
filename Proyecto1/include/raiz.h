@@ -36,6 +36,8 @@ class raiz
     void EspejoY(raiz*,raiz*,int);
     void DobleEspejo(raiz*,raiz*,int,int);
     void Collage(raiz *,raiz *,int, int,int,int);
+    void limpiar(raiz *m);
+    void prub(int);
     ~raiz();
 
 };

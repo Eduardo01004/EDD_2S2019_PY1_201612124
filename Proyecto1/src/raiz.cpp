@@ -590,7 +590,7 @@ void raiz::graficarHTML2(string nombre){
     int i = 1;
     int j = 1;
     int contador=0;
-    string dot=nombre+".html";
+    string dot="Exports/"+nombre+".html";
     string css=nombre+".css";
     FILE* salida;
     salida = fopen(dot.c_str(),"w");
@@ -629,8 +629,8 @@ void raiz::GenerarSCSS2(string nombre){
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
-    string dot=nombre+".html";
-    string css=nombre+".css";
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
     int contador=1;
     FILE* salida;
     salida = fopen(css.c_str(),"w");
@@ -648,15 +648,14 @@ void raiz::GenerarSCSS2(string nombre){
             while( i <= x){
                 Nodomatriz* aux = buscar(i,j);
                 if(aux != NULL){
-                    /*text=aux->color;
+                    text=aux->color;
                     std::istringstream iso(text);
                     getline(iso,RNeg,'-');
                     getline(iso,GNeg,'-');
                     getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();*/
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
                     fprintf(salida,".pixel:nth-child(%d)\n",contador);
-                    fprintf(salida,"{\n background: %s; \n}\n", aux->color.c_str());
-                    //cout<<y<<endl;
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
                 }
                 contador++;
                 i++;
@@ -708,8 +707,15 @@ void raiz::Negative(){
             a=ConvertirNegativo(atoi(RNeg.c_str()));
             b=ConvertirNegativo(atoi(GNeg.c_str()));
             c=ConvertirNegativo(atoi(BNeg.c_str()));
+            stringstream as;
+            as << a;
+            stringstream poe;
+            poe << b;
+            stringstream l;
+            l << c;
+            string cadena=as.str()+"-"+poe.str()+"-"+l.str();
             out=RGBToHex(a,b,c).c_str();
-            aux2->color=out;
+            aux2->color=cadena;
             aux2=aux2->siguiente;
         }
         aux=aux->siguiente;
@@ -733,7 +739,15 @@ void raiz::GrayScale(){
             g=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
             b=ConvertirSacleGray(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str()));
             out=RGBToHex(r,g,b).c_str();
-            aux2->color=out;
+            stringstream as;
+            as << r;
+            stringstream poe;
+            poe << g;
+            stringstream l;
+            l << b;
+            string cadena=as.str()+"-"+poe.str()+"-"+l.str();
+            //out=RGBToHex(a,b,c).c_str();
+            aux2->color=cadena;
             aux2=aux2->siguiente;
         }
         aux=aux->siguiente;
@@ -742,7 +756,6 @@ void raiz::GrayScale(){
 void raiz::EspejoX(raiz*p,raiz *m ,int a){
     int i=0;
     int j=0;
-    int x=cantidadColumnas();
     int q=a;
     cabecera *aux=p->primerocolumna;
     while (aux != NULL){
@@ -751,11 +764,31 @@ void raiz::EspejoX(raiz*p,raiz *m ,int a){
             m->InsertarTodoMatriz(a-(mat->x-1),mat->y,mat->color);
             mat=mat->siguiente;
         }
-
         aux=aux->siguiente;
-
     }
+
+    primerocolumna=m->primerocolumna;
+    primerofila=m->primerofila;
 }
+
+void raiz:: limpiar(raiz *p){
+       p->primerofila=NULL;
+    p->primerocolumna=NULL;
+}
+void raiz::prub(int a){
+    cabecera *aux=primerocolumna;
+    while (aux != NULL){
+        aux->numero=a-(aux->numero);
+        Nodomatriz *aux2=aux->primeromatriz;
+        while(aux2 != NULL){
+            aux2->x=a-(aux2->x-1);
+            aux2=aux2->siguiente;
+        }
+        aux=aux->siguiente;
+    }
+
+}
+
 void raiz::EspejoY(raiz*p,raiz *m ,int a){
     int i=0;
     int j=0;
@@ -806,6 +839,7 @@ void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,in
     }
 
 }
+
 int raiz::ConvertirSacleGray(int col,int g,int b){
         int x=0;
         x=(col*0.21)+(g*0.72)+(b*0.07);
