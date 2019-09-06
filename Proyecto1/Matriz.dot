@@ -1,4 +1,69 @@
 digraph G{
 node [shape = box] 
 raiz[label="Matriz"  group=1];
+12571472 [label="F15" group = 1]; 
+12571632 [label="F16" group = 1]; 
+12571472->12571632[dir=both];
+12571504 [label="C2" group = 4]; 
+12571120 [label="C3" group = 5]; 
+12571696 [label="C4" group = 6]; 
+12571248 [label="C5" group = 7]; 
+12571280 [label="C10" group = 12]; 
+12571408 [label="C11" group = 13]; 
+12571440 [label="C12" group = 14]; 
+12571568 [label="C13" group = 15]; 
+12571504->12571120[dir=both];
+12571120->12571696[dir=both];
+12571696->12571248[dir=both];
+12571248->12571280[dir=both];
+12571280->12571408[dir=both];
+12571408->12571440[dir=both];
+12571440->12571568[dir=both];
+raiz -> 12571472;
+raiz -> 12571504;
+{ rank  = same; raiz 12571504; 12571120; 12571696; 12571248; 12571280; 12571408; 12571440; 12571568; }
+12574288 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 4 ]; 
+12574680 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 5 ]; 
+12575464 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 5 ]; 
+12574400 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 6 ]; 
+12575688 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 6 ]; 
+12574120 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 7 ]; 
+12575296 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 7 ]; 
+12574624 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 12 ]; 
+12574960 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 12 ]; 
+12574232 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 13 ]; 
+12574848 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 13 ]; 
+12574736 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 14 ]; 
+12574512 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 14 ]; 
+12575016 [style=filled,fillcolor=seashell2,label= "139-69-19" group = 15 ]; 
+12571472->12574680;
+12574680->12574400[dir=both];
+12574400->12574120[dir=both];
+12574120->12574624[dir=both];
+12574624->12574232[dir=both];
+12574232->12574736[dir=both];
+{ rank = same; 12571472; 12574680; 12574400; 12574120; 12574624; 12574232; 12574736; }
+12571632->12574288;
+12574288->12575464[dir=both];
+12575464->12575688[dir=both];
+12575688->12575296[dir=both];
+12575296->12574960[dir=both];
+12574960->12574848[dir=both];
+12574848->12574512[dir=both];
+12574512->12575016[dir=both];
+{ rank = same; 12571632; 12574288; 12575464; 12575688; 12575296; 12574960; 12574848; 12574512; 12575016; }
+12571504->12574288[dir=both];
+12571120->12574680[dir=both];
+12574680->12575464[dir=both];
+12571696->12574400[dir=both];
+12574400->12575688[dir=both];
+12571248->12574120[dir=both];
+12574120->12575296[dir=both];
+12571280->12574624[dir=both];
+12574624->12574960[dir=both];
+12571408->12574232[dir=both];
+12574232->12574848[dir=both];
+12571440->12574736[dir=both];
+12574736->12574512[dir=both];
+12571568->12575016[dir=both];
 }

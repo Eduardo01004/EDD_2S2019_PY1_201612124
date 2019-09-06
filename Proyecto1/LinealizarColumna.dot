@@ -1,0 +1,23 @@
+digraph LinearColumn {
+13492576[shape=record, style=filled, fillcolor=seashell2,label=" (2,16)139-69-19"];
+13492408[shape=record, style=filled, fillcolor=seashell2,label=" (3,15)139-69-19"];
+13491792[shape=record, style=filled, fillcolor=seashell2,label=" (3,16)139-69-19"];
+13491736[shape=record, style=filled, fillcolor=seashell2,label=" (4,15)139-69-19"];
+13491512[shape=record, style=filled, fillcolor=seashell2,label=" (4,16)139-69-19"];
+13492184[shape=record, style=filled, fillcolor=seashell2,label=" (5,15)139-69-19"];
+13492240[shape=record, style=filled, fillcolor=seashell2,label=" (5,16)139-69-19"];
+13491904[shape=record, style=filled, fillcolor=seashell2,label=" (10,15)139-69-19"];
+13492632[shape=record, style=filled, fillcolor=seashell2,label=" (10,16)139-69-19"];
+13491960[shape=record, style=filled, fillcolor=seashell2,label=" (11,15)139-69-19"];
+13491568[shape=record, style=filled, fillcolor=seashell2,label=" (11,16)139-69-19"];
+13493192[shape=record, style=filled, fillcolor=seashell2,label=" (12,15)139-69-19"];
+13492016[shape=record, style=filled, fillcolor=seashell2,label=" (12,16)139-69-19"];
+13492856[shape=record, style=filled, fillcolor=seashell2,label=" (13,16)139-69-19"];
+->13492576;
+13492408->13491792;
+13491736->13491512;
+13492184->13492240;
+13491904->13492632;
+13491960->13491568;
+13493192->13492016;
+13492856}

@@ -38,6 +38,8 @@ class raiz
     void Collage(raiz *,raiz *,int, int,int,int);
     void limpiar(raiz *m);
     void prub(int);
+    void LinealizarCapaColumna();
+    void LinealizarCapaFila();
     ~raiz();
 
 };

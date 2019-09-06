@@ -753,10 +753,7 @@ void raiz::GrayScale(){
         aux=aux->siguiente;
     }
 }
-void raiz::EspejoX(raiz*p,raiz *m ,int a){
-    int i=0;
-    int j=0;
-    int q=a;
+void raiz::EspejoX(raiz *p, raiz *m ,int a){
     cabecera *aux=p->primerocolumna;
     while (aux != NULL){
         Nodomatriz *mat=aux->primeromatriz;
@@ -766,9 +763,10 @@ void raiz::EspejoX(raiz*p,raiz *m ,int a){
         }
         aux=aux->siguiente;
     }
-
     primerocolumna=m->primerocolumna;
     primerofila=m->primerofila;
+    m->primerocolumna=NULL;
+    m->primerofila=NULL;
 }
 
 void raiz:: limpiar(raiz *p){
@@ -824,6 +822,7 @@ void raiz::DobleEspejo(raiz*p,raiz *m ,int fila,int columna){
 
 void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,int cantidadcol){
     cabecera *aux=rai->primerocolumna;
+
     for (int i=0; i<fila;i++){
         for(int j=0; j<columna;j++){
             cabecera *aux=rai->primerofila;
@@ -840,6 +839,77 @@ void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,in
 
 }
 
+void raiz:: LinealizarCapaColumna(){
+    FILE* archivo;
+    archivo=fopen("LinealizarColumna.dot","w");
+    fprintf(archivo, "digraph LinearColumn {\n");
+    cabecera *fila=primerocolumna;
+    Nodomatriz *temp=fila->primeromatriz;
+    while(fila != NULL){
+            temp=fila->primeromatriz;
+            while(temp != NULL){
+            long int point = reinterpret_cast<long int>(temp);
+            fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",point,temp->x,temp->y,temp->color.c_str());
+            temp=temp->siguiente;
+            }
+        fila=fila->siguiente;
+    }
+    fila=primerocolumna;
+
+int i=0;
+    while(fila != NULL){
+temp=fila->primeromatriz;
+        //fprintf(archivo,"%s[shape=record, style=filled, fillcolor=seashell2,label=\"Inicio \"];\n",'h');
+        //fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",point,aux->x,aux->y,aux->color.c_str());
+        if (i==0){
+                i=1;
+            }
+            else if (i==1){
+                long int point = reinterpret_cast<long int>(temp);
+                    fprintf(archivo,"%d",point);
+                temp=temp->siguiente;
+            }
+
+        while (temp != NULL){
+            long int point2 = reinterpret_cast<long int>(temp);
+
+
+            fprintf(archivo,"->%d;\n",point2);
+            temp=temp->siguiente;
+        }
+        fila=fila->siguiente;
+    }
+    fprintf(archivo, "}\n");
+    fclose(archivo);
+    system("dot -Tpng LinealizarColumna.dot -o LinealizarColumna.png");
+    system(" LinealizarColumna.png");
+
+}
+void raiz:: LinealizarCapaFila(){
+    int i = 1;
+    int j = 1;
+    //string dot="Exports/"+nombre+".html";
+    //string css=nombre+".css";
+    FILE* salida;
+    //salida = fopen(dot.c_str(),"w");
+    //fprintf(salida,"<!DOCTYPE html>\n");
+        cabecera *fila=primerofila;
+        while(fila != NULL){
+                Nodomatriz* aux = fila->primeromatriz;
+                while (aux != NULL){
+                    if(aux != NULL){
+                    cout<<aux->x<<endl;
+                    cout<<aux->y<<endl;
+                    cout<<aux->color<<endl;
+
+                }
+                aux=aux->arriba;
+                }
+
+            fila=fila->siguiente;
+        }
+
+}
 int raiz::ConvertirSacleGray(int col,int g,int b){
         int x=0;
         x=(col*0.21)+(g*0.72)+(b*0.07);
