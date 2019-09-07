@@ -2,11 +2,8 @@ digraph G {rankdir=LR;
 
  
  subgraph cluster3{label="Filtros";
-9023176[shape=box,label=" Negative "];
-9023176 -> 9023344 ;
-9023344->9023176 ;
-9023344[shape=box,label=" GrayScale "];
-9023344 -> 9023176 ;
-9023176->9023344 ;
+1289928[shape=box,label=" DobleMirror "];
+1289928 -> 1289928 ;
+1289928->1289928 ;
 }
 }

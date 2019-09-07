@@ -769,23 +769,6 @@ void raiz::EspejoX(raiz *p, raiz *m ,int a){
     m->primerofila=NULL;
 }
 
-void raiz:: limpiar(raiz *p){
-       p->primerofila=NULL;
-    p->primerocolumna=NULL;
-}
-void raiz::prub(int a){
-    cabecera *aux=primerocolumna;
-    while (aux != NULL){
-        aux->numero=a-(aux->numero);
-        Nodomatriz *aux2=aux->primeromatriz;
-        while(aux2 != NULL){
-            aux2->x=a-(aux2->x-1);
-            aux2=aux2->siguiente;
-        }
-        aux=aux->siguiente;
-    }
-
-}
 
 void raiz::EspejoY(raiz*p,raiz *m ,int a){
     int i=0;
@@ -842,43 +825,28 @@ void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,in
 void raiz:: LinealizarCapaColumna(){
     FILE* archivo;
     archivo=fopen("LinealizarColumna.dot","w");
-    fprintf(archivo, "digraph LinearColumn {\n");
+    fprintf(archivo, "digraph LinearColumn {rankdir = \"LR\";\n");
     cabecera *fila=primerocolumna;
     Nodomatriz *temp=fila->primeromatriz;
+    int i=0;
+    int contador=0;
+    fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" Inicio\"];\n",0);
+    fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",1,temp->x,temp->y,temp->color.c_str());
+    fprintf(archivo,"%d->%d;\n",0,1);
     while(fila != NULL){
             temp=fila->primeromatriz;
             while(temp != NULL){
+                i++;
+                contador=i+1;
             long int point = reinterpret_cast<long int>(temp);
-            fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",point,temp->x,temp->y,temp->color.c_str());
+            fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",i,temp->x,temp->y,temp->color.c_str());
+            fprintf(archivo,"%d->%d;\n",i,contador);
             temp=temp->siguiente;
             }
         fila=fila->siguiente;
     }
     fila=primerocolumna;
-
-int i=0;
-    while(fila != NULL){
-temp=fila->primeromatriz;
-        //fprintf(archivo,"%s[shape=record, style=filled, fillcolor=seashell2,label=\"Inicio \"];\n",'h');
-        //fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",point,aux->x,aux->y,aux->color.c_str());
-        if (i==0){
-                i=1;
-            }
-            else if (i==1){
-                long int point = reinterpret_cast<long int>(temp);
-                    fprintf(archivo,"%d",point);
-                temp=temp->siguiente;
-            }
-
-        while (temp != NULL){
-            long int point2 = reinterpret_cast<long int>(temp);
-
-
-            fprintf(archivo,"->%d;\n",point2);
-            temp=temp->siguiente;
-        }
-        fila=fila->siguiente;
-    }
+    fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" Fin\"];\n",contador);
     fprintf(archivo, "}\n");
     fclose(archivo);
     system("dot -Tpng LinealizarColumna.dot -o LinealizarColumna.png");
@@ -886,28 +854,47 @@ temp=fila->primeromatriz;
 
 }
 void raiz:: LinealizarCapaFila(){
-    int i = 1;
-    int j = 1;
-    //string dot="Exports/"+nombre+".html";
-    //string css=nombre+".css";
-    FILE* salida;
-    //salida = fopen(dot.c_str(),"w");
-    //fprintf(salida,"<!DOCTYPE html>\n");
-        cabecera *fila=primerofila;
-        while(fila != NULL){
-                Nodomatriz* aux = fila->primeromatriz;
-                while (aux != NULL){
-                    if(aux != NULL){
-                    cout<<aux->x<<endl;
-                    cout<<aux->y<<endl;
-                    cout<<aux->color<<endl;
+FILE* archivo;
+    archivo=fopen("LinealizarFila.dot","w");
+    fprintf(archivo, "digraph LinearColumn {rankdir = \"LR\";\n");
+    cabecera *fila=primerofila;
+    Nodomatriz *temp=fila->primeromatriz;
+    int i=0;
+    int contador=0;
+    fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" Inicio\"];\n",0);
+    fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",1,temp->x,temp->y,temp->color.c_str());
+    fprintf(archivo,"%d->%d;\n",0,1);
+    while(fila != NULL){
+            temp=fila->primeromatriz;
+            while(temp != NULL){
+                i++;
+                contador=i+1;
+            long int point = reinterpret_cast<long int>(temp);
+            fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" (%d,%d)%s\"];\n",i,temp->x,temp->y,temp->color.c_str());
+            fprintf(archivo,"%d->%d;\n",i,contador);
+            temp=temp->arriba;
+            }
+        fila=fila->siguiente;
+    }
+    fila=primerocolumna;
+    fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" Fin\"];\n",contador);
+    fprintf(archivo, "}\n");
+    fclose(archivo);
+    system("dot -Tpng LinealizarFila.dot -o LinealizarFila.png");
+    system("LinealizarFila.png");
 
-                }
-                aux=aux->arriba;
-                }
+}
+void raiz::EditarColorRGB(int x, int y){
+    cabecera *aux=primerocolumna;
+    string color;
+    cout<<"ingrese color"<<endl;
+    cin>>color;
+    Nodomatriz *aux2=buscar(x,y);
+    if (aux2 != NULL){
+            aux2->color=color;
+            cout<<"color nuevo"<<aux2->color<<endl;
 
-            fila=fila->siguiente;
-        }
+    }else cout<<"dato no existe"<<endl;
 
 }
 int raiz::ConvertirSacleGray(int col,int g,int b){
