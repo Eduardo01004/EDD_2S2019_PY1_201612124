@@ -1236,6 +1236,95 @@ void ReportePorCapaCubo(){
     }else cout<<"Opcion incorrecta"<<endl;
 }
 
+void ReporteLinealizarMatriz(){
+    string data;
+    cout<<"1.Imagen Original"<<endl;
+    cout<<"2.Imagen Filtro"<<endl;
+    cin>>data;
+    if (data == "1"){
+        string dato;
+        cout<<"1.Linealizar por Columnas"<<endl;
+        cout<<"2.Linealizar Por Fila"<<endl;
+        cin>>dato;
+        if (dato == "1"){
+            int opcion;
+            string nombre;
+            system("cls");
+            arbol->mostrarInOrden(arbol->raiz);
+            cout<<"ingrese nombre de la imagen"<<endl;
+            cin>>nombre;
+            NodoABB * imagen=arbol->buscar(arbol->raiz,nombre);
+            if (imagen != NULL){
+                cout<<"Ingrese el id de profundidad"<<endl;
+                cin >> opcion;
+                NodoDobleProfundidad * aux3 = imagen->matriz->Buscar(opcion);
+                if(aux != NULL){
+                    aux3->matriz->LinealizarCapaColumna();
+                }else cout<<"No se encontro el id a buscar"<<endl;
+            }
+        }
+        else if(dato == "2"){
+            int opcion;
+            string nombre;
+            system("cls");
+            arbol->mostrarInOrden(arbol->raiz);
+            cout<<"ingrese nombre de la imagen"<<endl;
+            cin>>nombre;
+            NodoABB * imagen=arbol->buscar(arbol->raiz,nombre);
+            if (imagen != NULL){
+                cout<<"Ingrese el id de profundidad"<<endl;
+                cin >> opcion;
+                NodoDobleProfundidad * aux3 = imagen->matriz->Buscar(opcion);
+                if(aux != NULL){
+                    aux3->matriz->LinealizarCapaFila();
+                }else cout<<"No se encontro el id a buscar"<<endl;
+            }
+
+        }else cout<<"Opcion incorrecta"<<endl;
+    }
+    else if(data == "2"){
+        string dato;
+        cout<<"1.Linealizar por Columnas"<<endl;
+        cout<<"2.Linealizar Por Fila"<<endl;
+        cin>>dato;
+        if (dato == "1"){
+            int opcion;
+            string nombre;
+            system("cls");
+            cout<<"ingrese nombre del filtro"<<endl;
+            cin>>nombre;
+            NodoListaCircularDobleImagenes * filt=filtro->Buscar(nombre);
+            if (filt != NULL){
+                cout<<"Ingrese el id de profundidad"<<endl;
+                cin >> opcion;
+                NodoDobleProfundidad * aux3 = filt->copiacubo->Buscar(opcion);
+                if(aux != NULL){
+                    aux3->matriz->LinealizarCapaColumna();
+                }else cout<<"No se encontro el id a buscar"<<endl;
+            }else cout<<"Filtro No Aplicado"<<endl;
+        }
+        else if(dato == "2"){
+            int opcion;
+            string nombre;
+            system("cls");
+            cout<<"ingrese nombre del filtro"<<endl;
+            cin>>nombre;
+            NodoListaCircularDobleImagenes * filt=filtro->Buscar(nombre);
+            if (filt != NULL){
+                cout<<"Ingrese el id de profundidad"<<endl;
+                cin >> opcion;
+                NodoDobleProfundidad * aux3 = filt->copiacubo->Buscar(opcion);
+                if(aux != NULL){
+                    aux3->matriz->LinealizarCapaFila();
+                }else cout<<"No se encontro el id a buscar"<<endl;
+            }else cout<<"Filtro No Aplicado"<<endl;
+
+        }else cout<<"Opcion incorrecta"<<endl;
+
+    }else cout<<"Opcion incorrecta"<<endl;
+
+}
+
 /*-----------------------------------------REPORTES DE LOS RECORRIDOS ---------------------*/
 void ReporteTransversalRecorrido(NodoABB *raiz){
     if(raiz != NULL){
@@ -1260,7 +1349,7 @@ void ReportePreOrder(NodoABB *raiz){
     }
 }
 void Reportes(){
-    int opcion;
+    string opcion;
     cout << "[1]Imported Images report(Arbol ABB)" << endl;
     cout << "[2]Image layer report(Cada capa del cubo)" << endl;
     cout << "[3]Linear Matrix Report(Reporte de linealizar cada capa)" << endl;
@@ -1268,13 +1357,17 @@ void Reportes(){
     cout << "[5]Filters Report(Lista Circular Doble)" << endl;
     cout << "\nIngresa tu opcion: ";
     cin >> opcion;
-    if (opcion == 1){
+    if (opcion == "1"){
         arbol->GraficarInOrden();
     }
-    else if(opcion == 2){
+    else if(opcion == "2"){
         ReportePorCapaCubo();
     }
-    else if(opcion == 4){
+    else if(opcion == "3"){
+        ReporteLinealizarMatriz();
+
+    }
+    else if(opcion == "4"){
         system("cls");
         string opcion1;
         cout <<"1. Recorrido INORDER"<<endl;
@@ -1292,9 +1385,9 @@ void Reportes(){
         else if(opcion1 == "3"){
             ReportePreOrder(arbol->raiz);
             recorridoPre->GraficarRecorridoPreorden();
-        }
+        }cout<<"Opcion Incorrecta"<<endl;
     }
-    else if(opcion == 5){
+    else if(opcion == "5"){
         filtro->GraficarFiltro();
     }
     else cout<<"Opcion Incorrecta"<<endl;
