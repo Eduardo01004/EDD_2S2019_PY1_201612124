@@ -2,8 +2,5 @@ digraph G {rankdir=LR;
 
  
  subgraph cluster3{label="Filtros";
-1289928[shape=box,label=" DobleMirror "];
-1289928 -> 1289928 ;
-1289928->1289928 ;
 }
 }

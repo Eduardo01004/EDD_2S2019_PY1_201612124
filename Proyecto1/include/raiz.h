@@ -25,7 +25,6 @@ class raiz
     void graficarHTML();
     void GenerarSCSS();
     void graficarHTML2(string);
-    void GenerarSCSS2(string);
     void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);
     int ConvertirNegativo(int);
@@ -39,6 +38,13 @@ class raiz
     void LinealizarCapaColumna();
     void LinealizarCapaFila();
     void EditarColorRGB(int,int);
+    void GenerarSCSSNeg(string,int,int);
+    void GenerarSCSSGray(string,int,int);
+    void GenerarSCSSX(string,int,int);
+    void GenerarSCSSY(string,int,int);
+    void GenerarSCSSDoble(string,int,int);
+    void GenerarSCSSCollage(string,int,int);
+    void GenerarSCSSMosaic(string,int,int);
     ~raiz();
 
 };

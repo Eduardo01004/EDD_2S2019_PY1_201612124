@@ -481,11 +481,17 @@ void raiz::graficarCapa(){
                 Nodomatriz* aux = buscar(i,j);
 
                 if(aux != NULL){
-                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"1\" BGCOLOR=\" %s \">",aux->color.c_str());
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" %s \">",out.c_str());
                     fprintf(salida,"</TD>\n");
                 }
                 else {
-                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"1\" BGCOLOR=\" #ffffff \">");
+                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" #E41D1D \">");
                     fprintf(salida,"</TD>\n");
                 }
                 i++;
@@ -498,7 +504,7 @@ void raiz::graficarCapa(){
     fprintf(salida,"}\n");
     fclose(salida);
     system("dot -Tpng mario.dot -o mario.png");
-    //system(" mario.png");
+    system(" mario.png");
 }
 
 void raiz::graficarHTML(){
@@ -624,7 +630,7 @@ void raiz::graficarHTML2(string nombre){
     fclose(salida);
 
 }
-void raiz::GenerarSCSS2(string nombre){
+void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -638,7 +644,7 @@ void raiz::GenerarSCSS2(string nombre){
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
 
     fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 420px;\n height: 400px; \n }\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
     fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
@@ -667,17 +673,265 @@ void raiz::GenerarSCSS2(string nombre){
     fclose(salida);
     system(dot.c_str());
 }
-/*------------------------------------GENERA IMAGEN ORIGINAL-------------------------------*/
+void raiz::GenerarSCSSGray(string nombre,int ancho,int alto){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
 
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
-/*---------------------------------------GENERA ESCALA DE GRISES----------*/
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
 
-/*-----------------------------GENERA X MIRROR-----------------------*/
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+void raiz::GenerarSCSSX(string nombre,int ancho,int alto){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
 
-/*-----------------------------------------------GENERA MIRROR Y------------------------*/
-/*---------------------------------------------GENERA FILTRO DOBLE MIRROR------------*/
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
-/*-----------------------------------GENERA FILTRO NEGATIVO---------------------------------*/
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+void raiz::GenerarSCSSY(string nombre,int ancho,int alto){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+void raiz::GenerarSCSSDoble(string nombre,int ancho,int alto){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+void raiz::GenerarSCSSMosaic(string nombre,int ancho,int alto){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre+".html";
+    string css="Exports/"+nombre+".css";
+    int contador=1;
+    FILE* salida;
+    salida = fopen(css.c_str(),"w");
+    fprintf(salida,"body { \n background: #333333; \n");
+    fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
+
+    fprintf(salida,".canvas{\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
+
+    fprintf(salida,".pixel{\n");
+    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    text=aux->color;
+                    std::istringstream iso(text);
+                    getline(iso,RNeg,'-');
+                    getline(iso,GNeg,'-');
+                    getline(iso,BNeg,'-');
+                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
+                }
+                contador++;
+                i++;
+            }
+
+            j++;
+        }
+    }
+    fclose(salida);
+    system(dot.c_str());
+}
+
 string raiz::RGBToHex(int rNum, int gNum, int bNum){
     string result;
     char r[255];
@@ -805,7 +1059,6 @@ void raiz::DobleEspejo(raiz*p,raiz *m ,int fila,int columna){
 
 void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,int cantidadcol){
     cabecera *aux=rai->primerocolumna;
-
     for (int i=0; i<fila;i++){
         for(int j=0; j<columna;j++){
             cabecera *aux=rai->primerofila;
@@ -819,7 +1072,6 @@ void raiz::Collage(raiz *rai,raiz *matriz,int fila, int columna,int cantidadf,in
             }
         }
     }
-
 }
 
 void raiz:: LinealizarCapaColumna(){

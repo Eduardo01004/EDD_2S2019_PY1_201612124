@@ -89,13 +89,11 @@ void ArbolABB::graficaBinario(){
 
 void ArbolABB::mostrarInOrden(NodoABB * raiz)
 {   int contador=1;
-
     if(raiz != NULL){
-
         mostrarInOrden(raiz->izquierdo);
-        cout<<contador<<raiz->nombre.c_str()<<endl;
-        contador++;
+        cout<<raiz->nombre.c_str()<<endl;
         mostrarInOrden(raiz->derecho);
+
     }
 }
 void ArbolABB::GraficarInOrden()

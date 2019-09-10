@@ -1,11 +1,9 @@
-configm.csv config
+config.csv config
 1 capa
-body.csv archivo
+cuerpo.csv archivo
 2 capa
-hair.csv archivo
+espada.csv archivo
 3 capa
-shirt.csv archivo
+traje.csv archivo
 4 capa
-dungarees.csv archivo
-5 capa
-boots.csv archivo
+sombra.csv archivo

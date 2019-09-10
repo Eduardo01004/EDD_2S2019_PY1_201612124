@@ -1,5 +1,3 @@
 digraph inorden {
-inicial[shape=record, style=filled, fillcolor=seashell2,label="Nombre: inicial Dimension: 16 Tamano: 16"];
-mario[shape=record, style=filled, fillcolor=seashell2,label="Nombre: mario Dimension: 16 Tamano: 16"];
-mario -> inicial;
- }
+csv/deadpool/carga[shape=record, style=filled, fillcolor=seashell2,label="Nombre: csv/deadpool/carga Dimension: 16 Tamano: 16"];
+}
