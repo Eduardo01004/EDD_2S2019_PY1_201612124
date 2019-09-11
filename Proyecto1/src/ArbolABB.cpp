@@ -34,58 +34,10 @@ NodoABB* ArbolABB::buscar(NodoABB *raiz,string nombre){
     return NULL;
 }
 
-void ArbolABB::Crear(string nombre,int dimension, int tamano){
-    NodoABB* nuevo = new NodoABB(nombre,dimension,tamano);
+void ArbolABB::Crear(string nombre,int a, int b,int c, int d){
+    NodoABB* nuevo = new NodoABB(nombre,a,b,c,d);
 	raiz=Insertar(raiz,nuevo);
 }
-
-void ArbolABB::Grafica_auxiliar(NodoABB* node, FILE* stream)
-{
-    if(node != NULL)
-    {
-        long int point = reinterpret_cast<long int>(node);
-        fprintf(stream,"%d[label=\"Nombre: %s Dimension: %d Tamano: %d\"];\n",point,node->nombre.c_str(),node->dimension,node->tamano);
-    }
-	if (node->izquierdo)
-	{
-        long int point = reinterpret_cast<long int>(node);
-        long int point2 = reinterpret_cast<long int>(node->izquierdo);
-		fprintf(stream, "%d -> %d;\n", point,point2);
-		Grafica_auxiliar(node->izquierdo, stream);
-	}
-	if (node->derecho)
-	{
-        long int point = reinterpret_cast<long int>(node);
-        long int point2 = reinterpret_cast<long int>(node->derecho);
-		fprintf(stream, "%d -> %d;\n", point,point2);
-		Grafica_auxiliar(node->derecho, stream);
-	}
-}
-
-void ArbolABB::GraficarABB(NodoABB *tree,FILE* stream)
-{
-	fprintf(stream, "digraph BINARIO {\n");
-	fprintf(stream, "node [fontname=\"Arial\", color=gray30, style=	rounded];\n");
-	if (!tree)
-	fprintf(stream, "\n");
-	else if (!tree->derecho && !tree->izquierdo)
-	{
-        long int point = reinterpret_cast<long int>(tree);
-        fprintf(stream, "%d;\n", point);
-	}
-	else
-	Grafica_auxiliar(tree, stream);
-	fprintf(stream, "}\n");
-}
-void ArbolABB::graficaBinario(){
-	FILE *archivo;
-	archivo=fopen("ABB.dot","w");
-	GraficarABB(raiz,archivo);
-	fclose(archivo);
-	system("dot -Tjpg ABB.dot -o ABB.jpg");
-    //system(" ABB.jpg");
-}
-
 
 void ArbolABB::mostrarInOrden(NodoABB * raiz)
 {   int contador=1;
@@ -99,20 +51,22 @@ void ArbolABB::mostrarInOrden(NodoABB * raiz)
 void ArbolABB::GraficarInOrden()
 {
     FILE *archivo;
-    archivo=fopen("Inorden.dot","w");
-    fprintf(archivo, "digraph inorden {\n");
+    archivo=fopen("ArbolABB.dot","w");
+    fprintf(archivo, "digraph ArbolABB {\n rankdir=TB;\n");
+    fprintf(archivo," graph [splines=compound, nodesep=0.5];\n");
+    fprintf(archivo,"node [shape = record, style=filled, fillcolor=seashell2,width=0.7,height=0.2];\n");
     HacerInorden(raiz,archivo);
     fprintf(archivo, "}\n");
     fclose(archivo);
-    system("dot -Tjpg Inorden.dot -o Inorden.jpg");
-    system(" Inorden.jpg");
+    system("dot -Tjpg ArbolABB.dot -o ArbolABB.jpg");
+    system(" ArbolABB.jpg");
 }
 
 void ArbolABB::HacerInorden(NodoABB * raiz,FILE* stream){
 
     if(raiz != NULL){
         HacerInorden(raiz->izquierdo,stream);
-        fprintf(stream,"%s[shape=record, style=filled, fillcolor=seashell2,label=\"Nombre: %s Dimension: %d Tamano: %d\"];\n",raiz->nombre.c_str(),raiz->nombre.c_str(),raiz->dimension,raiz->tamano);
+        fprintf(stream,"%s[label=\"<C0>|Nombre:%s Dimension:%dX%dpx  Tamano:%dX%dpx |<C1>\"];\n",raiz->nombre.c_str(),raiz->nombre.c_str(),raiz->widthimagen,raiz->hightimagen,raiz->widthpixel,raiz->hightpixel);
         if (raiz->derecho != NULL){
 
             fprintf(stream, "%s -> %s;\n ",raiz->nombre.c_str(),raiz->derecho->nombre.c_str());
@@ -125,27 +79,7 @@ void ArbolABB::HacerInorden(NodoABB * raiz,FILE* stream){
 
 }
 
-void ArbolABB:: Inorden(FILE* fs, NodoABB *raiz)
-{
-    if (raiz != NULL){
 
-        if(raiz -> izquierdo != NULL)fprintf(fs, "%s -> %s; \n", raiz->nombre.c_str(), raiz->izquierdo->nombre.c_str());
-        if(raiz -> derecho != NULL) fprintf(fs, "%s -> %s; \n", raiz->nombre.c_str(), raiz->derecho->nombre.c_str());
-        Inorden(fs, raiz->izquierdo);
-        Inorden(fs, raiz->derecho);
-    }
-}
-void ArbolABB::GraficarPreOrden()
-{
-    FILE *archivo;
-    archivo=fopen("Preorden.dot","w");
-    fprintf(archivo, "digraph preorden {\n");
-    Inorden(archivo,raiz);
-    fprintf(archivo, "}\n");
-    fclose(archivo);
-    system("dot -Tjpg Preorden.dot -o Preorden.jpg");
-    system(" Preorden.jpg");
-}
 
 
 

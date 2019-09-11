@@ -14,14 +14,11 @@ class ArbolABB
         NodoABB* Insertar(NodoABB *,NodoABB *);
         NodoABB* buscar(NodoABB *raiz,string nombre);
         void graficaBinario();
-        void Crear(string,int,int);
-        void GraficarABB(NodoABB *tree,FILE* stream);
-        void Grafica_auxiliar(NodoABB* node, FILE* stream);
+        void Crear(string,int,int,int,int);
         void mostrarInOrden(NodoABB*);
         void GraficarInOrden();
         void HacerInorden(NodoABB * raiz,FILE* stream);
         void Inorden(FILE *stream, NodoABB *raiz);
-        void GraficarPreOrden();
 
 
 

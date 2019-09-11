@@ -23,7 +23,7 @@ class raiz
     void InsertarTodoMatriz(int x,int y,string color);
     void graficarCapa();
     void graficarHTML();
-    void GenerarSCSS();
+    void GenerarSCSS(int,int);
     void graficarHTML2(string);
     void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);
@@ -45,6 +45,7 @@ class raiz
     void GenerarSCSSDoble(string,int,int);
     void GenerarSCSSCollage(string,int,int);
     void GenerarSCSSMosaic(string,int,int);
+
     ~raiz();
 
 };

@@ -16,10 +16,12 @@ class NodoABB
         NodoABB();
         ~NodoABB();
         string nombre;
-        int dimension;
-        int tamano;
+        int hightimagen;
+        int widthimagen;
+        int hightpixel;
+        int widthpixel;
         Profundidad_Matriz *matriz;
-        NodoABB(string,int,int);
+        NodoABB(string,int,int,int,int);
         NodoABB *izquierdo;
         NodoABB *derecho;
 

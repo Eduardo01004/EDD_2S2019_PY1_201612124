@@ -548,7 +548,7 @@ void raiz::graficarHTML(){
     fclose(salida);
 }
 
-void raiz::GenerarSCSS(){
+void raiz::GenerarSCSS(int alto, int ancho){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -561,7 +561,7 @@ void raiz::GenerarSCSS(){
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
 
     fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 400px;\n height: 400px; \n }\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
     fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
@@ -1143,9 +1143,7 @@ void raiz::EditarColorRGB(int x, int y){
     cin>>color;
     Nodomatriz *aux2=buscar(x,y);
     if (aux2 != NULL){
-            aux2->color=color;
-            cout<<"color nuevo"<<aux2->color<<endl;
-
+        aux2->color=color;
     }else cout<<"dato no existe"<<endl;
 
 }
@@ -1154,4 +1152,6 @@ int raiz::ConvertirSacleGray(int col,int g,int b){
         x=(col*0.21)+(g*0.72)+(b*0.07);
         return x;
 }
+
+
 raiz::~raiz(){}

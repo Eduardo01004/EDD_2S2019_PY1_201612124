@@ -2,8 +2,10 @@ config.csv config
 1 capa
 cuerpo.csv archivo
 2 capa
-espada.csv archivo
+borde.csv archivo
 3 capa
-traje.csv archivo
+nucleo.csv archivo
 4 capa
-sombra.csv archivo
+careta.csv archivo
+5 capa
+traje.csv archivo

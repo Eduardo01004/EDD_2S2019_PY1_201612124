@@ -63,6 +63,9 @@ int widthcollage=0;
 int hightcollage=0;
 int widthmosaic=0;
 int hightmosaic=0;
+int widthoriginal=0;
+int hightoriginal=0;
+string rutaarchivo="";
 //---------------------------------------------fin caroables globales ----------------------------------------------------
 
 /////////----------------------------METODOS PARA CONVERTIR COLORES -------------------------------------------//////
@@ -152,7 +155,7 @@ void automataConfig(string lexema, string token){
      case 7:
         if(token == "ancho"){
             altopixel= atoi(lexema.c_str());
-            arbol->Crear(nombreimagen,altoimage,anchoimage);
+            arbol->Crear(nombreimagen,altoimage*30,anchoimage*30,altopixel*30,anchopixel*30);
             Faseconfig=8;
          }else{
             FaseCapas=1000;
@@ -175,7 +178,9 @@ void automataConfig(string lexema, string token){
 
 }
 void AnalizarConfig(string path,string archivo){
-    std::ifstream in (path.c_str());
+    string ruta="";
+    ruta=rutaarchivo+path;
+    std::ifstream in (ruta.c_str());
     if(in.is_open()){
         FILE *fp;
         fp = fopen(archivo.c_str(),"w");
@@ -196,7 +201,7 @@ void AnalizarConfig(string path,string archivo){
         }
         fclose(fp);
     }else {
-        cout<<"No existe el archivo "<< path << endl;
+        cout<<"No existe el archivo "<< path << " del archivo configuracion"<< endl;
      }
 
 }
@@ -279,7 +284,9 @@ void AnalizarArchivoCapas(string path, string archivo){
     char caracter;
     int coorx=0;//fila
     int coory=1;//columna
-    std::ifstream in (path.c_str());
+    string ruta="";
+    ruta=rutaarchivo+path;
+    std::ifstream in (ruta.c_str());
     if(in.is_open()){
         FILE *fp;
         fp = fopen(archivo.c_str(),"w");
@@ -306,7 +313,7 @@ void AnalizarArchivoCapas(string path, string archivo){
         fclose(fp);
     }
     else{
-        cout<<"No existe el archivo "<< path << endl;
+        cout<<"No existe el archivo "<< path << "De capas" << endl;
     }
 }
 
@@ -314,6 +321,7 @@ void AnalizarArchivoCapas(string path, string archivo){
 void AnalizarArchivoinicial(string path,string archivo){
     std::ifstream in (path.c_str());
     if(in.is_open()){
+
         FILE *fp;
         fp = fopen(archivo.c_str(),"w");
         string palabra = "";
@@ -337,7 +345,7 @@ void AnalizarArchivoinicial(string path,string archivo){
         cout<<"archivo leido" << endl;
         fclose(fp);
     }else {
-        cout<<"No existe el archivo "<< path << endl;
+        cout<<"No existe el archivo "<< path << " del archivo inicial"<< endl;
      }
 }
 
@@ -945,6 +953,7 @@ void FiltroDobleMirror(){
         }
         } else cout<<"Filtro No encontrado"<<endl;
    }else cout<<"Imagen No encontrado"<<endl;
+   cout<<widthdoble<<endl;
 
    }else if(op == "2"){
        int opcion;
@@ -1062,7 +1071,6 @@ void AplicarFiltrosMenu(){
     cout << "[4]Collage(Collage)" << endl;
     cout << "[5]Mosaic(Mosaico)" << endl;
     cout << "\nIngresa tu opcion: ";
-
     cin >> opcion;
     if (opcion == 1){
         FiltroNegativo();
@@ -1104,6 +1112,9 @@ void MenuExports(){
     cout<<"ingrese su opcion: "<<endl;
     cin>>opcion;
     if (opcion == 1){
+        int a=0;
+        int b=0;
+        arbol->mostrarInOrden(arbol->raiz);
         cout<<"ingrese nombre de la imagen"<<endl;
         cin>>nombre;
         NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
@@ -1111,6 +1122,16 @@ void MenuExports(){
             matriztemporal = new raiz();
             Profundidad_Matriz *aux2=image->matriz;
             NodoDobleProfundidad *aux3=aux2->primero;
+            cabecera *fila=aux3->matriz->primerofila;
+            while(fila != NULL){
+                a=fila->numero;
+                fila=fila->siguiente;
+            }
+            cabecera *colum=aux3->matriz->primerocolumna;
+            while(colum != NULL){
+                b=colum->numero;
+                colum=colum->siguiente;
+            }
             while(aux3 != NULL){
                 if (aux3->matriz != NULL){
                     aux2->UnirCapas(aux3->matriz,matriztemporal);
@@ -1118,7 +1139,8 @@ void MenuExports(){
                 aux3 = aux3->siguiente;
             }
         matriztemporal->graficarHTML();
-        matriztemporal->GenerarSCSS();
+        //matriztemporal->Mosaico()
+        matriztemporal->GenerarSCSS(a*30,b*30);
         matriztemporal->graficarCapa();
         }else cout<<"No se encontro la imagen a buscar"<<endl;
 
@@ -1217,7 +1239,7 @@ void MenuExports(){
                     cin>>nom;
                     matriztemporal->GraficarDispersa();
                     matriztemporal->graficarHTML2(nom);
-                    matriztemporal->GenerarSCSSY(nom,widthY,hightY);
+                    matriztemporal->GenerarSCSSY(nom,widthY*30,hightY*30);
                 }else cout<<"Filtro no Aplicado"<<endl;
             }
             else if (chooise == "3"){
@@ -1236,8 +1258,9 @@ void MenuExports(){
                     string nom;
                     cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                     cin>>nom;
+                    matriztemporal->GraficarDispersa();
                     matriztemporal->graficarHTML2(nom);
-                    matriztemporal->GenerarSCSSDoble(nom,widthdoble*30,hightdoble*30);
+                    matriztemporal->GenerarSCSSDoble(nom,(widthdoble-1)*30,hightdoble*30);
                 }else cout<<"Filtro no Aplicado"<<endl;
             }
         }
@@ -1528,7 +1551,7 @@ void Edicion_Manual(){
     if (prin == "1"){
         int opcion;
         system("cls");
-        NodoABB *neg=arbol->buscar(arbol->raiz,"mario");
+        NodoABB *neg=arbol->buscar(arbol->raiz,nombreimagen);
         if (neg != NULL){
             cout<<"Ingrese el id de profundidad"<<endl;
             cin >> opcion;
@@ -1562,6 +1585,7 @@ void Edicion_Manual(){
                 cout<<"ingrese x"<<endl;
                 cin>>x;
                 cout<<"ingrese y"<<endl;
+                cin>>y;
                 aux3->matriz->EditarColorRGB(x,y);
                 aux3->matriz->GraficarDispersa();
             }else cout<<"No se encontro el id a buscar"<<endl;
@@ -1582,7 +1606,12 @@ int main()
     string direccion;
     string token;
     string punto=".";
-    int opcion;
+    string opcion="";
+    string ruta="";
+    string ruta1;
+    string ruta2;
+    string ruta3;
+
     string opcioninorden="";
     while (1){
         cout << "[1]Insert Image" << endl;
@@ -1594,18 +1623,20 @@ int main()
         cout << "[7]Exit" << endl;
         cout << "\nIngresa tu opcion: ";
         cin >> opcion;
-        switch(opcion)
-        {
-        case 1:
+        if (opcion == "1"){
             system("cls");
             cout<< "Ingrese la ruta del archivo Inicial"<<endl;
             cin >> direccion;
-            token= direccion.substr(0, direccion.find(punto));
-            nombreimagen=token;
+            std::istringstream iso(direccion);
+            getline(iso,ruta,'/');
+            getline(iso,ruta2,'/');
+            getline(iso,ruta3,'.');
+            rutaarchivo=ruta+"/"+ruta2+"/";
+            nombreimagen=ruta3;
             AnalizarArchivoinicial(direccion,"archivo.txt");
             analisisSintacticoArchivoInicial();
-            break;
-        case 2:
+        }
+        else if (opcion == "2"){
             system("cls");
             arbol->mostrarInOrden(arbol->raiz);
             cout<<"seleccione una imagen"<<endl;
@@ -1614,31 +1645,31 @@ int main()
             filtro->ultimo=NULL;
             verificar(opcioninorden);
 
-            break;
-        case 3:
+        }
+        else if(opcion == "3"){
             system("cls");
             AplicarFiltrosMenu();
-
-            break;
-        case 4:
+        }
+        else if( opcion == "4"){
             system("cls");
             Edicion_Manual();
-            break;
-        case 5:
+        }
+        else if (opcion == "5"){
             system("cls");
             MenuExports();
-            break;
-        case 6:
+        }
+        else if (opcion == "6"){
             system("cls");
             Reportes();
-            break;
-        case 7:
+        }
+        else if (opcion == "7"){
             return 0;
             break;
-        default:
-            cout << "Por favor ingresa una opcion correcta.\n";
-            break;
         }
-    }
-    return 0;
+        else {
+            cout << "Por favor ingresa una opcion correcta.\n";
+        }
+
+}
+return 0;
 }
