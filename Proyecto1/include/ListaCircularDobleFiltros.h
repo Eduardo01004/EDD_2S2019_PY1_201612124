@@ -12,6 +12,7 @@ class ListaCircularDobleFiltros
         void InsertarFiltro(string filtro);
         void GraficarFiltro();
         NodoListaCircularDobleImagenes *Buscar(string filtro);
+        void Mostrar();
 };
 
 #endif // LISTACIRCULARDOBLEFILTROS_H

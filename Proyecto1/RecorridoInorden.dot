@@ -1,6 +1,3 @@
 digraph inorden {
 rankdir = LR;
-12169072[shape=record, style=filled, fillcolor=seashell2,label="Imagen: inicial"];
-12169072->12169112;
-12169112[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
 }

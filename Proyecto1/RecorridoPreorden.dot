@@ -1,4 +1,12 @@
 digraph Pre {
 rankdir = LR;
-14528176[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
+11847288[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
+11847288->11847168;
+11847168[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hulk"];
+11847168->11846608;
+11846608[shape=record, style=filled, fillcolor=seashell2,label="Imagen: deadpool"];
+11846608->11846568;
+11846568[shape=record, style=filled, fillcolor=seashell2,label="Imagen: ironman"];
+11846568->11847368;
+11847368[shape=record, style=filled, fillcolor=seashell2,label="Imagen: real"];
 }

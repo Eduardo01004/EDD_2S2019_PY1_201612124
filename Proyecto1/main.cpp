@@ -155,7 +155,7 @@ void automataConfig(string lexema, string token){
      case 7:
         if(token == "ancho"){
             altopixel= atoi(lexema.c_str());
-            arbol->Crear(nombreimagen,altoimage*30,anchoimage*30,altopixel*30,anchopixel*30);
+            arbol->Crear(nombreimagen,altoimage*30,anchoimage*30,altopixel,anchopixel);
             Faseconfig=8;
          }else{
             FaseCapas=1000;
@@ -1104,6 +1104,7 @@ void AplicarFiltrosMenu(){
 
 
 void MenuExports(){
+    system("cls");
     int opcion;
     string nombre;
     string name;
@@ -1114,6 +1115,7 @@ void MenuExports(){
     if (opcion == 1){
         int a=0;
         int b=0;
+        cout<<"-----------------"<<"IMAGES"<<"------------------------"<<endl;
         arbol->mostrarInOrden(arbol->raiz);
         cout<<"ingrese nombre de la imagen"<<endl;
         cin>>nombre;
@@ -1138,10 +1140,12 @@ void MenuExports(){
                 }
                 aux3 = aux3->siguiente;
             }
-        matriztemporal->graficarHTML();
-        //matriztemporal->Mosaico()
-        matriztemporal->GenerarSCSS(a*30,b*30);
-        matriztemporal->graficarCapa();
+        string nom;
+        cout<<"Ingrese el nombre de su imagen de salida"<<endl;
+        cin>>nom;
+        matriztemporal->graficarHTML(nom,nombreimagen);
+        matriztemporal->GenerarSCSS(nom,a*30,b*30,nombreimagen);
+        //matriztemporal->graficarCapa();
         }else cout<<"No se encontro la imagen a buscar"<<endl;
 
     }
@@ -1169,9 +1173,9 @@ void MenuExports(){
                 string nom;
                 cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                 cin>>nom;
-                matriztemporal->GraficarDispersa();
-                matriztemporal->graficarHTML2(nom);
-                matriztemporal->GenerarSCSSNeg(nom,widthneg*30,hightneg*30);
+                //matriztemporal->GraficarDispersa();
+                matriztemporal->graficarHTML2(nom,nombreimagen);
+                matriztemporal->GenerarSCSSNeg(nom,widthneg*30,hightneg*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
         }
         else if(opcion == "2"){
@@ -1190,8 +1194,8 @@ void MenuExports(){
                 cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                 cin>>nom;
                 matriztemporal->GraficarDispersa();
-                matriztemporal->graficarHTML2(nom);
-                matriztemporal->GenerarSCSSGray(nom,widthgray*30,hightgray*30);
+                matriztemporal->graficarHTML2(nom,nombreimagen);
+                matriztemporal->GenerarSCSSGray(nom,widthgray*30,hightgray*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
         }
         else if(opcion == "3"){
@@ -1217,8 +1221,8 @@ void MenuExports(){
                 cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                 cin>>nom;
                 matriztemporal->GraficarDispersa();
-                matriztemporal->graficarHTML2(nom);
-                matriztemporal->GenerarSCSSX(nom,widthX*30,hightX*30);
+                matriztemporal->graficarHTML2(nom,nombreimagen);
+                matriztemporal->GenerarSCSSX(nom,widthX*30,hightX*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
             }
             else if(chooise == "2"){
@@ -1238,8 +1242,8 @@ void MenuExports(){
                     cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                     cin>>nom;
                     matriztemporal->GraficarDispersa();
-                    matriztemporal->graficarHTML2(nom);
-                    matriztemporal->GenerarSCSSY(nom,widthY*30,hightY*30);
+                    matriztemporal->graficarHTML2(nom,nombreimagen);
+                    matriztemporal->GenerarSCSSY(nom,widthY*30,hightY*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
             }
             else if (chooise == "3"){
@@ -1259,8 +1263,8 @@ void MenuExports(){
                     cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                     cin>>nom;
                     matriztemporal->GraficarDispersa();
-                    matriztemporal->graficarHTML2(nom);
-                    matriztemporal->GenerarSCSSDoble(nom,(widthdoble-1)*30,hightdoble*30);
+                    matriztemporal->graficarHTML2(nom,nombreimagen);
+                    matriztemporal->GenerarSCSSDoble(nom,(widthdoble-1)*30,hightdoble*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
             }
         }
@@ -1281,8 +1285,8 @@ void MenuExports(){
                     cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                     cin>>nom;
                     matriztemporal->GraficarDispersa();
-                    matriztemporal->graficarHTML2(nom);
-                    matriztemporal->GenerarSCSSCollage(nom,(widthcollage)*30,hightcollage*30);
+                    matriztemporal->graficarHTML2(nom,nombreimagen);
+                    matriztemporal->GenerarSCSSCollage(nom,(widthcollage)*30,hightcollage*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
         }
     }
@@ -1303,6 +1307,7 @@ void ReportePorCapaCubo(){
             int opcion;
             string nombre;
             system("cls");
+            cout<<"-----------------"<<"IMAGES"<<"------------------------"<<endl;
             arbol->mostrarInOrden(arbol->raiz);
             cout<<"ingrese nombre de la imagen"<<endl;
             cin>>nombre;
@@ -1318,6 +1323,7 @@ void ReportePorCapaCubo(){
         }
         else if(dato == "2"){
             string nombre;
+            cout<<"-----------------"<<"IMAGES"<<"------------------------"<<endl;
             arbol->mostrarInOrden(arbol->raiz);
             cout<<"ingrese nombre de la imagen"<<endl;
             cin>>nombre;
@@ -1397,6 +1403,7 @@ void ReporteLinealizarMatriz(){
             int opcion;
             string nombre;
             system("cls");
+            cout<<"-----------------"<<"IMAGES"<<"------------------------"<<endl;
             arbol->mostrarInOrden(arbol->raiz);
             cout<<"ingrese nombre de la imagen"<<endl;
             cin>>nombre;
@@ -1414,6 +1421,7 @@ void ReporteLinealizarMatriz(){
             int opcion;
             string nombre;
             system("cls");
+            cout<<"-----------------"<<"IMAGES"<<"------------------------"<<endl;
             arbol->mostrarInOrden(arbol->raiz);
             cout<<"ingrese nombre de la imagen"<<endl;
             cin>>nombre;
@@ -1572,6 +1580,7 @@ void Edicion_Manual(){
         int opcion;
         system("cls");
         string name;
+        filtro->Mostrar();
         cout<<"ingrese Filtro a modificar"<<endl;
         cin>>name;
         NodoListaCircularDobleImagenes *filt=filtro->Buscar(name);
@@ -1593,10 +1602,11 @@ void Edicion_Manual(){
     }else cout<<"opcion invalida"<<endl;
 }
 void verificar(string opcioninorden){
-
     NodoABB *imagen=arbol->buscar(arbol->raiz,opcioninorden);
     if(imagen != NULL){
         nombreimagen=opcioninorden;
+        string rutasalida = "Exports/" + opcioninorden;
+        mkdir(rutasalida.c_str());
     }else cout<<"Imagen no Existe"<<endl;
 }
 
@@ -1638,12 +1648,16 @@ int main()
         }
         else if (opcion == "2"){
             system("cls");
+            cout<<"-----------------"<<"IMAGES"<<"------------------------"<<endl;
             arbol->mostrarInOrden(arbol->raiz);
             cout<<"seleccione una imagen"<<endl;
             cin>>opcioninorden;
             filtro->primero=NULL;
             filtro->ultimo=NULL;
             verificar(opcioninorden);
+            //string rutasalida = "Exports/" + opcioninorden;
+            //mkdir(rutasalida.c_str()_;
+            //mkdir(rutasalida.c_str());
 
         }
         else if(opcion == "3"){

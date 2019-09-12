@@ -39,6 +39,19 @@ void ListaCircularDobleFiltros::InsertarFiltro(string filtro){
 
 }
 
+
+void ListaCircularDobleFiltros::Mostrar(){
+    NodoListaCircularDobleImagenes *aux=primero;
+    cout<<"---------"<<"Filtros Aplicados"<<"--------"<<endl;
+    if (aux != NULL){
+        do{
+            cout<<aux->filtro<<endl;
+            aux=aux->siguiente;
+        }while (aux != primero);
+    }else cout<<"No hay Filtros Aplicados"<<endl;
+
+}
+
 void ListaCircularDobleFiltros::GraficarFiltro(){
     FILE *archivo;
     archivo=fopen("ListaCircular.dot","w");

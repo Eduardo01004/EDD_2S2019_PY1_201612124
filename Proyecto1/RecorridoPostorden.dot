@@ -1,4 +1,12 @@
 digraph Post {
 rankdir = LR;
-9219760[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
+11846768[shape=record, style=filled, fillcolor=seashell2,label="Imagen: deadpool"];
+11846768->11847208;
+11847208[shape=record, style=filled, fillcolor=seashell2,label="Imagen: ironman"];
+11847208->11846928;
+11846928[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hulk"];
+11846928->11846648;
+11846648[shape=record, style=filled, fillcolor=seashell2,label="Imagen: real"];
+11846648->11846968;
+11846968[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
 }

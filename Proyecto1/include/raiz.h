@@ -22,9 +22,9 @@ class raiz
     Nodomatriz* buscar(int,int);
     void InsertarTodoMatriz(int x,int y,string color);
     void graficarCapa();
-    void graficarHTML();
-    void GenerarSCSS(int,int);
-    void graficarHTML2(string);
+    void graficarHTML(string,string );
+    void GenerarSCSS(string,int,int,string);
+    void graficarHTML2(string,string);
     void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);
     int ConvertirNegativo(int);
@@ -38,12 +38,12 @@ class raiz
     void LinealizarCapaColumna();
     void LinealizarCapaFila();
     void EditarColorRGB(int,int);
-    void GenerarSCSSNeg(string,int,int);
-    void GenerarSCSSGray(string,int,int);
-    void GenerarSCSSX(string,int,int);
-    void GenerarSCSSY(string,int,int);
-    void GenerarSCSSDoble(string,int,int);
-    void GenerarSCSSCollage(string,int,int);
+    void GenerarSCSSNeg(string,int,int,string);
+    void GenerarSCSSGray(string,int,int,string);
+    void GenerarSCSSX(string,int,int,string);
+    void GenerarSCSSY(string,int,int,string);
+    void GenerarSCSSDoble(string,int,int,string);
+    void GenerarSCSSCollage(string,int,int,string);
     void GenerarSCSSMosaic(string,int,int);
 
     ~raiz();

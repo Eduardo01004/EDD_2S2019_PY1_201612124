@@ -2,13 +2,13 @@ digraph ArbolABB {
  rankdir=TB;
  graph [splines=compound, nodesep=0.5];
 node [shape = record, style=filled, fillcolor=seashell2,width=0.7,height=0.2];
-deadpool[label="<C0>|Nombre:deadpool Dimension:690X1230px  Tamano:600X600px |<C1>"];
-hulk[label="<C0>|Nombre:hulk Dimension:510X750px  Tamano:1500X1500px |<C1>"];
+deadpool[label="<C0>|Nombre:deadpool Dimension:690X1230px  Tamano:20X20px |<C1>"];
+hulk[label="<C0>|Nombre:hulk Dimension:510X750px  Tamano:50X50px |<C1>"];
 hulk -> ironman;
  hulk -> deadpool;
- ironman[label="<C0>|Nombre:ironman Dimension:960X960px  Tamano:900X900px |<C1>"];
-mario[label="<C0>|Nombre:mario Dimension:480X480px  Tamano:900X900px |<C1>"];
+ ironman[label="<C0>|Nombre:ironman Dimension:960X960px  Tamano:30X30px |<C1>"];
+mario[label="<C0>|Nombre:mario Dimension:480X480px  Tamano:30X30px |<C1>"];
 mario -> real;
  mario -> hulk;
- real[label="<C0>|Nombre:real Dimension:870X870px  Tamano:900X900px |<C1>"];
+ real[label="<C0>|Nombre:real Dimension:870X870px  Tamano:30X30px |<C1>"];
 }
