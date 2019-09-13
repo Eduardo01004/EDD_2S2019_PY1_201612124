@@ -44,7 +44,9 @@ class raiz
     void GenerarSCSSY(string,int,int,string);
     void GenerarSCSSDoble(string,int,int,string);
     void GenerarSCSSCollage(string,int,int,string);
-    void GenerarSCSSMosaic(string,int,int);
+    void GenerarSCSSMosaic(string,float,float,string);
+    void graficarHTMLMosaic(string,string );
+    void graficaDivs(FILE*);
 
     ~raiz();
 

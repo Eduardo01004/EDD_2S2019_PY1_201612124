@@ -61,8 +61,8 @@ int widthgray=0;
 int hightgray=0;
 int widthcollage=0;
 int hightcollage=0;
-int widthmosaic=0;
-int hightmosaic=0;
+float widthmosaic=0;
+float hightmosaic=0;
 int widthoriginal=0;
 int hightoriginal=0;
 string rutaarchivo="";
@@ -815,7 +815,7 @@ void FiltroMirrorY(){
    cout<<"2. Aplicar Filtro a una Capa"<<endl;
    cin>>op;
    if (op == "1"){
-          filtro->InsertarFiltro("MirrorY");
+        filtro->InsertarFiltro("MirrorY");
     NodoABB *popo=arbol->buscar(arbol->raiz,nombreimagen);
     int a=0;
     int b=0;
@@ -1062,6 +1062,51 @@ void FiltroCollage(){
    }else cout<<"Imagen No encontrado"<<endl;
 }
 
+void FiltroMosaico(){
+    filtro->InsertarFiltro("Mosaic");
+    NodoABB *popo=arbol->buscar(arbol->raiz,nombreimagen);
+    int a=0;
+    int b=0;
+    if (popo != NULL){
+        NodoListaCircularDobleImagenes *pi=filtro->Buscar("Mosaic");
+        if (pi != NULL){
+            NodoDobleProfundidad *au=popo->matriz->primero;
+            cabecera* auxcabe=au->matriz->ultimofila;
+            Nodomatriz *pito=auxcabe->primeromatriz;
+            while(pito != NULL){
+            while (auxcabe != NULL){
+                a=auxcabe->numero;
+                hightmosaic=a;
+                auxcabe=auxcabe->siguiente;
+            }
+                pito=pito->abajo;
+            }
+            cabecera* auxcab=au->matriz->primerocolumna;
+                while (auxcab != NULL){
+                    b=auxcab->numero;
+                    widthmosaic=b;
+                    auxcab=auxcab->siguiente;
+                }
+            while(au != NULL ){
+                cabecera *fila=au->matriz->primerocolumna;
+                pi->copiacubo->Insertar_eje_Z(au->profundidad);
+                NodoDobleProfundidad *pr=pi->copiacubo->Buscar(au->profundidad);
+                while(fila !=NULL){
+                    Nodomatriz *mat=fila->primeromatriz;
+                    while(mat != NULL){
+                       if(pr != NULL){
+                            pr->matriz->InsertarTodoMatriz(mat->x,mat->y,mat->color);
+                        }
+                        mat=mat->siguiente;
+                    }
+                fila=fila->siguiente;
+                }
+            au=au->siguiente;
+        }
+        } else cout<<"Filtro No encontrado"<<endl;
+
+   }else cout<<"Imagen No encontrado"<<endl;
+}
 
 void AplicarFiltrosMenu(){
      int opcion;
@@ -1097,6 +1142,7 @@ void AplicarFiltrosMenu(){
         FiltroCollage();
     }
     else if (opcion == 5){
+        FiltroMosaico();
 
     }
 
@@ -1288,6 +1334,27 @@ void MenuExports(){
                     matriztemporal->graficarHTML2(nom,nombreimagen);
                     matriztemporal->GenerarSCSSCollage(nom,(widthcollage)*30,hightcollage*30,nombreimagen);
                 }else cout<<"Filtro no Aplicado"<<endl;
+        }else if (opcion == "5"){
+            NodoListaCircularDobleImagenes *pip=filtro->Buscar("Mosaic");
+                if (pip != NULL){
+                    Profundidad_Matriz *aux2=pip->copiacubo;
+                    NodoDobleProfundidad *aux3=aux2->primero;
+                    NodoDobleProfundidad *por=aux2->primero;
+                    matriztemporal=new raiz();
+                    while(aux3 != NULL){
+                        if (aux3->matriz != NULL){
+                            aux2->UnirCapas(aux3->matriz,matriztemporal);
+                        }
+                    aux3 = aux3->siguiente;
+                    }
+                    string nom;
+                    cout<<"Ingrese el nombre de su imagen de salida"<<endl;
+                    cin>>nom;
+                    matriztemporal->graficarHTMLMosaic(nom,nombreimagen);
+                    matriztemporal->GenerarSCSSMosaic(nom,hightmosaic*30,widthmosaic*30,nombreimagen);
+                }else cout<<"Filtro no Aplicado"<<endl;
+
+
         }
     }
 
@@ -1655,10 +1722,6 @@ int main()
             filtro->primero=NULL;
             filtro->ultimo=NULL;
             verificar(opcioninorden);
-            //string rutasalida = "Exports/" + opcioninorden;
-            //mkdir(rutasalida.c_str()_;
-            //mkdir(rutasalida.c_str());
-
         }
         else if(opcion == "3"){
             system("cls");

@@ -875,24 +875,90 @@ void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto,string nombre2){
     }
     fclose(salida);
 }
-void raiz::GenerarSCSSMosaic(string nombre,int ancho,int alto){
+void raiz::graficaDivs(FILE* salida){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i=1;
+    int j=1;
+    if( x != -1 && y != -1){
+        fprintf(salida,"<div class=\"canvas\">\n");
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                else{
+                    fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                i++;
+            }
+            j++;
+        }
+    }
+    fprintf(salida,"</div>\n\n\n");
+}
+void raiz::graficarHTMLMosaic(string nombre,string nombre2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
+    int contador=0;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string css=nombre+".css";
+    FILE* salida;
+    salida = fopen(dot.c_str(),"w");
+    fprintf(salida,"<!DOCTYPE html>\n");
+    fprintf(salida,"<html>\n");
+    fprintf(salida,"<head>\n");
+    fprintf(salida,"<link rel=\"stylesheet\" href=\"%s\">\n",css.c_str());
+    fprintf(salida,"</head>\n");
+    fprintf(salida,"<body>\n");
+    fprintf(salida,"<div class=\"canvas2\">\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    graficaDivs(salida);
+                }
+                else graficaDivs(salida);
+                i++;
+            }
+            j++;
+        }
+        fprintf(salida,"</div>\n\n\n");
+    }
+    fprintf(salida,"</div>\n\n\n");
+    fprintf(salida,"</body>\n\n\n");
+    fprintf(salida,"</html>");
+    fclose(salida);
+}
+
+void raiz::GenerarSCSSMosaic(string nombre,float ancho,float alto,string nombre2){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    int color1=0;
+    int color2=0;
+    int color3=0;
+    string salida2="";
     string dot="Exports/"+nombre+".html";
-    string css="Exports/"+nombre+".css";
+    string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
     FILE* salida;
     salida = fopen(css.c_str(),"w");
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
-
     fprintf(salida,".canvas{\n");
-    fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
-
+    fprintf(salida," width: 30px;\n height: 30px; \n  float:left;\n }\n");
+    fprintf(salida,".canvas2{\n");
+    fprintf(salida," width: %fpx;\n height: %fpx; \n }\n",alto,ancho);
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %fpx;\n height: %fpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",(30*30)/alto,(30*30)/ancho);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -904,8 +970,14 @@ void raiz::GenerarSCSSMosaic(string nombre,int ancho,int alto){
                     getline(iso,RNeg,'-');
                     getline(iso,GNeg,'-');
                     getline(iso,BNeg,'-');
+                    color1=(atoi(RNeg.c_str()))/2;
+                    color2=(atoi(GNeg.c_str()))/2;
+                    color3=(atoi(BNeg.c_str()))/2;
                     out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
+                    salida2=RGBToHex(color1,color2,color3);
                     fprintf(salida,".pixel:nth-child(%d)\n",contador);
+                    fprintf(salida,"{\n background: %s;\nopacity: .50;\n}\n", salida2.c_str());
+                    fprintf(salida,".canvas:nth-child(%d)\n",contador);
                     fprintf(salida,"{\n background: %s; \n}\n", out.c_str());
                 }
                 contador++;
@@ -916,7 +988,6 @@ void raiz::GenerarSCSSMosaic(string nombre,int ancho,int alto){
         }
     }
     fclose(salida);
-    system(dot.c_str());
 }
 
 string raiz::RGBToHex(int rNum, int gNum, int bNum){
