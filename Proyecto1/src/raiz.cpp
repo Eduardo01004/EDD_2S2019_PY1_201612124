@@ -41,12 +41,12 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
     cabecera *auxiliarfila=primerofila;
     bool flag;
     bool flagsave=false;
-    if(auxiliarcolumna!=NULL){
-    while(auxiliarcolumna->numero!=coorx){
+    if(auxiliarcolumna != NULL){
+    while(auxiliarcolumna->numero != coorx){
         auxiliarcolumna=auxiliarcolumna->siguiente;
     }
 
-    while(auxiliarfila->numero!=coory){
+    while(auxiliarfila->numero != coory){
         auxiliarfila=auxiliarfila->siguiente;
     }
     Nodomatriz *matriztemporal=new Nodomatriz();
@@ -55,21 +55,20 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
     matriztemporal->color = color;
     matriztemporal->y=coory;
 
-
     Nodomatriz *temporalmatrizMatriz = buscar(coorx,coory);
     if( temporalmatrizMatriz != NULL){
         temporalmatrizMatriz->color = color;
-    }else{
-
-        if(auxiliarcolumna->primeromatriz==NULL){
-           matriztemporal ->siguiente=NULL;
+    }
+    else{
+        if(auxiliarcolumna->primeromatriz == NULL){
+            matriztemporal ->siguiente=NULL;
             auxiliarcolumna->primeromatriz=matriztemporal;
             auxiliarcolumna->ultimomatriz=matriztemporal;
         }else{
             Nodomatriz *auxiliarmatriz=auxiliarcolumna->primeromatriz;
             flag=true;
-            while(flag==true){
-                if(auxiliarmatriz!=NULL){
+            while(flag == true){
+                if(auxiliarmatriz != NULL){
                     if(auxiliarmatriz->y == coory){
                         flag=false;
                         flagsave=true;
@@ -82,24 +81,23 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
                     flagsave=false;
                 }
             }
-            if(flagsave==false){
-                if(coory<auxiliarcolumna->primeromatriz->y){
+            if(flagsave == false){
+                if(coory < auxiliarcolumna->primeromatriz->y){
                     matriztemporal->anterior=NULL;
                     matriztemporal->siguiente=auxiliarcolumna->primeromatriz;
                     auxiliarcolumna->primeromatriz->anterior=matriztemporal;
                     auxiliarcolumna->primeromatriz=matriztemporal;
-                }else if(coory>auxiliarcolumna->ultimomatriz->y){
+                }else if(coory > auxiliarcolumna->ultimomatriz->y){
                     matriztemporal->siguiente=NULL;
                     matriztemporal->anterior=auxiliarcolumna->ultimomatriz;
                     auxiliarcolumna->ultimomatriz->siguiente=matriztemporal;
                     auxiliarcolumna->ultimomatriz=matriztemporal;
                 }else{
-                    Nodomatriz *nodoauxiliar;
                     temporalmatriz=auxiliarcolumna->primeromatriz;
                     flag=true;
                     while(flag){
-                        if(temporalmatriz->siguiente!=NULL){
-                            if(coory<temporalmatriz->siguiente->y){
+                        if(temporalmatriz->siguiente != NULL){
+                            if(coory < temporalmatriz->siguiente->y){
                               flag=false;
                             }else{
                                 temporalmatriz=temporalmatriz->siguiente;
@@ -108,14 +106,14 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
                             flag=false;
                         }
                     }
-                    nodoauxiliar=temporalmatriz->siguiente;
+                    Nodomatriz *nodoauxiliar=temporalmatriz->siguiente; // esto
                     temporalmatriz->siguiente=matriztemporal;
                     matriztemporal->siguiente=nodoauxiliar;
                 }
             }
         }
-
-        if(auxiliarfila->primeromatriz==NULL){
+        //aqui se inserta en la posicion en y
+        if(auxiliarfila->primeromatriz == NULL){
            matriztemporal->arriba=NULL;
            auxiliarfila->primeromatriz=matriztemporal;
            auxiliarfila->ultimomatriz=matriztemporal;
@@ -123,9 +121,9 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
             Nodomatriz *auxiliarmatriz=auxiliarfila->primeromatriz;
             flag=true;
             flagsave=false;
-            while(flag==true){
-                if(auxiliarmatriz!=NULL){
-                    if(auxiliarmatriz->x==coorx){
+            while(flag == true){
+                if(auxiliarmatriz != NULL){
+                    if(auxiliarmatriz->x == coorx){
                         flag=false;
                         flagsave=true;
                     }else{
@@ -137,18 +135,17 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
                 }
             }
              if(flagsave==false){
-                 if(coorx<auxiliarfila->primeromatriz->x){
+                 if(coorx < auxiliarfila->primeromatriz->x){
                      matriztemporal->abajo=NULL;
                      matriztemporal->arriba=auxiliarfila->primeromatriz;
                      auxiliarfila->primeromatriz->abajo=matriztemporal;
                      auxiliarfila->primeromatriz=matriztemporal;
-                 }else if(coorx>auxiliarfila->ultimomatriz->x){
+                 }else if(coorx > auxiliarfila->ultimomatriz->x){
                      matriztemporal->arriba=NULL;
                      matriztemporal->abajo=auxiliarfila->ultimomatriz;
                      auxiliarfila->ultimomatriz->arriba=matriztemporal;
                      auxiliarfila->ultimomatriz=matriztemporal;
                  }else{
-                    Nodomatriz *nodoauxiliar;
                      temporalmatriz=auxiliarfila->primeromatriz;
                      flag=true;
                      while(flag){
@@ -162,7 +159,7 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
                              flag=false;
                          }
                      }
-                     nodoauxiliar=temporalmatriz->arriba;
+                     Nodomatriz *nodoauxiliar=temporalmatriz->arriba;//esto
                      temporalmatriz->arriba=matriztemporal;
                      matriztemporal->arriba=nodoauxiliar;
                  }
@@ -180,18 +177,17 @@ void raiz::existeX(int coorx){
     bool flag=true;
     bool flag_guardar=false;
     cabecera *temporal=primerocolumna;
-    cabecera *aucoorx;
-    if(primerocolumna==NULL){
-       cabecera *cabeza=new cabecera();
+    if(primerocolumna == NULL){
+        cabecera *cabeza=new cabecera();
         cabeza->numero=coorx;
         cabeza->primeromatriz=NULL;
         cabeza->siguiente=NULL;
         primerocolumna=cabeza;
         ultimocolumna=cabeza;
     }else{
-        while(flag==true){
-            if(temporal!=NULL){
-                if(temporal->numero==coorx){
+        while(flag == true){
+            if(temporal != NULL){
+                if(temporal->numero == coorx){
                     flag=false;
                     flag_guardar=true;
                 }else{
@@ -207,10 +203,10 @@ void raiz::existeX(int coorx){
             cabeza->numero=coorx;
             cabeza->primeromatriz=NULL;
 
-            if(coorx<primerocolumna->numero){
+            if(coorx < primerocolumna->numero){
                 cabeza->siguiente=primerocolumna;
                 primerocolumna=cabeza;
-            }else if(coorx>ultimocolumna->numero){
+            }else if(coorx > ultimocolumna->numero){
                 ultimocolumna->siguiente=cabeza;
                 cabeza->siguiente=NULL;
                 ultimocolumna=cabeza;
@@ -218,8 +214,8 @@ void raiz::existeX(int coorx){
                 temporal=primerocolumna;
                 flag=true;
                 while(flag){
-                    if(temporal->siguiente!=NULL){
-                        if(coorx<temporal->siguiente->numero){
+                    if(temporal->siguiente != NULL){
+                        if(coorx < temporal->siguiente->numero){
                           flag=false;
                         }else{
                             temporal=temporal->siguiente;
@@ -228,7 +224,7 @@ void raiz::existeX(int coorx){
                         flag=false;
                     }
                 }
-                aucoorx=temporal->siguiente;
+                cabecera *aucoorx=temporal->siguiente;
                 temporal->siguiente=cabeza;
                 cabeza->siguiente=aucoorx;
             }
@@ -262,65 +258,56 @@ Nodomatriz* raiz::buscar(int x,int y){
 }
 
 void raiz::existey(int y){
-
-    bool estado=true;
-    bool encontrado=false;
-    cabecera*temp=primerofila;
-    cabecera *auy;
-    if(primerofila==NULL){
-       cabecera *nuevo=new cabecera();
-        nuevo->primeromatriz=NULL;
-        nuevo->numero=y;
-        nuevo->siguiente=NULL;
-        primerofila=nuevo;
-        ultimofila=nuevo;
+    bool flag=true;
+    bool flagsave=false;
+    cabecera*temporal=primerofila;
+    if(primerofila == NULL){
+       cabecera *columna=new cabecera();
+        columna->primeromatriz=NULL;
+        columna->numero=y;
+        columna->siguiente=NULL;
+        primerofila=columna;
+        ultimofila=columna;
     }else{
-        while(estado==true){
-            if(temp!=NULL){
-                if(temp->numero==y){
-                    estado=false;
-                    encontrado=true;
+        while(flag == true){
+            if(temporal!=NULL){
+                if(temporal->numero == y){
+                    flag=false;
+                    flagsave=true;
                 }else{
-                    temp=temp->siguiente;
+                    temporal=temporal->siguiente;
                 }
             }else{
-                estado=false;
-                encontrado=false;
+                flag=false;
+                flagsave=false;
             }
         }
 
-        if(encontrado==false){
-       cabecera *nuevo=new cabecera();
-            nuevo->primeromatriz=NULL;
-            nuevo->numero=y;
+        if(flagsave == false){
+            cabecera *columna=new cabecera();
+            columna->primeromatriz=NULL;
+            columna->numero=y;
 
-            if(y<primerofila->numero){
-                nuevo->siguiente=primerofila;
-                primerofila=nuevo;
-            }else if(y>ultimofila->numero){
-                ultimofila->siguiente=nuevo;
-                nuevo->siguiente=NULL;
-                ultimofila=nuevo;
+            if(y < primerofila->numero){
+                columna->siguiente=primerofila;
+                primerofila=columna;
+            }else if(y > ultimofila->numero){
+                ultimofila->siguiente=columna;
+                columna->siguiente=NULL;
+                ultimofila=columna;
             }else{
-                temp=primerofila;
-                estado=true;
-                while(estado){
-                    if(temp->siguiente!=NULL){
-                        if(y<temp->siguiente->numero){
-                          estado=false;
-                        }else{
-                            temp=temp->siguiente;
-                        }
-                    }else{
-                        estado=false;
-                    }
+                temporal=primerofila;
+                flag=true;
+                while(flag){
+                    if(temporal->siguiente!=NULL)
+                        if(y < temporal->siguiente->numero) flag=false;
+                        else temporal=temporal->siguiente;
+                    else flag=false;
                 }
-                auy=temp->siguiente;
-                temp->siguiente=nuevo;
-                nuevo->siguiente=auy;
+                cabecera *auy=temporal->siguiente;
+                temporal->siguiente=columna;
+                columna->siguiente=auy;
             }
-
-
         }
     }
 }
@@ -343,9 +330,7 @@ void raiz::GraficarDispersa()
     afile << "digraph G{\n";
     afile << "node [shape = box] \n";
     afile << "raiz[label=\"Matriz\"  group=1];\n";
-
     if(aux != NULL){
-
         while(aux != NULL){
             long int point = reinterpret_cast<long int>(aux);
             afile << point << " [label=\"F" << aux->numero << "\" group = 1]; \n";
@@ -379,7 +364,6 @@ void raiz::GraficarDispersa()
             }
              aux2 = aux2->siguiente;
         }
-
 //----------------------------------------------------------------------------------------------------
         aux=primerofila;
         aux2=primerocolumna;
@@ -454,8 +438,6 @@ void raiz::GraficarDispersa()
             }
             aux2=aux2->siguiente;
         }
-
-
     }
     afile<<"}\n";
     afile.close();
@@ -463,49 +445,7 @@ void raiz::GraficarDispersa()
     system("Matriz.png");
 
 }
-
 void raiz::graficarCapa(){
-    int x = cantidadColumnas();
-    int y = cantidadFilas();
-    int i = 1;
-    int j = 1;
-    FILE* salida;
-    salida = fopen("mario.dot","w");
-    fprintf(salida, "digraph  imagen {\n node [shape=plaintext]; \n");
-    if( x != -1 && y != -1){
-        fprintf(salida,"struct1 [label=< ");
-        fprintf(salida,"<TABLE border=\"1\">\n");
-        while(j <= y){
-            i = 1;
-            fprintf(salida,"<TR>\n");
-            while( i <= x){
-                Nodomatriz* aux = buscar(i,j);
-
-                if(aux != NULL){
-                    text=aux->color;
-                    std::istringstream iso(text);
-                    getline(iso,RNeg,'-');
-                    getline(iso,GNeg,'-');
-                    getline(iso,BNeg,'-');
-                    out=RGBToHex(atoi(RNeg.c_str()),atoi(GNeg.c_str()),atoi(BNeg.c_str())).c_str();
-                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" %s \">",out.c_str());
-                    fprintf(salida,"</TD>\n");
-                }
-                else {
-                    fprintf(salida,"<TD WIDTH=\"30\" HEIGHT=\"30\" BORDER=\"0\" BGCOLOR=\" #E41D1D \">");
-                    fprintf(salida,"</TD>\n");
-                }
-                i++;
-            }
-            fprintf(salida,"</TR>\n");
-            j++;
-        }
-        fprintf(salida,"</TABLE>>];\n");
-    }
-    fprintf(salida,"}\n");
-    fclose(salida);
-    system("dot -Tpng mario.dot -o mario.png");
-    system(" mario.png");
 }
 
 void raiz::graficarHTML(string nombre,string nombre2){
@@ -546,6 +486,7 @@ void raiz::graficarHTML(string nombre,string nombre2){
     fprintf(salida,"</body>\n\n\n");
     fprintf(salida,"</html>");
     fclose(salida);
+
 }
 
 void raiz::GenerarSCSS(string nombre, int alto, int ancho,string nombre2){
@@ -554,6 +495,8 @@ void raiz::GenerarSCSS(string nombre, int alto, int ancho,string nombre2){
     int i = 1;
     int j = 1;
     int contador=1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     FILE* salida;
     string css="Exports/"+nombre2+"/"+nombre+".css";
     salida = fopen(css.c_str(),"w");
@@ -586,6 +529,7 @@ void raiz::GenerarSCSS(string nombre, int alto, int ancho,string nombre2){
         }
     }
     fclose(salida);
+    system(sal.c_str());
 }
 void raiz::graficarHTML2(string nombre,string nombre2){
     int x = cantidadColumnas();
@@ -625,16 +569,17 @@ void raiz::graficarHTML2(string nombre,string nombre2){
     fprintf(salida,"</body>\n\n\n");
     fprintf(salida,"</html>");
     fclose(salida);
-
 }
 void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto,string nombre2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
     string css="Exports/"+nombre2+"/"+nombre+".css";
     string name="/"+nombre+".html";
     int contador=1;
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     FILE* salida;
     salida = fopen(css.c_str(),"w");
     fprintf(salida,"body { \n background: #333333; \n");
@@ -668,7 +613,7 @@ void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto,string nombre2){
         }
     }
     fclose(salida);
-    system(name.c_str());
+    system(sal.c_str());
 }
 void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2){
     int x = cantidadColumnas();
@@ -677,6 +622,8 @@ void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2){
     int j = 1;
     string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     FILE* salida;
     salida = fopen(css.c_str(),"w");
     fprintf(salida,"body { \n background: #333333; \n");
@@ -710,12 +657,15 @@ void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2){
         }
     }
     fclose(salida);
+    system(sal.c_str());
 }
 void raiz::GenerarSCSSX(string nombre,int ancho,int alto,string nombre2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
     FILE* salida;
@@ -751,12 +701,15 @@ void raiz::GenerarSCSSX(string nombre,int ancho,int alto,string nombre2){
         }
     }
     fclose(salida);
+    system(sal.c_str());
 }
 void raiz::GenerarSCSSY(string nombre,int ancho,int alto,string nombre2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
     FILE* salida;
@@ -792,12 +745,15 @@ void raiz::GenerarSCSSY(string nombre,int ancho,int alto,string nombre2){
         }
     }
     fclose(salida);
+    system(sal.c_str());
 }
 void raiz::GenerarSCSSDoble(string nombre,int ancho,int alto,string nombre2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
     FILE* salida;
@@ -833,19 +789,67 @@ void raiz::GenerarSCSSDoble(string nombre,int ancho,int alto,string nombre2){
         }
     }
     fclose(salida);
+    system(sal.c_str());
+}
+
+void raiz::graficarHTMLCollage(string nombre,string nombre2){
+    int x = cantidadColumnas();
+    int y = cantidadFilas();
+    int i = 1;
+    int j = 1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
+    int contador=0;
+    string css=nombre+".css";
+    FILE* salida;
+    salida = fopen(dot.c_str(),"w");
+    fprintf(salida,"<!DOCTYPE html>\n");
+    fprintf(salida,"<html>\n");
+    fprintf(salida,"<head>\n");
+    fprintf(salida,"<link rel=\"stylesheet\" href=\"%s\">\n",css.c_str());
+    fprintf(salida,"</head>\n");
+    fprintf(salida,"<body>\n");
+    fprintf(salida,"<div class=\"canvas2\">\n");
+    fprintf(salida,"<div class=\"canvas\">\n");
+    if( x != -1 && y != -1){
+        while(j <= y){
+            i = 1;
+            while( i <= x){
+                Nodomatriz* aux = buscar(i,j);
+                if(aux != NULL){
+                    fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                else{
+                    fprintf(salida,"<div class=\"pixel\"></div>\n");
+                }
+                contador++;
+                i++;
+            }
+            j++;
+        }
+    }
+    fprintf(salida,"</div>\n\n\n");
+    fprintf(salida,"</div>\n\n\n");
+    fprintf(salida,"</body>\n\n\n");
+    fprintf(salida,"</html>");
+    fclose(salida);
+
 }
 void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto,string nombre2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
     int j = 1;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
     string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     FILE* salida;
     salida = fopen(css.c_str(),"w");
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
-
+    fprintf(salida,".canvas2{\n");
+    fprintf(salida," width: 30%;\n height: 30%; \n }\n");
     fprintf(salida,".canvas{\n");
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
@@ -874,6 +878,7 @@ void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto,string nombre2){
         }
     }
     fclose(salida);
+    system(sal.c_str());
 }
 void raiz::graficaDivs(FILE* salida){
     int x = cantidadColumnas();
@@ -945,8 +950,9 @@ void raiz::GenerarSCSSMosaic(string nombre,float ancho,float alto,string nombre2
     int color1=0;
     int color2=0;
     int color3=0;
+    string dot="Exports/"+nombre2+"/"+nombre+".html";
     string salida2="";
-    string dot="Exports/"+nombre+".html";
+    string sal="C:/Users/Eduardo/Desktop/Edd2019/Proyecto1/"+dot;
     string css="Exports/"+nombre2+"/"+nombre+".css";
     int contador=1;
     FILE* salida;
@@ -988,6 +994,7 @@ void raiz::GenerarSCSSMosaic(string nombre,float ancho,float alto,string nombre2
         }
     }
     fclose(salida);
+    system(sal.c_str());
 }
 
 string raiz::RGBToHex(int rNum, int gNum, int bNum){
@@ -1159,8 +1166,8 @@ void raiz:: LinealizarCapaColumna(){
     fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" Fin\"];\n",contador);
     fprintf(archivo, "}\n");
     fclose(archivo);
-    system("dot -Tpng LinealizarColumna.dot -o LinealizarColumna.png");
-    system(" LinealizarColumna.png");
+    system("dot -T svg LinealizarColumna.dot -o LinealizarColumna.svg");
+    system(" LinealizarColumna.svg");
 
 }
 void raiz:: LinealizarCapaFila(){
@@ -1190,8 +1197,8 @@ FILE* archivo;
     fprintf(archivo,"%d[shape=record, style=filled, fillcolor=seashell2,label=\" Fin\"];\n",contador);
     fprintf(archivo, "}\n");
     fclose(archivo);
-    system("dot -Tpng LinealizarFila.dot -o LinealizarFila.png");
-    system("LinealizarFila.png");
+    system("dot -T svg LinealizarFila.dot -o LinealizarFila.svg");
+    system("LinealizarFila.svg");
 
 }
 void raiz::EditarColorRGB(int x, int y){

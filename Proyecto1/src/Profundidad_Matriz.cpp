@@ -60,7 +60,6 @@ void Profundidad_Matriz::mostrar(){
 
 NodoDobleProfundidad* Profundidad_Matriz::Buscar(int nivel){
     NodoDobleProfundidad *aux=primero;
-
     while(aux != NULL){
         if (aux->profundidad == nivel)return aux;
         aux=aux->siguiente;

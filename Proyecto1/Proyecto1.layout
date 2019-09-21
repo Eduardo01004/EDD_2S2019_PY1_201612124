@@ -2,9 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="include\Profundidad_Matriz.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\NodoListaCircularDobleImagenes.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="348" topLine="0" />
+			<Cursor1 position="179" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Recorridos.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2479" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="src\NodoRecorricodos.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="50" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Profundidad_Matriz.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="473" topLine="67" />
+		</Cursor>
+	</File>
+	<File name="include\raiz.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1464" topLine="29" />
 		</Cursor>
 	</File>
 	<File name="include\NodoDobleProfundidad.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -12,39 +32,19 @@
 			<Cursor1 position="83" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\ListaCircularDobleFiltros.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\NodoABB.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="473" topLine="0" />
+			<Cursor1 position="531" topLine="9" />
 		</Cursor>
 	</File>
-	<File name="include\ArbolABB.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\Profundidad_Matriz.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="467" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="src\cabecera.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="23" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\NodoABB.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="339" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\raiz.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1512" topLine="31" />
-		</Cursor>
-	</File>
-	<File name="src\NodoDobleProfundidad.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="135" topLine="0" />
+			<Cursor1 position="348" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="51454" topLine="403" />
+			<Cursor1 position="50130" topLine="694" />
 		</Cursor>
 		<Folding>
 			<Collapse line="71" />
@@ -53,74 +53,65 @@
 			<Collapse line="93" />
 			<Collapse line="179" />
 			<Collapse line="207" />
-			<Collapse line="282" />
 			<Collapse line="320" />
 			<Collapse line="351" />
 			<Collapse line="430" />
 			<Collapse line="443" />
 			<Collapse line="577" />
-			<Collapse line="716" />
-			<Collapse line="811" />
-			<Collapse line="910" />
-			<Collapse line="1006" />
-			<Collapse line="1110" />
-			<Collapse line="1362" />
-			<Collapse line="1458" />
-			<Collapse line="1550" />
-			<Collapse line="1558" />
-			<Collapse line="1565" />
-			<Collapse line="1572" />
-			<Collapse line="1619" />
-			<Collapse line="1670" />
+			<Collapse line="808" />
+			<Collapse line="1354" />
+			<Collapse line="1452" />
+			<Collapse line="1544" />
+			<Collapse line="1552" />
+			<Collapse line="1559" />
+			<Collapse line="1566" />
+			<Collapse line="1613" />
+			<Collapse line="1664" />
 		</Folding>
 	</File>
-	<File name="src\Profundidad_Matriz.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\ListaCircularDobleFiltros.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="473" topLine="67" />
+			<Cursor1 position="473" topLine="0" />
 		</Cursor>
-	</File>
-	<File name="src\Recorridos.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2479" topLine="2" />
-		</Cursor>
-	</File>
-	<File name="src\NodoListaCircularDobleImagenes.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="179" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\raiz.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="34419" topLine="895" />
-		</Cursor>
-		<Folding>
-			<Collapse line="29" />
-			<Collapse line="263" />
-		</Folding>
 	</File>
 	<File name="src\ArbolABB.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1067" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="include\NodoABB.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\raiz.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="531" topLine="9" />
-		</Cursor>
-	</File>
-	<File name="src\NodoRecorricodos.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="50" topLine="0" />
+			<Cursor1 position="31560" topLine="1117" />
 		</Cursor>
 	</File>
 	<File name="src\ListaCircularDobleFiltros.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1313" topLine="35" />
+			<Cursor1 position="2392" topLine="62" />
 		</Cursor>
 	</File>
 	<File name="include\NodoListaCircularDobleImagenes.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="573" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\NodoABB.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="339" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\cabecera.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="23" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\ArbolABB.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="467" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="src\NodoDobleProfundidad.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="135" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

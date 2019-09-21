@@ -4,8 +4,6 @@ cuerpo.csv archivo
 2 capa
 borde.csv archivo
 3 capa
-nucleo.csv archivo
+cabeza.csv archivo
 4 capa
-careta.csv archivo
-5 capa
-traje.csv archivo
+pantalon.csv archivo

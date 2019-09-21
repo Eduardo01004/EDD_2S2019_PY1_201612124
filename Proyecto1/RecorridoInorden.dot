@@ -1,3 +1,14 @@
 digraph inorden {
 rankdir = LR;
+14437104[shape=record, style=filled, fillcolor=seashell2,label="Imagen: deadpool"];
+14437104->14437664;
+14437664[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hora_de_aventura"];
+14437664->14438024;
+14438024[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hulk"];
+14438024->14437864;
+14437864[shape=record, style=filled, fillcolor=seashell2,label="Imagen: ironman"];
+14437864->14437824;
+14437824[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
+14437824->14437704;
+14437704[shape=record, style=filled, fillcolor=seashell2,label="Imagen: real"];
 }

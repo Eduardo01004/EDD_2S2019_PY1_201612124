@@ -43,6 +43,7 @@ class raiz
     void GenerarSCSSX(string,int,int,string);
     void GenerarSCSSY(string,int,int,string);
     void GenerarSCSSDoble(string,int,int,string);
+    void graficarHTMLCollage(string,string);
     void GenerarSCSSCollage(string,int,int,string);
     void GenerarSCSSMosaic(string,float,float,string);
     void graficarHTMLMosaic(string,string );

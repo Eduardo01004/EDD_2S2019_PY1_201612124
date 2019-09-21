@@ -1,8 +1,8 @@
 image_width datos
-32 ancho
+17 ancho
 image_height datos
-32 ancho
+25 ancho
 pixel_width datos
-30 ancho
+50 ancho
 pixel_height datos
-30 ancho
+50 ancho

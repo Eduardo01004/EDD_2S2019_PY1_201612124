@@ -1,12 +1,14 @@
 digraph Post {
 rankdir = LR;
-11846768[shape=record, style=filled, fillcolor=seashell2,label="Imagen: deadpool"];
-11846768->11847208;
-11847208[shape=record, style=filled, fillcolor=seashell2,label="Imagen: ironman"];
-11847208->11846928;
-11846928[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hulk"];
-11846928->11846648;
-11846648[shape=record, style=filled, fillcolor=seashell2,label="Imagen: real"];
-11846648->11846968;
-11846968[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
+14437504[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hora_de_aventura"];
+14437504->14437744;
+14437744[shape=record, style=filled, fillcolor=seashell2,label="Imagen: hulk"];
+14437744->14437544;
+14437544[shape=record, style=filled, fillcolor=seashell2,label="Imagen: mario"];
+14437544->14437904;
+14437904[shape=record, style=filled, fillcolor=seashell2,label="Imagen: ironman"];
+14437904->14437624;
+14437624[shape=record, style=filled, fillcolor=seashell2,label="Imagen: real"];
+14437624->14437984;
+14437984[shape=record, style=filled, fillcolor=seashell2,label="Imagen: deadpool"];
 }
