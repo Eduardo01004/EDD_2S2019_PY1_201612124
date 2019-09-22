@@ -23,7 +23,7 @@ class raiz
     void InsertarTodoMatriz(int x,int y,string color);
     void graficarCapa();
     void graficarHTML(string,string );
-    void GenerarSCSS(string,int,int,string);
+    void GenerarSCSS(string,int,int,string,int,int);
     void graficarHTML2(string,string);
     void GenerarScalaDeGrises();
     string RGBToHex(int rNum, int gNum, int bNum);
@@ -38,14 +38,14 @@ class raiz
     void LinealizarCapaColumna();
     void LinealizarCapaFila();
     void EditarColorRGB(int,int);
-    void GenerarSCSSNeg(string,int,int,string);
-    void GenerarSCSSGray(string,int,int,string);
-    void GenerarSCSSX(string,int,int,string);
-    void GenerarSCSSY(string,int,int,string);
-    void GenerarSCSSDoble(string,int,int,string);
+    void GenerarSCSSNeg(string,int,int,string,int,int);
+    void GenerarSCSSGray(string,int,int,string,int,int);
+    void GenerarSCSSX(string,int,int,string,int,int);
+    void GenerarSCSSY(string,int,int,string,int,int);
+    void GenerarSCSSDoble(string,int,int,string,int,int);
     void graficarHTMLCollage(string,string);
-    void GenerarSCSSCollage(string,int,int,string);
-    void GenerarSCSSMosaic(string,float,float,string);
+    void GenerarSCSSCollage(string,int,int,string,int,int);
+    void GenerarSCSSMosaic(string,float,float,string,int,int);
     void graficarHTMLMosaic(string,string );
     void graficaDivs(FILE*);
 

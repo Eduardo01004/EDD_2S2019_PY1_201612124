@@ -1,9 +1,7 @@
 config.csv config
 1 capa
-cuerpo.csv archivo
+capa0.csv archivo
 2 capa
-borde.csv archivo
+capa1.csv archivo
 3 capa
-cabeza.csv archivo
-4 capa
-pantalon.csv archivo
+capa2.csv archivo

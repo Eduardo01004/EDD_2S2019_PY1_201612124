@@ -2,5 +2,26 @@ digraph G {rankdir=LR;
 
  
  subgraph cluster3{label="Filtros";
+9481888[shape=box,label=" Negative "];
+9481888 -> 9482008 ;
+9482008->9481888 ;
+9482008[shape=box,label=" Grayscale "];
+9482008 -> 9482056 ;
+9482056->9482008 ;
+9482056[shape=box,label=" MirrorX "];
+9482056 -> 9482104 ;
+9482104->9482056 ;
+9482104[shape=box,label=" MirrorY "];
+9482104 -> 9482152 ;
+9482152->9482104 ;
+9482152[shape=box,label=" DobleMirror "];
+9482152 -> 9493416 ;
+9493416->9482152 ;
+9493416[shape=box,label=" Collage "];
+9493416 -> 9493464 ;
+9493464->9493416 ;
+9493464[shape=box,label=" Mosaic "];
+9493464 -> 9481888 ;
+9481888->9493464 ;
 }
 }

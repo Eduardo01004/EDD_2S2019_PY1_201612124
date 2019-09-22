@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1569084410 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
+1569125134 source:c:\users\eduardo\desktop\edd2019\proyecto1\main.cpp
 	<iostream>
 	"ArbolABB.h"
 	"raiz.h"
@@ -61,7 +61,7 @@
 	"Nodomatriz.h"
 	<stdlib.h>
 
-1569083456 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
+1569116594 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\raiz.cpp
 	"raiz.h"
 	<iostream>
 	<stdlib.h>
@@ -74,7 +74,7 @@
 	<sstream>
 	<direct.h>
 
-1569020932 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
+1569111427 c:\users\eduardo\desktop\edd2019\proyecto1\include\raiz.h
 	"cabecera.h"
 	<string.h>
 
@@ -120,7 +120,7 @@
 	"NodoDobleProfundidad.h"
 	"raiz.h"
 
-1567191595 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\profundidad_matriz.cpp
+1569085571 source:c:\users\eduardo\desktop\edd2019\proyecto1\src\profundidad_matriz.cpp
 	"Profundidad_Matriz.h"
 	<iostream>
 	<stdlib.h>

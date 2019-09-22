@@ -45,7 +45,6 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
     while(auxiliarcolumna->numero != coorx){
         auxiliarcolumna=auxiliarcolumna->siguiente;
     }
-
     while(auxiliarfila->numero != coory){
         auxiliarfila=auxiliarfila->siguiente;
     }
@@ -54,7 +53,6 @@ void raiz::InsertarMatriz(int coorx,int coory,string color){
     matriztemporal->x=coorx;
     matriztemporal->color = color;
     matriztemporal->y=coory;
-
     Nodomatriz *temporalmatrizMatriz = buscar(coorx,coory);
     if( temporalmatrizMatriz != NULL){
         temporalmatrizMatriz->color = color;
@@ -489,7 +487,7 @@ void raiz::graficarHTML(string nombre,string nombre2){
 
 }
 
-void raiz::GenerarSCSS(string nombre, int alto, int ancho,string nombre2){
+void raiz::GenerarSCSS(string nombre, int alto, int ancho,string nombre2,int pixelwidth,int pixelheight){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -505,7 +503,7 @@ void raiz::GenerarSCSS(string nombre, int alto, int ancho,string nombre2){
     fprintf(salida,".canvas{\n");
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",pixelwidth,pixelheight);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -570,7 +568,7 @@ void raiz::graficarHTML2(string nombre,string nombre2){
     fprintf(salida,"</html>");
     fclose(salida);
 }
-void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto,string nombre2){
+void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto,string nombre2,int ancho2,int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -589,7 +587,7 @@ void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto,string nombre2){
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",ancho2,alto2);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -615,7 +613,7 @@ void raiz::GenerarSCSSNeg(string nombre,int ancho,int alto,string nombre2){
     fclose(salida);
     system(sal.c_str());
 }
-void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2){
+void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2,int ancho2,int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -633,7 +631,7 @@ void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2){
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",ancho2,alto2);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -659,7 +657,7 @@ void raiz::GenerarSCSSGray(string nombre,int ancho,int alto,string nombre2){
     fclose(salida);
     system(sal.c_str());
 }
-void raiz::GenerarSCSSX(string nombre,int ancho,int alto,string nombre2){
+void raiz::GenerarSCSSX(string nombre,int ancho,int alto,string nombre2,int ancho2, int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -677,7 +675,7 @@ void raiz::GenerarSCSSX(string nombre,int ancho,int alto,string nombre2){
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",ancho2,alto2);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -703,7 +701,7 @@ void raiz::GenerarSCSSX(string nombre,int ancho,int alto,string nombre2){
     fclose(salida);
     system(sal.c_str());
 }
-void raiz::GenerarSCSSY(string nombre,int ancho,int alto,string nombre2){
+void raiz::GenerarSCSSY(string nombre,int ancho,int alto,string nombre2,int ancho2, int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -721,7 +719,7 @@ void raiz::GenerarSCSSY(string nombre,int ancho,int alto,string nombre2){
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",ancho2,alto2);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -747,7 +745,7 @@ void raiz::GenerarSCSSY(string nombre,int ancho,int alto,string nombre2){
     fclose(salida);
     system(sal.c_str());
 }
-void raiz::GenerarSCSSDoble(string nombre,int ancho,int alto,string nombre2){
+void raiz::GenerarSCSSDoble(string nombre,int ancho,int alto,string nombre2,int ancho2, int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -765,7 +763,7 @@ void raiz::GenerarSCSSDoble(string nombre,int ancho,int alto,string nombre2){
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
 
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",ancho2,alto2);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -835,7 +833,7 @@ void raiz::graficarHTMLCollage(string nombre,string nombre2){
     fclose(salida);
 
 }
-void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto,string nombre2){
+void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto,string nombre2,int ancho2, int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -849,12 +847,11 @@ void raiz::GenerarSCSSCollage(string nombre,int ancho,int alto,string nombre2){
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
     fprintf(salida,".canvas2{\n");
-    fprintf(salida," width: 30%;\n height: 30%; \n }\n");
+    fprintf(salida," width: 80%%%;\n height: 80%%%; \n }\n");//esto se toco
     fprintf(salida,".canvas{\n");
     fprintf(salida," width: %dpx;\n height: %dpx; \n }\n",ancho,alto);
-
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: 30px;\n height: 30px;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n");
+    fprintf(salida," width: %dpx;\n height: %dpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",ancho2,alto2);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;
@@ -942,7 +939,7 @@ void raiz::graficarHTMLMosaic(string nombre,string nombre2){
     fclose(salida);
 }
 
-void raiz::GenerarSCSSMosaic(string nombre,float ancho,float alto,string nombre2){
+void raiz::GenerarSCSSMosaic(string nombre,float ancho,float alto,string nombre2,int ancho2, int alto2){
     int x = cantidadColumnas();
     int y = cantidadFilas();
     int i = 1;
@@ -960,11 +957,11 @@ void raiz::GenerarSCSSMosaic(string nombre,float ancho,float alto,string nombre2
     fprintf(salida,"body { \n background: #333333; \n");
     fprintf(salida," height: 100vh;\n display: flex;\n justify-content: center;\n align-items: center; \n }\n");
     fprintf(salida,".canvas{\n");
-    fprintf(salida," width: 30px;\n height: 30px; \n  float:left;\n }\n");
+    fprintf(salida," width: %dpx;\n height: %dpx; \n  float:left;\n }\n",ancho2,alto2);
     fprintf(salida,".canvas2{\n");
     fprintf(salida," width: %fpx;\n height: %fpx; \n }\n",alto,ancho);
     fprintf(salida,".pixel{\n");
-    fprintf(salida," width: %fpx;\n height: %fpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",(30*30)/alto,(30*30)/ancho);
+    fprintf(salida," width: %fpx;\n height: %fpx;\n float: left; \n box-shadow: 0px 0px 1px #fff;\n}\n",(alto2*alto2)/alto,(ancho2*ancho2)/ancho);
     if( x != -1 && y != -1){
         while(j <= y){
             i = 1;

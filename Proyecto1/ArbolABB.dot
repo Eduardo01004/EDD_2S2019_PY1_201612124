@@ -2,9 +2,15 @@ digraph ArbolABB {
  rankdir=TB;
  graph [splines=compound, nodesep=0.5];
 node [shape = record, style=filled, fillcolor=seashell2,width=0.7,height=0.2];
-hora_de_aventura[label="<C0>|Nombre:hora_de_aventura Dimension:1860X1440px  Tamano:20X20px |<C1>"];
-inicial[label="<C0>|Nombre:inicial Dimension:480X480px  Tamano:30X30px |<C1>"];
-inicial -> mario;
- inicial -> hora_de_aventura;
- mario[label="<C0>|Nombre:mario Dimension:480X480px  Tamano:30X30px |<C1>"];
-}
+bmo[label="<C0>|Nombre:bmo Dimension:330X420px  Tamano:20X20px |<C1>"];
+deadpool[label="<C0>|Nombre:deadpool Dimension:690X1230px  Tamano:20X20px |<C1>"];
+deadpool -> hora_de_aventura;
+ deadpool -> bmo;
+ hora_de_aventura[label="<C0>|Nombre:hora_de_aventura Dimension:1860X1440px  Tamano:20X20px |<C1>"];
+hora_de_aventura -> mario;
+ inicial[label="<C0>|Nombre:inicial Dimension:480X480px  Tamano:30X30px |<C1>"];
+mario[label="<C0>|Nombre:mario Dimension:480X480px  Tamano:30X30px |<C1>"];
+mario -> inicial;
+ tux[label="<C0>|Nombre:tux Dimension:1440X1740px  Tamano:10X10px |<C1>"];
+tux -> deadpool;
+ }

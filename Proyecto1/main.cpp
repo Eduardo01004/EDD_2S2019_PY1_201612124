@@ -245,9 +245,6 @@ void AutomataArchivoCapas(string lexema, string token){
             if (aux2){
                 aux2->matriz->InsertarTodoMatriz(coorx,coory,color);
             }else cout<<"no encontrado"<<endl;
-
-
-
             FaseCapas=3;
         }else{
             FaseCapas=1000;
@@ -282,7 +279,7 @@ void analisisSintacticoArchivoCapas(){
 
 void AnalizarArchivoCapas(string path, string archivo){
     char caracter;
-    int coorx=0;//fila
+    int coorx=1;//fila
     int coory=1;//columna
     string ruta="";
     ruta=rutaarchivo+path;
@@ -293,10 +290,9 @@ void AnalizarArchivoCapas(string path, string archivo){
         string palabra = "";
         while(in.get(caracter)){
             if(caracter == 'x'){
-            }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32){
-            }else if(caracter == 10){//salto de linea
-                coory++;
-                coorx=0;
+            }else if( caracter == 9 || caracter == 8 || caracter == 11 || caracter == 13 || caracter ==32 || caracter == 10){
+                 coory++;
+                coorx=1;
             }
             else if(caracter == ','){
                 if(palabra != "") {//forma el color
@@ -307,6 +303,7 @@ void AnalizarArchivoCapas(string path, string archivo){
                 coorx++;
                 palabra = "";
             }else{
+
                 palabra += caracter;
             }
         }
@@ -321,7 +318,6 @@ void AnalizarArchivoCapas(string path, string archivo){
 void AnalizarArchivoinicial(string path,string archivo){
     std::ifstream in (path.c_str());
     if(in.is_open()){
-
         FILE *fp;
         fp = fopen(archivo.c_str(),"w");
         string palabra = "";
@@ -844,7 +840,7 @@ void FiltroMirrorY(){
                     Nodomatriz *mat=fila->primeromatriz;
                     while(mat != NULL){
                        if(pr != NULL){
-                            pr->matriz->InsertarTodoMatriz((mat->x),((a+5)-(mat->y-1)),mat->color);
+                            pr->matriz->InsertarTodoMatriz((mat->x),((a)-(mat->y-1)),mat->color);
                         }
                         mat=mat->siguiente;
                     }
@@ -888,7 +884,7 @@ void FiltroMirrorY(){
                     Nodomatriz *mat=fila->primeromatriz;
                     while(mat != NULL){
                        if(pr != NULL){
-                            if(au->profundidad == opcion ) pr->matriz->InsertarTodoMatriz((mat->x),((a+5)-(mat->y-1)),mat->color);
+                            if(au->profundidad == opcion ) pr->matriz->InsertarTodoMatriz((mat->x),((a)-(mat->y-1)),mat->color);
                             else pr->matriz->InsertarTodoMatriz(mat->x,mat->y,mat->color);
                         }
                         mat=mat->siguiente;
@@ -939,7 +935,7 @@ void FiltroDobleMirror(){
                     Nodomatriz *mat=fila->primeromatriz;
                     while(mat != NULL){
                        if(pr != NULL){
-                            pr->matriz->InsertarTodoMatriz(b-(mat->x-1),((a+5)-(mat->y-1)),mat->color);
+                            pr->matriz->InsertarTodoMatriz(b-(mat->x-1),((a)-(mat->y-1)),mat->color);
                         }
                         mat=mat->siguiente;
                     }
@@ -949,8 +945,6 @@ void FiltroDobleMirror(){
         }
         } else cout<<"Filtro No encontrado"<<endl;
    }else cout<<"Imagen No encontrado"<<endl;
-   cout<<widthdoble<<endl;
-
    }else if(op == "2"){
        int opcion;
           filtro->InsertarFiltro("DobleMirror");
@@ -985,7 +979,7 @@ void FiltroDobleMirror(){
                     Nodomatriz *mat=fila->primeromatriz;
                     while(mat != NULL){
                        if(pr != NULL){
-                            if(au->profundidad == opcion ) pr->matriz->InsertarTodoMatriz(b-(mat->x-1),((a+5)-(mat->y-1)),mat->color);
+                            if(au->profundidad == opcion ) pr->matriz->InsertarTodoMatriz(b-(mat->x-1),((a)-(mat->y-1)),mat->color);
                             else pr->matriz->InsertarTodoMatriz(mat->x,mat->y,mat->color);
                         }
                         mat=mat->siguiente;
@@ -1039,11 +1033,8 @@ void FiltroCollage(){
                     Nodomatriz *mat=fila->primeromatriz;
                     while(mat != NULL){
                        if(pr != NULL){
-                            pr->matriz->InsertarTodoMatriz((b*j)+mat->x,((a+5)*i)+mat->y,mat->color);
-
+                            pr->matriz->InsertarTodoMatriz((b*j)+mat->x,(a*i)+mat->y,mat->color);
                             widthcollage=(b*x);
-
-
                         }
                         mat=mat->siguiente;
                     }
@@ -1186,7 +1177,7 @@ void MenuExports(){
         cout<<"Ingrese el nombre de su imagen de salida"<<endl;
         cin>>nom;
         matriztemporal->graficarHTML(nom,nombreimagen);
-        matriztemporal->GenerarSCSS(nom,a*30,b*30,nombreimagen);
+        matriztemporal->GenerarSCSS(nom,a*image->widthpixel,b*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
         }else cout<<"No se encontro la imagen a buscar"<<endl;
 
     }
@@ -1200,26 +1191,31 @@ void MenuExports(){
         cout << "\nIngresa tu opcion: ";
         cin >> opcion;
         if (opcion == "1"){
-            NodoListaCircularDobleImagenes *pip=filtro->Buscar("Negative");
-                if (pip != NULL){
-                    Profundidad_Matriz *aux2=pip->copiacubo;
-                    NodoDobleProfundidad *aux3=aux2->primero;
-                    matriztemporal=new raiz();
-                    while(aux3 != NULL){
-                        if (aux3->matriz != NULL){
-                            aux2->UnirCapas(aux3->matriz,matriztemporal);
+            NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+            if(image != NULL){
+                NodoListaCircularDobleImagenes *pip=filtro->Buscar("Negative");
+                    if (pip != NULL){
+                        Profundidad_Matriz *aux2=pip->copiacubo;
+                        NodoDobleProfundidad *aux3=aux2->primero;
+                        matriztemporal=new raiz();
+                        while(aux3 != NULL){
+                            if (aux3->matriz != NULL){
+                                aux2->UnirCapas(aux3->matriz,matriztemporal);
+                            }
+                            aux3 = aux3->siguiente;
                         }
-                        aux3 = aux3->siguiente;
-                    }
-                string nom;
-                cout<<"Ingrese el nombre de su imagen de salida"<<endl;
-                cin>>nom;
-                matriztemporal->graficarHTML2(nom,nombreimagen);
-                matriztemporal->GenerarSCSSNeg(nom,widthneg*30,hightneg*30,nombreimagen);
-                }else cout<<"Filtro no Aplicado"<<endl;
+                    string nom;
+                    cout<<"Ingrese el nombre de su imagen de salida"<<endl;
+                    cin>>nom;
+                    matriztemporal->graficarHTML2(nom,nombreimagen);
+                    matriztemporal->GenerarSCSSNeg(nom,widthneg*image->widthpixel,hightneg*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
+                    }else cout<<"Filtro no Aplicado"<<endl;
+            }else cout<<"Imagen no encontrada"<<endl;
         }
         else if(opcion == "2"){
-            NodoListaCircularDobleImagenes *pip=filtro->Buscar("Grayscale");
+            NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+            if (image != NULL){
+                NodoListaCircularDobleImagenes *pip=filtro->Buscar("Grayscale");
                 if (pip != NULL){
                     Profundidad_Matriz *aux2=pip->copiacubo;
                     NodoDobleProfundidad *aux3=aux2->primero;
@@ -1234,8 +1230,9 @@ void MenuExports(){
                 cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                 cin>>nom;
                 matriztemporal->graficarHTML2(nom,nombreimagen);
-                matriztemporal->GenerarSCSSGray(nom,widthgray*30,hightgray*30,nombreimagen);
+                matriztemporal->GenerarSCSSGray(nom,widthgray*image->widthpixel,hightgray*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
                 }else cout<<"Filtro no Aplicado"<<endl;
+            }else cout<<"imagen no encontrada"<<endl;
         }
         else if(opcion == "3"){
             string chooise;
@@ -1244,71 +1241,81 @@ void MenuExports(){
             cout << "[3]Double Mirror(Espejo en ambos ejes)" << endl;
             cin>>chooise;
             if (chooise == "1"){
-                NodoListaCircularDobleImagenes *pip=filtro->Buscar("MirrorX");
-                if (pip != NULL){
-                    Profundidad_Matriz *aux2=pip->copiacubo;
-                    NodoDobleProfundidad *aux3=aux2->primero;
-                    NodoDobleProfundidad *por=aux2->primero;//matriz temporal
-                    matriztemporal=new raiz();
-                    while(aux3 != NULL){
-                        if (aux3->matriz != NULL){
-                            aux2->UnirCapas(aux3->matriz,matriztemporal);
+                NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+                if (image != NULL){
+                    NodoListaCircularDobleImagenes *pip=filtro->Buscar("MirrorX");
+                    if (pip != NULL){
+                        Profundidad_Matriz *aux2=pip->copiacubo;
+                        NodoDobleProfundidad *aux3=aux2->primero;
+                        NodoDobleProfundidad *por=aux2->primero;//matriz temporal
+                        matriztemporal=new raiz();
+                        while(aux3 != NULL){
+                            if (aux3->matriz != NULL){
+                                aux2->UnirCapas(aux3->matriz,matriztemporal);
+                            }
+                            aux3 = aux3->siguiente;
                         }
-                        aux3 = aux3->siguiente;
-                    }
-                string nom;
-                cout<<"Ingrese el nombre de su imagen de salida"<<endl;
-                cin>>nom;
-                matriztemporal->graficarHTML2(nom,nombreimagen);
-                if (widthX <= 13) matriztemporal->GenerarSCSSX(nom,widthX*30,hightX*30,nombreimagen);
-                else matriztemporal->GenerarSCSSX(nom,(widthX+1)*30,hightX*30,nombreimagen);
-                }else cout<<"Filtro no Aplicado"<<endl;
+                    string nom;
+                    cout<<"Ingrese el nombre de su imagen de salida"<<endl;
+                    cin>>nom;
+                    matriztemporal->graficarHTML2(nom,nombreimagen);
+                    if (widthX <= 13) matriztemporal->GenerarSCSSX(nom,(widthX)*image->widthpixel,hightX*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
+                    else matriztemporal->GenerarSCSSX(nom,(widthX)*image->widthpixel,hightX*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
+                    }else cout<<"Filtro no Aplicado"<<endl;
+                }
             }
             else if(chooise == "2"){
-                NodoListaCircularDobleImagenes *pip=filtro->Buscar("MirrorY");
-                if (pip != NULL){
-                    Profundidad_Matriz *aux2=pip->copiacubo;
-                    NodoDobleProfundidad *aux3=aux2->primero;
-                    NodoDobleProfundidad *por=aux2->primero;//matriz temporal
-                    matriztemporal=new raiz();
-                    while(aux3 != NULL){
-                        if (aux3->matriz != NULL){
-                            aux2->UnirCapas(aux3->matriz,matriztemporal);
+                NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+                if (image != NULL){
+                    NodoListaCircularDobleImagenes *pip=filtro->Buscar("MirrorY");
+                    if (pip != NULL){
+                        Profundidad_Matriz *aux2=pip->copiacubo;
+                        NodoDobleProfundidad *aux3=aux2->primero;
+                        NodoDobleProfundidad *por=aux2->primero;//matriz temporal
+                        matriztemporal=new raiz();
+                        while(aux3 != NULL){
+                            if (aux3->matriz != NULL){
+                                aux2->UnirCapas(aux3->matriz,matriztemporal);
+                            }
+                        aux3 = aux3->siguiente;
                         }
-                    aux3 = aux3->siguiente;
-                    }
-                    string nom;
-                    cout<<"Ingrese el nombre de su imagen de salida"<<endl;
-                    cin>>nom;
-                    matriztemporal->graficarHTML2(nom,nombreimagen);
-                    matriztemporal->GenerarSCSSY(nom,widthY*30,hightY*30,nombreimagen);
-                }else cout<<"Filtro no Aplicado"<<endl;
+                        string nom;
+                        cout<<"Ingrese el nombre de su imagen de salida"<<endl;
+                        cin>>nom;
+                        matriztemporal->graficarHTML2(nom,nombreimagen);
+                        matriztemporal->GenerarSCSSY(nom,widthY*image->widthpixel,hightY*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
+                    }else cout<<"Filtro no Aplicado"<<endl;
+                }
             }
             else if (chooise == "3"){
-                NodoListaCircularDobleImagenes *pip=filtro->Buscar("DobleMirror");
-                if (pip != NULL){
-                    Profundidad_Matriz *aux2=pip->copiacubo;
-                    NodoDobleProfundidad *aux3=aux2->primero;
-                    NodoDobleProfundidad *por=aux2->primero;//matriz temporal
-                    matriztemporal=new raiz();
-                    while(aux3 != NULL){
-                        if (aux3->matriz != NULL){
-                            aux2->UnirCapas(aux3->matriz,matriztemporal);
+                NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+                if (image != NULL){
+                    NodoListaCircularDobleImagenes *pip=filtro->Buscar("DobleMirror");
+                    if (pip != NULL){
+                        Profundidad_Matriz *aux2=pip->copiacubo;
+                        NodoDobleProfundidad *aux3=aux2->primero;
+                        NodoDobleProfundidad *por=aux2->primero;//matriz temporal
+                        matriztemporal=new raiz();
+                        while(aux3 != NULL){
+                            if (aux3->matriz != NULL){
+                                aux2->UnirCapas(aux3->matriz,matriztemporal);
+                            }
+                        aux3 = aux3->siguiente;
                         }
-                    aux3 = aux3->siguiente;
-                    }
-                    string nom;
-                    cout<<"Ingrese el nombre de su imagen de salida"<<endl;
-                    cin>>nom;
-                    matriztemporal->graficarHTML2(nom,nombreimagen);
-                    if (widthdoble <= 13) matriztemporal->GenerarSCSSDoble(nom,(widthdoble)*30,hightdoble*30,nombreimagen);
-                    else matriztemporal->GenerarSCSSDoble(nom,(widthdoble+1)*30,hightdoble*30,nombreimagen);
-
-                }else cout<<"Filtro no Aplicado"<<endl;
+                        string nom;
+                        cout<<"Ingrese el nombre de su imagen de salida"<<endl;
+                        cin>>nom;
+                        matriztemporal->graficarHTML2(nom,nombreimagen);
+                        if (widthdoble <= 13) matriztemporal->GenerarSCSSDoble(nom,(widthdoble)*image->widthpixel,hightdoble*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
+                        else matriztemporal->GenerarSCSSDoble(nom,(widthdoble)*image->widthpixel,hightdoble*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
+                    }else cout<<"Filtro no Aplicado"<<endl;
+                }
             }
         }
         else if(opcion == "4"){
-            NodoListaCircularDobleImagenes *pip=filtro->Buscar("Collage");
+            NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+            if (image != NULL){
+                NodoListaCircularDobleImagenes *pip=filtro->Buscar("Collage");
                 if (pip != NULL){
                     Profundidad_Matriz *aux2=pip->copiacubo;
                     NodoDobleProfundidad *aux3=aux2->primero;
@@ -1324,10 +1331,13 @@ void MenuExports(){
                     cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                     cin>>nom;
                     matriztemporal->graficarHTMLCollage(nom,nombreimagen);
-                    matriztemporal->GenerarSCSSCollage(nom,(widthcollage)*30,hightcollage*30,nombreimagen);
+                    matriztemporal->GenerarSCSSCollage(nom,(widthcollage)*image->widthpixel,hightcollage*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
                 }else cout<<"Filtro no Aplicado"<<endl;
+            }
         }else if (opcion == "5"){
-            NodoListaCircularDobleImagenes *pip=filtro->Buscar("Mosaic");
+            NodoABB *image=arbol->buscar(arbol->raiz,nombreimagen);
+            if(image != NULL){
+                NodoListaCircularDobleImagenes *pip=filtro->Buscar("Mosaic");
                 if (pip != NULL){
                     Profundidad_Matriz *aux2=pip->copiacubo;
                     NodoDobleProfundidad *aux3=aux2->primero;
@@ -1343,8 +1353,9 @@ void MenuExports(){
                     cout<<"Ingrese el nombre de su imagen de salida"<<endl;
                     cin>>nom;
                     matriztemporal->graficarHTMLMosaic(nom,nombreimagen);
-                    matriztemporal->GenerarSCSSMosaic(nom,hightmosaic*30,widthmosaic*30,nombreimagen);
+                    matriztemporal->GenerarSCSSMosaic(nom,hightmosaic*image->widthpixel,widthmosaic*image->hightpixel,nombreimagen,image->widthpixel,image->hightpixel);
                 }else cout<<"Filtro no Aplicado"<<endl;
+            }
 
 
         }
@@ -1372,6 +1383,7 @@ void ReportePorCapaCubo(){
             cin>>nombre;
             NodoABB * imagen=arbol->buscar(arbol->raiz,nombre);
             if (imagen != NULL){
+                imagen->matriz->mostrar();
                 cout<<"Ingrese el id de profundidad"<<endl;
                 cin >> opcion;
                 NodoDobleProfundidad * aux3 = imagen->matriz->Buscar(opcion);
@@ -1416,6 +1428,7 @@ void ReportePorCapaCubo(){
             cin>>nombre;
             NodoListaCircularDobleImagenes * filt=filtro->Buscar(nombre);
             if (filt != NULL){
+                filt->copiacubo->mostrar();
                 cout<<"Ingrese el id de profundidad"<<endl;
                 cin >> opcion;
                 NodoDobleProfundidad * aux3 = filt->copiacubo->Buscar(opcion);
